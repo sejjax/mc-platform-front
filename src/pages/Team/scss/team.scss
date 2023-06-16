@@ -1,0 +1,50 @@
+.team-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.same-height {
+  height: calc(100% - 24px);
+}
+
+.info {
+  display: grid;
+  gap: 5px;
+
+  &__name {
+    font-size: 13px;
+  }
+
+  &__value {
+    font-size: clamp(10px, 1vw, 20px);
+    font-weight: 500;
+  }
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__with-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: space-between;
+
+    .data-input {
+      visibility: hidden;
+      height: auto;
+      width: 0;
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+  }
+}
+
+.partners-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}

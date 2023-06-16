@@ -1,0 +1,313 @@
+.rrs-target,
+.rrs-target * {
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.rrs-target {
+  position: relative;
+}
+.rrs-base,
+.rrs-connects {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+/* Wrapper for all connect elements.
+ */
+.rrs-connects {
+  overflow: hidden;
+  z-index: 0;
+}
+.rrs-connect,
+.rrs-origin {
+  will-change: transform;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  -ms-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -webkit-transform-style: preserve-3d;
+  transform-origin: 0 0;
+  transform-style: flat;
+}
+.rrs-connect {
+  height: 100%;
+  width: 100%;
+}
+.rrs-origin {
+  height: 10%;
+  width: 10%;
+}
+/* Offset direction
+ */
+.rrs-txt-dir-rtl.rrs-horizontal .rrs-origin {
+  left: 0;
+  right: auto;
+}
+/* Give origins 0 height/width so they don't interfere with clicking the
+ * connect elements.
+ */
+.rrs-vertical .rrs-origin {
+  width: 0;
+}
+.rrs-horizontal .rrs-origin {
+  height: 0;
+}
+.rrs-handle {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+}
+.rrs-touch-area {
+  height: 100%;
+  width: 100%;
+}
+.rrs-state-tap .rrs-connect,
+.rrs-state-tap .rrs-origin {
+  -webkit-transition: transform 0.3s;
+  transition: transform 0.3s;
+}
+.rrs-state-drag * {
+  cursor: inherit !important;
+}
+/* Slider size and handle placement;
+ */
+.rrs-horizontal {
+  height: 12px;
+}
+.rrs-horizontal .rrs-handle {
+  width: 12px;
+  height: 12px;
+  right: -8px;
+  top: -10px;
+}
+.rrs-vertical {
+  width: 18px;
+}
+.rrs-vertical .rrs-handle {
+  width: 28px;
+  height: 34px;
+  right: -6px;
+  top: -17px;
+}
+.rrs-txt-dir-rtl.rrs-horizontal .rrs-handle {
+  left: -17px;
+  right: auto;
+}
+/* Styling;
+ * Giving the connect element a border radius causes issues with using transform: scale
+ */
+.rrs-target {
+  background: linear-gradient(90deg, #00BC55 0%, #00E164 34.38%, #FFB200 50%, #FE0054 100%);
+  border-radius: 6px;
+  padding: 0 14px 0 12px;
+}
+.rrs-connects {
+  border-radius: 3px;
+}
+.rrs-connect {
+  background: #3FB8AF;
+}
+/* Handles and cursors;
+ */
+.rrs-draggable {
+  cursor: ew-resize;
+}
+.rrs-vertical .rrs-draggable {
+  cursor: ns-resize;
+}
+.rrs-handle {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 14px solid #000;
+  background: transparent;
+  cursor: default;
+}
+
+/* Disabled state;
+ */
+[disabled] .rrs-connect {
+  background: #B8B8B8;
+}
+[disabled].rrs-target,
+[disabled].rrs-handle,
+[disabled] .rrs-handle {
+  cursor: default;
+}
+/* Base;
+ *
+ */
+.rrs-pips,
+.rrs-pips * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.rrs-pips {
+  position: absolute;
+  color: #999;
+}
+/* Values;
+ *
+ */
+.rrs-value {
+  position: absolute;
+  white-space: nowrap;
+  text-align: center;
+}
+.rrs-value-sub {
+  color: #ccc;
+  font-size: 10px;
+}
+/* Markings;
+ *
+ */
+.rrs-marker {
+  position: absolute;
+  background: #CCC;
+}
+.rrs-marker-sub {
+  background: #AAA;
+}
+.rrs-marker-large {
+  background: #AAA;
+}
+/* Horizontal layout;
+ *
+ */
+.rrs-pips-horizontal {
+  padding: 10px 0;
+  height: 80px;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+.rrs-value-horizontal {
+  -webkit-transform: translate(-50%, 50%);
+  transform: translate(-50%, 50%);
+}
+.rrs-rtl .rrs-value-horizontal {
+  -webkit-transform: translate(50%, 50%);
+  transform: translate(50%, 50%);
+}
+.rrs-marker-horizontal.rrs-marker {
+  margin-left: -1px;
+  width: 2px;
+  height: 5px;
+}
+.rrs-marker-horizontal.rrs-marker-sub {
+  height: 10px;
+}
+.rrs-marker-horizontal.rrs-marker-large {
+  height: 15px;
+}
+/* Vertical layout;
+ *
+ */
+.rrs-pips-vertical {
+  padding: 0 10px;
+  height: 100%;
+  top: 0;
+  left: 100%;
+}
+.rrs-value-vertical {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  padding-left: 25px;
+}
+.rrs-rtl .rrs-value-vertical {
+  -webkit-transform: translate(0, 50%);
+  transform: translate(0, 50%);
+}
+.rrs-marker-vertical.rrs-marker {
+  width: 5px;
+  height: 2px;
+  margin-top: -1px;
+}
+.rrs-marker-vertical.rrs-marker-sub {
+  width: 10px;
+}
+.rrs-marker-vertical.rrs-marker-large {
+  width: 15px;
+}
+.rrs-tooltip {
+  display: block;
+  position: absolute;
+  border: 1px solid #D9D9D9;
+  border-radius: 3px;
+  background: #fff;
+  color: #000;
+  padding: 5px;
+  text-align: center;
+  white-space: nowrap;
+}
+.rrs-horizontal .rrs-tooltip {
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  left: 50%;
+  bottom: 120%;
+}
+.rrs-vertical .rrs-tooltip {
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  top: 50%;
+  right: 120%;
+}
+.rrs-horizontal .rrs-origin > .rrs-tooltip {
+  -webkit-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+  left: auto;
+  bottom: 10px;
+}
+.rrs-vertical .rrs-origin > .rrs-tooltip {
+  -webkit-transform: translate(0, -18px);
+  transform: translate(0, -18px);
+  top: auto;
+  right: 28px;
+}
+
+/* Custom labels;
+ *
+ */
+
+.rrs-risks {
+  font-family: Roboto, sans-serif;
+
+  .rrs-labels {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .rrs-label {
+      font-size: 12px;
+      padding: 5px 0;
+      cursor: auto;
+    }
+  }
+
+  .rrs-title {
+    padding: 5px 0 25px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .rrs-content {
+    padding: 15px 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+  }
+}
+

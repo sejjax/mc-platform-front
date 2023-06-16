@@ -1,0 +1,56 @@
+.income__wrapper {
+  padding: 1rem;
+}
+
+@media (max-width: 730px) {
+  //   .income__wrapper {
+  //     padding-bottom: 150px !important;
+  //   }
+
+  .chart__wrapper {
+    display: flex !important;
+    .recharts-responsive-container {
+      display: flex !important;
+      height: 100% !important;
+      flex: 1 1 auto;
+      width: 100% !important;
+      .recharts-wrapper {
+        flex: 1 1 auto;
+        width: 100% !important;
+        height: 100% !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .recharts-legend-wrapper {
+          position: initial !important;
+          margin-top: -40px !important;
+          width: 100% !important;
+          div {
+            position: initial !important;
+            width: 100%;
+          }
+        }
+      }
+    }
+    .recharts-pie {
+      transform: translateX(30px);
+    }
+  }
+
+  .income__body_wrapper {
+    padding: 0 !important;
+  }
+  .recharts-legend-wrapper {
+    top: unset !important;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .recharts-legend-wrapper {
+    .income__legend_wrapper {
+      flex-direction: column;
+      gap: 15px;
+      display: flex !important;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+
+// Breadcrumb item arrow
+.breadcrumb-item {
+  &.active {
+    > a {
+      color: #74788D;
+    }
+  }
+  > a {
+    color: #495057;
+  }
+  + .breadcrumb-item {
+    &::before {
+      font-family: "Material Design Icons";
+    }
+  }
+}

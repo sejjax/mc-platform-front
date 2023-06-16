@@ -1,0 +1,65 @@
+// project list
+
+.project-list-table {
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  margin-top: -1em;
+  tr {
+    background-color: #fff;
+    th {
+      &.min-col-xs {
+        min-width: 80px;
+      }
+      &.min-col-sm {
+        min-width: 120px;
+      }
+      &.min-col-md {
+        min-width: 180px;
+      }
+      &.min-col-xl {
+        min-width: 300px;
+      }
+    }
+  }
+}
+
+.project-image {
+  flex: 0 0 48px;
+  background-color: #f8f8fb;
+  padding: 0;
+  height: 48px;
+  width: 48px;
+}
+
+// project overview
+.project-receive {
+  .receive-text {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+
+    .amount {
+      margin-top: 10px;
+      font-size: 20px;
+
+      &.success {
+        color: #00BC55;
+      }
+    }
+  }
+
+  .project-image {
+    margin-right: 20px;
+  }
+
+  .symbol {
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0 12px;
+    padding: 0 8px;
+    color: #7A8692;
+    background: rgba(85, 110, 230, 0.1);
+    border-radius: 4px;
+  }
+}

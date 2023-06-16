@@ -1,0 +1,110 @@
+.email__img {
+  margin-top: -35px;
+  max-width: 100%;
+}
+
+.email__verification_content_wrapper {
+  border-radius: 23px !important;
+  margin-bottom: 0 !important;
+  position: relative;
+  z-index: 100;
+}
+.email__verification_content_text {
+  margin-top: -25px;
+}
+
+.email__verification_content_wrapper_body {
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 23px;
+  position: relative;
+  min-height: auto;
+}
+
+.email__verification_page_wrapper {
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.email__verification_background_wrapper {
+  max-width: 708px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 53px 73px;
+
+  overflow: hidden;
+  background: #2a3042;
+}
+.email__verification_border_wrapper {
+  border: 2px solid #ffffff42;
+  padding: 24px;
+  position: relative;
+  border-radius: 23px;
+}
+.email__verification_blur {
+  width: 20vw;
+  height: 58vh;
+  background: #34c38f;
+  filter: blur(120px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.email__verification_coin_left {
+  position: absolute;
+  top: 10px;
+  left: -64px;
+  z-index: 98;
+  transform: rotate(190deg);
+}
+.email__verification_coin_right {
+  position: absolute;
+  bottom: -15px;
+  right: -55px;
+  z-index: 1;
+}
+
+.email__verification_dollar_coin_img {
+  width: 148px;
+  height: 148px;
+  z-index: 1;
+}
+
+.email__verification_blur_left {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  background: linear-gradient(0deg, #ff5c00, #ff5c00),
+    linear-gradient(0deg, #ff5c00, #ff5c00), #ff5c00;
+  mix-blend-mode: screen;
+  filter: blur(40px);
+  top: 20px;
+  left: -30px;
+}
+.email__verification_blur_right {
+  position: absolute;
+  width: 130px;
+  background: linear-gradient(0deg, #ff5c00, #ff5c00),
+    linear-gradient(0deg, #ff5c00, #ff5c00), #ff5c00;
+  mix-blend-mode: screen;
+  filter: blur(40px);
+  height: 130px;
+  bottom: 20px;
+  right: -30px;
+}
+
+@media screen and (max-width: 430px) {
+  .email__verification_background_wrapper {
+    padding: 0;
+  }
+  .email__verification_page_wrapper {
+    .container {
+      padding: 0;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.fullscreen__logo {
+  max-width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+  object-fit: cover;
+  object-position: right;
+}
+
+.fullscreen__logo_mobile {
+  margin-top: 20px;
+  width: 150px;
+  display: none;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 500px) {
+  .fullscreen__logo {
+    display: none;
+  }
+
+  .fullscreen__logo_mobile {
+    display: block;
+  }
+}

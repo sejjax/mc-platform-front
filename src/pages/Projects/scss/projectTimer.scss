@@ -1,0 +1,44 @@
+.timer__wrapper {
+  font-size: 24px;
+  display: flex;
+  gap: 7px;
+  .timer__element_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .timer__element_name {
+    font-size: 12px;
+    margin-top: -7px;
+    color: rgb(102, 102, 102);
+  }
+  .timer__element {
+    margin: 0px;
+    font-size: 24px;
+    color: rgb(102, 102, 102);
+  }
+}
+
+@media (max-width: 770px) {
+  .td__with_timer {
+    display: flex;
+    .btn__maybe_with_timer {
+      order: 2;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .td__with_timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0rem;
+    gap: 10px;
+    .btn__maybe_with_timer {
+      order: 1;
+      justify-content: center !important;
+    }
+  }
+}

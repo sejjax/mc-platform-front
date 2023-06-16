@@ -1,0 +1,32 @@
+.table__dropdown_list {
+  background: #ffffff;
+  box-shadow: 0px 10px 20px rgba(18, 38, 63, 0.0313726);
+  border-radius: 8px;
+  border: none !important;
+  padding: 0px !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 20px;
+  color: #495057;
+  button {
+    padding: 14px 20px;
+    margin: 0 !important;
+  }
+}
+.table__dropdown_item_edit {
+  position: relative;
+}
+.table__dropdown_item_delete {
+  color: #7f8bfc !important;
+}
+.custom-dropdown-divider {
+  border-top-color: #eff2f7;
+  height: 0;
+  overflow: hidden;
+  border-top: 1px solid #eff2f7;
+}
+
+.dropdown__btn {
+  background: none !important;
+  border: none !important;
+}

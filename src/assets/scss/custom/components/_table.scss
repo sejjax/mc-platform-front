@@ -1,0 +1,139 @@
+//
+// _table.scss
+//
+
+.table {
+  th {
+    font-weight: $font-weight-bold;
+  }
+
+  .table-light {
+    color: $body-color;
+    border-color: $table-border-color;
+    background-color: $table-head-bg;
+  }
+}
+
+.table-bordered {
+  border: $table-border-width solid $table-border-color;
+
+  th,
+  td {
+    border: $table-border-width solid $table-border-color;
+  }
+}
+
+.table-dark > :not(:last-child) > :last-child > * {
+  border-bottom-color: $table-dark-border-color;
+}
+
+.table-nowrap {
+  th,
+  td {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 770px) {
+  .table {
+    border: none;
+    thead {
+      display: none;
+      border: none;
+    }
+    tbody {
+      border: none !important;
+    }
+
+    &.table__adaptive_bordered_between {
+      tr {
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f6f6f6;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
+    &.without__padding {
+      td,
+      tr {
+        padding: 5px 0 !important;
+      }
+    }
+
+    tr {
+      display: block;
+      margin-top: 15px;
+      border: none;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    td {
+      &.after-none {
+        &::before {
+          display: none;
+        }
+      }
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: right;
+    }
+    .project__title {
+      display: block;
+      text-align: left;
+    }
+    td::before {
+      content: attr(data-label);
+      text-align: left;
+      font-weight: bold;
+      margin-right: 20px;
+    }
+  }
+
+  .react-bootstrap-table-pagination {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    div:first-child {
+      display: inherit;
+      width: auto;
+    }
+    div:last-child {
+      display: inherit;
+      width: auto;
+      ul {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .wallet__addr_col {
+    flex-wrap: wrap;
+    gap: 5px;
+    word-break: break-all;
+  }
+  // .media__flex_right {
+  //   justify-content: end !important;
+  //   width: 100%;
+  // }
+}
+
+@media (max-width: 500px) {
+  .pagination {
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  td.wrap {
+    flex-direction: column;
+    align-items: baseline;
+    text-align: initial;
+  }
+}

@@ -1,0 +1,131 @@
+.level {
+  width: 110%;
+  aspect-ratio: 1;
+  border: 2px solid #556ee6;
+  border-radius: 50%;
+  align-items: center;
+  max-width: 52px;
+  position: relative;
+  box-sizing: border-box;
+  justify-self: flex-end;
+
+  @media (max-width: 600px) {
+    justify-self: unset;
+    width: 60px;
+  }
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(20px, 2vw, 40px);
+    font-weight: 500;
+    color: #556ee6;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+
+    @media (max-width: 1200px) {
+      font-size: 40px;
+    }
+  }
+}
+
+.table {
+  display: table;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.typography {
+  p {
+    padding: 0;
+    margin: 0;
+
+    font-size: clamp(8px, 0.75vw, 13px);
+
+    @media (max-width: 1200px) {
+      font-size: 13px;
+    }
+  }
+
+  h5 {
+    font-size: clamp(13px, 1vw, 16px);
+
+    @media (max-width: 1200px) {
+      font-size: 15px;
+    }
+  }
+
+  &__with-icon {
+    display: flex;
+  }
+}
+
+.level-container {
+  display: flex;
+  // grid-template-columns: 1fr 3fr;
+  gap: 20px;
+  align-items: center;
+  display: flex;
+
+  @media (max-width: 600px) {
+    // grid-template-columns: 1fr;
+    margin-top: 20px;
+
+    font-size: 20px;
+    justify-items: center;
+  }
+}
+.dashboard__to_next_title {
+  font-size: 1.05rem;
+}
+.dashbaord__level_title {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.dashboard__to_next_level {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: baseline;
+  .dashboard__level_amount {
+    font-weight: bold;
+  }
+  .level__line {
+    height: 7px;
+    flex: 1 1 auto;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    background: #d2d2d2;
+    div {
+      border-radius: 20px;
+    }
+    .level__line_first {
+      background-color: #1890ff;
+    }
+    .level__line_second {
+      background-color: #556ee6;
+    }
+  }
+}
+
+.level__line_row {
+  display: flex;
+}
+
+.copy__link {
+  font-weight: bold;
+}
+@media screen and (max-width: 1320px) {
+  .level__line {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}

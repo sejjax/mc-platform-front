@@ -1,0 +1,19 @@
+.notifications__modal_delete_body {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  flex-direction: column;
+  gap: 20px;
+  div {
+    text-align: center;
+  }
+
+  span {
+    font-weight: bold;
+  }
+  .notifications__modal_delete_btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

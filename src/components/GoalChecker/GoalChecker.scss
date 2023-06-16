@@ -1,0 +1,27 @@
+.goal__checker {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: baseline;
+  &_amount {
+    font-weight: bold;
+  }
+  &_level_line {
+    height: 7px;
+    flex: 1 1 auto;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    background: #d2d2d2;
+    div {
+      border-radius: 20px;
+    }
+    .level__line_first {
+      background-color: #1890ff;
+    }
+    .level__line_second {
+      background-color: #556ee6;
+    }
+  }
+}

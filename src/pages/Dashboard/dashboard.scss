@@ -1,0 +1,27 @@
+@import "../../assets/scss/theme.scss";
+
+// .apexcharts-canvas {
+//   text {
+//     fill: $text-muted !important;
+//   }
+// }
+
+.zero-level {
+  display: grid;
+  place-items: center;
+
+  text-align: center;
+
+  min-height: 380px;
+
+  p {
+    font-size: 15px;
+    font-weight: 600;
+    max-width: 340px;
+  }
+
+  .link {
+    font-size: 13px;
+  }
+}
+

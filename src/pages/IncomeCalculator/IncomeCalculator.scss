@@ -1,0 +1,18 @@
+.calculator__card_wrapper {
+  max-width: 700px;
+  // margin: 0 auto;
+}
+.calculator__data {
+  display: flex;
+
+  div {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .calculator__data {
+    flex-direction: column;
+  }
+}
