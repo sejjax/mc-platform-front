@@ -26,12 +26,4 @@ yarn-error.log*
 package-lock.json
 yarn-lock
 .eslintcache
-debug.log**/.idea/
-**/.vscode/
-**node_modules/
-**build/
-**/.env
-**/.DS_Store
-**/yarn-error.log
-.yarnrc
-.npmrc
+debug.log

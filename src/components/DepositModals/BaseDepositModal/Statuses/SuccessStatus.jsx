@@ -3,7 +3,7 @@ import React from "react"
 import { Card, CardTitle, NavLink } from "reactstrap"
 
 const SuccessStatus = ({ baseDeposit, redirectToInvest }) => {
-
+  console.log('bD',baseDeposit)
   return (
     <>
       <Card className={"border border-primary"}>
