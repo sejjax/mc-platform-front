@@ -1,0 +1,8 @@
+PORT=3000
+REACT_BASE_URL=https://dashboard.mcplatform.net
+REACT_STRAPI_URL=https://platform-strapi.mcplatform.net
+REACT_APP_SERVER_URL=https://server.mcplatform.net/api
+REACT_APP_RECAPTCHA_KEY=6LdbxfAeAAAAAPvksDaG8BSYW8FQkhOsCX7-ABP6
+REACT_APP_RECAPTCHA_SECRET_KEY=6LdbxfAeAAAAAC6SqFCMpcdFml_HoZtGU1d1i1qt
+REACT_APP_STRAPI_URL=https://platform-strapi.mcplatform.net
+REACT_APP_WALLET_CONNECT_PROJECT_ID=ee41ac2aaab410e3c2563333b8cf18d8
