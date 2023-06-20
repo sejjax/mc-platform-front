@@ -202,4 +202,3 @@ function byTokenFormSelector(state) {
     allProjectsSlug: projects.slug,
   }
 }
-
