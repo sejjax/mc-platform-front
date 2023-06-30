@@ -1,43 +1,42 @@
 // import React from "react"
-import { cryptoOrders, wallet } from "./crypto"
-import { invoiceList } from "./invoices"
-import { projects } from "./projects"
-import { tasks } from "./tasks"
+import { calenderDefaultCategories, events } from './calender';
+import { chats, contacts, groups, messages } from './chat';
+import { userProfile, users } from './contacts';
+import { cryptoOrders, wallet } from './crypto';
+import { monthData, weekData, yearData } from './dashboard';
 import {
-  inboxmails,
-  starredmails,
-  importantmails,
-  draftmails,
-  sentmails,
-  trashmails,
-} from "./mails"
+  chatData,
+  decEarningData,
+  decTopSellingData,
+  janEarningData,
+  janTopSellingData,
+  novEarningData,
+  novTopSellingData,
+  octEarningData,
+  octTopSellingData,
+} from './dashboard-saas';
 import {
   cartData,
   comments,
   customerData,
   discountData,
   orders,
+  productComments,
   productsData,
   recentProducts,
   shops,
-  productComments,
-} from "./ecommerce"
-import { chats, contacts, groups, messages } from "./chat"
-import { calenderDefaultCategories, events } from "./calender"
-import { users, userProfile } from "./contacts"
-import { yearData, monthData, weekData } from "./dashboard"
-
+} from './ecommerce';
+import { invoiceList } from './invoices';
 import {
-  janTopSellingData,
-  decTopSellingData,
-  novTopSellingData,
-  octTopSellingData,
-  janEarningData,
-  decEarningData,
-  novEarningData,
-  octEarningData,
-  chatData,
-} from "./dashboard-saas"
+  draftmails,
+  importantmails,
+  inboxmails,
+  sentmails,
+  starredmails,
+  trashmails,
+} from './mails';
+import { projects } from './projects';
+import { tasks } from './tasks';
 
 export {
   productsData,
@@ -80,4 +79,4 @@ export {
   octEarningData,
   chatData,
   productComments,
-}
+};

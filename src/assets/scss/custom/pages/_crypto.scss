@@ -6,8 +6,8 @@
   .currency-value {
     position: relative;
     &:after {
-      content: "\F04E1";
-      font-family: "Material Design Icons";
+      content: '\F04E1';
+      font-family: 'Material Design Icons';
       font-size: 24px;
       position: absolute;
       width: 45px;
@@ -167,7 +167,7 @@
   padding-bottom: 190px;
 
   &.bg-ico-hero {
-    background-image: url("../../../images/crypto/bg-ico-hero.jpg");
+    background-image: url('../../../images/crypto/bg-ico-hero.jpg');
     background-size: cover;
     background-position: top;
   }

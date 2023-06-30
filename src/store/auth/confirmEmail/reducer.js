@@ -1,9 +1,9 @@
-import { CONFIRM_EMAIL, CONFIRM_SUCCESS, CONFIRM_FAILS } from "./actionsTypes"
+import { CONFIRM_EMAIL, CONFIRM_FAILS, CONFIRM_SUCCESS } from './actionsTypes';
 
 const initialState = {
   confirmSuccess: null,
   confirmFails: null,
-}
+};
 
 const confirmEmail = (state = initialState, action) => {
   switch (action.type) {
@@ -12,24 +12,24 @@ const confirmEmail = (state = initialState, action) => {
         ...state,
         confirmSuccess: null,
         confirmFails: null,
-      }
-      break
+      };
+      break;
     case CONFIRM_SUCCESS:
       state = {
         ...state,
         confirmSuccess: action.payload,
-      }
-      break
+      };
+      break;
     case CONFIRM_FAILS:
       state = {
         ...state,
         confirmFails: action.payload,
-      }
-      break
+      };
+      break;
     default:
-      state = { ...state }
+      state = { ...state };
   }
-  return state
-}
+  return state;
+};
 
-export default confirmEmail
+export default confirmEmail;

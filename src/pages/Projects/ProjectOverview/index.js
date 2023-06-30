@@ -1,44 +1,41 @@
-import React, { useEffect } from "react"
-import MetaTags from "react-meta-tags"
-import PropTypes from "prop-types"
-import { withRouter } from "react-router-dom"
-import { isEmpty } from "lodash"
-import { Col, Container, Row } from "reactstrap"
+import React, { useEffect } from 'react';
+
+import { isEmpty } from 'lodash';
+import PropTypes from 'prop-types';
+import MetaTags from 'react-meta-tags';
+//redux
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Col, Container, Row } from 'reactstrap';
+
+import { getProjectDetail as onGetProjectDetail } from 'store/projects/project/actions';
 
 //Import Breadcrumb
-import Breadcrumbs from "components/Common/Breadcrumb2"
+import Breadcrumbs from 'components/Common/Breadcrumb2';
 
-import { getProjectDetail as onGetProjectDetail } from "store/projects/project/actions"
-import ProjectDetail from "./projectDetail"
+import OverviewChart from './overviewChart';
+import ProjectDetail from './projectDetail';
 
-import OverviewChart from "./overviewChart"
-
-//redux
-import { useSelector, useDispatch } from "react-redux"
 // import RangeSlider from "../rangeSlider"
 
-const Index = props => {
-  const dispatch = useDispatch()
+const Index = (props) => {
+  const dispatch = useDispatch();
 
-  const { projectDetail } = useSelector(state => ({
+  const { projectDetail } = useSelector((state) => ({
     projectDetail: state.Project.projectDetail,
-  }))
+  }));
 
   const {
     match: { params },
-  } = props
+  } = props;
 
   useEffect(() => {
     if (params && params.slug) {
-      dispatch(onGetProjectDetail(params.slug))
+      dispatch(onGetProjectDetail(params.slug));
     }
-  }, [params, onGetProjectDetail])
+  }, [params, onGetProjectDetail]);
 
-  const breadcrumbItems = [
-    "Проекты",
-    projectDetail?.categories?.name,
-    projectDetail?.name,
-  ]
+  const breadcrumbItems = ['Проекты', projectDetail?.categories?.name, projectDetail?.name];
 
   return (
     <React.Fragment>
@@ -50,7 +47,7 @@ const Index = props => {
           {/* Render Breadcrumbs */}
           <Breadcrumbs
             title={projectDetail.name}
-            breadcrumbItems={breadcrumbItems.map(item => ({ title: item }))}
+            breadcrumbItems={breadcrumbItems.map((item) => ({ title: item }))}
           />
 
           {!isEmpty(projectDetail) && (
@@ -78,11 +75,11 @@ const Index = props => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 Index.propTypes = {
   match: PropTypes.object,
-}
+};
 
-export default withRouter(Index)
+export default withRouter(Index);

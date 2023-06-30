@@ -1,25 +1,22 @@
-import {
-  loadStoreFromLocalStorage,
-  saveStoreToLocalStorage,
-} from "helpers/saveStore"
-import { createStore, applyMiddleware, compose } from "redux"
-import createSagaMiddleware from "redux-saga"
+import { loadStoreFromLocalStorage, saveStoreToLocalStorage } from 'helpers/saveStore';
+import { applyMiddleware, compose, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-import rootReducer from "./reducers"
-import rootSaga from "./sagas"
+import rootReducer from './reducers';
+import rootSaga from './sagas';
 
-const sagaMiddleware = createSagaMiddleware()
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const sagaMiddleware = createSagaMiddleware();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
   loadStoreFromLocalStorage(),
-  composeEnhancers(applyMiddleware(sagaMiddleware))
-)
-sagaMiddleware.run(rootSaga)
+  composeEnhancers(applyMiddleware(sagaMiddleware)),
+);
+sagaMiddleware.run(rootSaga);
 
 store.subscribe(() => {
-  const { Profile } = store.getState()
+  const { Profile } = store.getState();
   saveStoreToLocalStorage({
     Profile: {
       user: Profile.user,
@@ -27,7 +24,7 @@ store.subscribe(() => {
       error: null,
       success: null,
     },
-  })
-})
+  });
+});
 
-export default store
+export default store;

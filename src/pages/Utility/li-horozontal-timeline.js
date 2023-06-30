@@ -1,16 +1,14 @@
-import PropTypes from "prop-types"
-import React from "react"
+import React from 'react';
 
-const LiHorizontalTimeline = props => {
+import PropTypes from 'prop-types';
+
+const LiHorizontalTimeline = (props) => {
   return (
     <React.Fragment>
       <div
-        className={
-          props.event.id === 3 ? "item event-list active" : "item event-list"
-        }
+        className={props.event.id === 3 ? 'item event-list active' : 'item event-list'}
         key={props.key}
-        style={{ width: 279 }}
-      >
+        style={{ width: 279 }}>
         <div>
           <div className="event-date">
             <div className="text-primary mb-1">{props.event.date}</div>
@@ -26,12 +24,12 @@ const LiHorizontalTimeline = props => {
         </div>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 LiHorizontalTimeline.propTypes = {
   event: PropTypes.object,
   key: PropTypes.any,
-}
+};
 
-export default LiHorizontalTimeline
+export default LiHorizontalTimeline;

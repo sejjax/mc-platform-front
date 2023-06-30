@@ -1,34 +1,30 @@
-import React, { useState } from "react"
-import { MetaTags } from "react-meta-tags"
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+
+import incomeImg from 'assets/images/metrics-income.svg';
+import classnames from 'classnames';
+import { roundToDynamicNumbers } from 'helpers/Utils';
+import { get } from 'helpers/api_helper';
+import withAdmin from 'hocs/withAdmin';
+import { MetaTags } from 'react-meta-tags';
+import { Card, CardBody, Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap';
+
+import Breadcrumbs from '../../components/Common/Breadcrumb';
+import AnotherTable from 'components/AnotherTable/Table';
+
+import { ACCESS } from 'constants/access';
+
+import { t } from '../../i18n';
 import {
-  Card,
-  CardBody,
-  Col,
-  Container,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-} from "reactstrap"
-import Breadcrumbs from "../../components/Common/Breadcrumb"
-import incomeImg from "assets/images/metrics-income.svg"
-import {
-  usersTable,
+  metricsNavDisplayedTitles,
   metricsTableNavItems,
   projectsTable,
-  metricsNavDisplayedTitles,
-} from "./MetricsContstants"
-import classnames from "classnames"
-import AnotherTable from "components/AnotherTable/Table"
-import { useEffect } from "react"
-import { get } from "helpers/api_helper"
-import { roundToDynamicNumbers } from "helpers/Utils"
-import withAdmin from "hocs/withAdmin"
-import { ACCESS } from "constants/access"
+  usersTable,
+} from './MetricsContstants';
 
 const Metrics = () => {
-  const [projectsTab, setProjectsTab] = useState("year")
-  const [usersTab, setUsersTab] = useState("year")
+  const [projectsTab, setProjectsTab] = useState('year');
+  const [usersTab, setUsersTab] = useState('year');
   const [data, setData] = useState({
     activeUsers: 0,
     inactiveUsers: 0,
@@ -49,94 +45,85 @@ const Metrics = () => {
       month: [],
       year: [],
     },
-  })
+  });
 
-  const selectedProjectData = data.projectRates[projectsTab]
-  const selectedPartnerData = data.partnerRates[usersTab]
+  const selectedProjectData = data.projectRates[projectsTab];
+  const selectedPartnerData = data.partnerRates[usersTab];
 
   useEffect(() => {
     const fetchMetricsData = async () => {
-      const data = await get("metrics")
-      setData(data)
-    }
-    fetchMetricsData()
-  }, [])
+      const data = await get('metrics');
+      setData(data);
+    };
+    fetchMetricsData();
+  }, []);
 
   const tabHandler = (state, tabNumber) => {
     return () => {
-      if (state === "project") {
+      if (state === 'project') {
         if (projectsTab !== tabNumber) {
-          return setProjectsTab(tabNumber)
+          return setProjectsTab(tabNumber);
         }
       }
-      if (state === "user") {
+      if (state === 'user') {
         if (usersTab !== tabNumber) {
-          setUsersTab(tabNumber)
+          setUsersTab(tabNumber);
         }
       }
-    }
-  }
+    };
+  };
 
   return (
     <div className="page-content">
       <MetaTags>
-        <title>MCapital Метрики</title>
+        <title>{t('metrics_meta_title')}</title>
       </MetaTags>
       <Container fluid>
         <Breadcrumbs
           title="Metrics"
           hasBreadcrumbItem={false}
-          breadcrumbItem="Метрики"
+          breadcrumbItem={t('sidebar_metrics_label')}
         />
         <Row>
           <Card>
             <CardBody>
-              <h3 className="metrics__platform_data_title">
-                Общие данные платформы
-              </h3>
+              <h3 className="metrics__platform_data_title">{t('metrics_general_data')}</h3>
               <div className="metrics__platform_data_wrapper">
                 <div className="metrics__platform_data_item">
-                  Суммарный доход
+                  {t('metrics_total_income')}
                   <div className="metrics__platform_data_item_content">
                     <img src={incomeImg} />
                     {roundToDynamicNumbers(data.platformIncome, 1)}
                   </div>
                 </div>
                 <div className="metrics__platform_data_item">
-                  Активные пользователи
-                  <div className="metrics__platform_data_item_content">
-                    {data.activeUsers}
-                  </div>
+                  {t('metrics_active_users')}
+                  <div className="metrics__platform_data_item_content">{data.activeUsers}</div>
                 </div>
                 <div className="metrics__platform_data_item">
-                  Неактивные пользователи
-                  <div className="metrics__platform_data_item_content">
-                    {data.inactiveUsers}
-                  </div>
+                  {t('metrics_inactive_users')}
+                  <div className="metrics__platform_data_item_content">{data.inactiveUsers}</div>
                 </div>
                 <div className="metrics__platform_data_item">
-                  Выплачено партнёрам
+                  {t('metrics_partners_paid')}
                   <div className="metrics__platform_data_item_content">
                     {roundToDynamicNumbers(data.sumAllSendedReferrals, 1)}
                   </div>
                 </div>
                 <div className="metrics__platform_data_item">
-                  Выплачено инвесторам
+                  {t('metrics_investors_paid')}
                   <div className="metrics__platform_data_item_content">
                     {roundToDynamicNumbers(data.sumAllSendedProducts, 1)}
                   </div>
                 </div>
                 <div className="metrics__platform_data_item">
-                  К выплате на 7 дней
+                  {t('metrics_to_be_paid_seven_day')}
                   <div className="metrics__platform_data_item_content">
-                    {roundToDynamicNumbers(
-                      data.sumAccrualsInTheNextSevenDays,
-                      1
-                    )}
+                    {roundToDynamicNumbers(data.sumAccrualsInTheNextSevenDays, 1)}
                   </div>
                 </div>
                 <div className="metrics__platform_data_item">
-                  Всего к выплате
+                  {t('metrics_total_to_be_paid')}
                   <div className="metrics__platform_data_item_content">
                     {roundToDynamicNumbers(data.allAccruals, 1)}
                   </div>
@@ -147,71 +134,52 @@ const Metrics = () => {
           <Card>
             <CardBody>
               <div className="d-flex justify-content-between flex-wrap-mobile">
-                <div className="metrics__table_title">Лучшие партнеры</div>
-                <Nav
-                  tabs
-                  className="nav-tabs-custom align-items-center flex-wrap-mobile"
-                >
-                  {metricsTableNavItems.map(tabName => (
+                <div className="metrics__table_title">{t('metrics_best_partners')}</div>
+                <Nav tabs className="nav-tabs-custom align-items-center flex-wrap-mobile">
+                  {metricsTableNavItems.map((tabName) => (
                     <NavItem key={`navItem_${tabName}`}>
                       <NavLink
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: 'pointer' }}
                         className={classnames({
                           active: usersTab === tabName,
                         })}
-                        onClick={tabHandler("user", tabName)}
-                      >
-                        <span className="d-block">
-                          {metricsNavDisplayedTitles[tabName]}
-                        </span>
+                        onClick={tabHandler('user', tabName)}>
+                        <span className="d-block">{metricsNavDisplayedTitles[tabName]}</span>
                       </NavLink>
                     </NavItem>
                   ))}
                 </Nav>
               </div>
-              <AnotherTable
-                data={selectedPartnerData}
-                columns={usersTable}
-                keyField="id"
-              />
+              <AnotherTable data={selectedPartnerData} columns={usersTable} keyField="id" />
             </CardBody>
           </Card>
           <Card>
             <CardBody>
               <div className="d-flex justify-content-between flex-wrap-mobile">
-                <div className="metrics__table_title">
-                  Проекты с самым высоким рейтингом
-                </div>
+                <div className="metrics__table_title">{t('metrics_top_rated_projects')}</div>
                 <Nav tabs className="nav-tabs-custom align-items-center">
-                  {metricsTableNavItems.map(tabName => (
+                  {metricsTableNavItems.map((tabName) => (
                     <NavItem key={`navItem_${tabName}`}>
                       <NavLink
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: 'pointer' }}
                         className={classnames({
                           active: projectsTab === tabName,
                         })}
-                        onClick={tabHandler("project", tabName)}
-                      >
-                        <span className="d-block">
-                          {metricsNavDisplayedTitles[tabName]}
-                        </span>
+                        onClick={tabHandler('project', tabName)}>
+                        <span className="d-block">{metricsNavDisplayedTitles[tabName]}</span>
                       </NavLink>
                     </NavItem>
                   ))}
                 </Nav>
               </div>
 
-              <AnotherTable
-                data={selectedProjectData}
-                keyField="id"
-                columns={projectsTable}
-              />
+              <AnotherTable data={selectedProjectData} keyField="id" columns={projectsTable} />
             </CardBody>
           </Card>
         </Row>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default withAdmin(Metrics, ACCESS.metrics)
+export default withAdmin(Metrics, ACCESS.metrics);

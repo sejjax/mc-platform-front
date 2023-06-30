@@ -1,32 +1,33 @@
-import { takeEvery, fork, put, all } from "redux-saga/effects"
-import updateAuthUser from "helpers/UpdateAuthUser"
-import userService from "services/userService"
+import updateAuthUser from 'helpers/UpdateAuthUser';
+import { all, fork, put, takeEvery } from 'redux-saga/effects';
 
-import { UPLOAD_PHOTO } from "./actionTypes"
-import { uploadPhotoSuccess, uploadPhotoError } from "./actions"
+import userService from 'services/userService';
+
+import { UPLOAD_PHOTO } from './actionTypes';
+import { uploadPhotoError, uploadPhotoSuccess } from './actions';
 
 function* uploadPhoto({ payload }) {
   try {
-    const response = yield userService.uploadPhoto(payload)
+    const response = yield userService.uploadPhoto(payload);
 
     yield updateAuthUser({
       photo: response,
-    })
+    });
 
-    yield put(uploadPhotoSuccess(response))
-    yield put(uploadPhotoError(null))
+    yield put(uploadPhotoSuccess(response));
+    yield put(uploadPhotoError(null));
   } catch (error) {
-    yield put(uploadPhotoSuccess(null))
-    yield put(uploadPhotoError(error))
+    yield put(uploadPhotoSuccess(null));
+    yield put(uploadPhotoError(error));
   }
 }
 
 export function* watchUploadPhoto() {
-  yield takeEvery(UPLOAD_PHOTO, uploadPhoto)
+  yield takeEvery(UPLOAD_PHOTO, uploadPhoto);
 }
 
 function* UploadPhoto() {
-  yield all([fork(watchUploadPhoto)])
+  yield all([fork(watchUploadPhoto)]);
 }
 
-export default UploadPhoto
+export default UploadPhoto;

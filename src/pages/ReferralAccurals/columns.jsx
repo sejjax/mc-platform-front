@@ -1,136 +1,140 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import ShortWallet from "components/SharedAcrrualsPage/components/ShortWallet"
+import React from 'react';
+
 import {
   addHeaderFormatterToTableColumns,
   headerFormatterCenteredTitle,
-} from "helpers/table_helper"
-import React from "react"
+} from 'helpers/table_helper';
+
+import ShortWallet from 'components/SharedAcrrualsPage/components/ShortWallet';
+
+import { t } from '../../i18n';
 
 export const DISPLAYED_KEY_NAMES = {
-  payment_date: "Дата",
-  referralFullName: "Имя партнера",
-  referralPartnerId: "ID партнера",
-  wallet_addr: "Адрес кошелька",
-  amount: "Количество",
-  percent: "Процент",
-  accrual_type: "Тип",
-  product: "Продукт",
-  status: "Статус",
-}
+  payment_date: 'Дата',
+  referralFullName: 'Имя партнера',
+  referralPartnerId: 'ID партнера',
+  wallet_addr: 'Адрес кошелька',
+  amount: 'Количество',
+  percent: 'Процент',
+  accrual_type: 'Тип',
+  product: 'Продукт',
+  status: 'Статус',
+};
 
 export const columns = addHeaderFormatterToTableColumns(
   [
     {
-      dataField: "payment_date",
+      dataField: 'payment_date',
       sort: true,
-      text: "Дата",
+      text: t('tables_title.date'),
       attrs: {
-        "data-label": "Дата",
+        'data-label': t('tables_title.date'),
       },
-      formatter: row => {
-        return <div>{row.split("-").reverse().join(".")}</div>
+      formatter: (row) => {
+        return <div>{row.split('-').reverse().join('.')}</div>;
       },
     },
     {
-      dataField: "referralFullName",
+      dataField: 'referralFullName',
       sort: true,
-      text: "Имя партнера",
+      text: t('tables_title.partner_name'),
       attrs: {
-        "data-label": "Имя партнера",
+        'data-label': t('tables_title.partner_name'),
       },
     },
     {
-      dataField: "referralPartnerId",
+      dataField: 'referralPartnerId',
       sort: true,
-      text: "ID партнера",
+      text: t('tables_title.partner_id'),
       attrs: {
-        "data-label": "ID партнера",
+        'data-label': t('tables_title.partner_id'),
       },
     },
     {
-      dataField: "wallet_addr",
-      text: "Адрес кошелька",
+      dataField: 'wallet_addr',
+      text: t('tables_title.address'),
       sort: true,
       attrs: {
-        "data-label": "Адрес кошелька",
+        'data-label': t('tables_title.address'),
       },
-      classes: "wallet__addr_col",
+      classes: 'wallet__addr_col',
       formatter: (cell, row) => <ShortWallet id={row.id} wallet={cell} />,
     },
     {
-      dataField: "amount",
-      text: "Количество",
+      dataField: 'amount',
+      text: t('tables_title.amount'),
       sort: true,
       attrs: {
-        "data-label": "Количество",
+        'data-label': t('tables_title.amount'),
       },
-      formatter: row => {
-        const roundedValue = Math.ceil(row * 1000) / 1000
-        return <div className="text-bold">{roundedValue} USDT</div>
+      formatter: (row) => {
+        const roundedValue = Math.ceil(row * 1000) / 1000;
+        return <div className="text-bold">{roundedValue} USDT</div>;
       },
       sortFunc: (a, b, order) => {
-        if (order === "asc") {
-          return a - b
+        if (order === 'asc') {
+          return a - b;
         }
-        return b - a
+        return b - a;
       },
     },
     {
-      dataField: "percent",
-      text: "Процент",
+      dataField: 'percent',
+      text: t('tables_title.percentage'),
       sort: true,
       attrs: {
-        "data-label": "Процент",
+        'data-label': t('tables_title.percentage'),
       },
-      formatter: row => {
-        return <div>{row}%</div>
+      formatter: (row) => {
+        return <div>{row}%</div>;
       },
     },
     {
-      dataField: "accrual_type",
-      text: "Тип",
+      dataField: 'accrual_type',
+      text: t('tables_title.type'),
       sort: true,
       attrs: {
-        "data-label": "Тип",
+        'data-label': t('tables_title.type'),
       },
-      formatter: row => {
+      formatter: (row) => {
         const values = {
-          product: "Доход от продукта",
-          referral: "Реферальный доход",
-          upgrade: "Повышение пакета",
-          passive: "Пассивный доход",
-        }
-        return <div>{values[row]}</div>
+          product: t('tables_title.product_type'),
+          referral: t('tables_title.referral_income'),
+          upgrade: t('tables_title.upgrade'),
+          passive: t('tables_title.passive'),
+        };
+        return <div>{values[row]}</div>;
       },
     },
     {
-      dataField: "product",
-      text: "Продукт",
+      dataField: 'product',
+      text: t('tables_title.product'),
       sort: true,
       attrs: {
-        "data-label": "Продукт",
+        'data-label': t('tables_title.product'),
       },
-      formatter: row => {
-        return <div>{row.product}</div>
+      formatter: (row) => {
+        return <div>{row.product}</div>;
       },
     },
     {
-      dataField: "status",
-      text: "Статус",
+      dataField: 'status',
+      text: t('tables_title.status'),
       sort: true,
       attrs: {
-        "data-label": "Статус",
+        'data-label': t('tables_title.status'),
       },
-      formatter: row => {
+      formatter: (row) => {
         const values = {
-          sent: "Отправлено",
-          waiting: "Ожидание",
-          error: "Ошибка",
-          nulled: "Аннулировано",
-        }
-        return <div>{values[row]}</div>
+          sent: t('tables_title.sent'),
+          waiting: t('tables_title.waiting'),
+          error: t('tables_title.error'),
+          nulled: t('tables_title.nulled'),
+        };
+        return <div>{values[row]}</div>;
       },
     },
   ],
-  headerFormatterCenteredTitle
-)
+  headerFormatterCenteredTitle,
+);

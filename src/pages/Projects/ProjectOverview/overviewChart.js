@@ -1,18 +1,25 @@
-import React, {useMemo} from "react"
-import PropTypes from "prop-types"
-import { Card, CardBody, CardTitle } from "reactstrap"
-import ReactApexChart from "react-apexcharts"
-import OptionsChart from "./optionsChart";
+import React, { useMemo } from 'react';
+
+import PropTypes from 'prop-types';
+import ReactApexChart from 'react-apexcharts';
+import { Card, CardBody, CardTitle } from 'reactstrap';
+
+import { t } from '../../../i18n';
+import OptionsChart from './optionsChart';
 
 const OverviewChart = ({ apyChanging }) => {
-  const {options, series} = useMemo(() => OptionsChart({
-    apyChanging: Array.isArray(apyChanging) ? apyChanging : []
-  }), [apyChanging])
+  const { options, series } = useMemo(
+    () =>
+      OptionsChart({
+        apyChanging: Array.isArray(apyChanging) ? apyChanging : [],
+      }),
+    [apyChanging],
+  );
 
   return (
     <Card>
       <CardBody>
-        <CardTitle className="mb-4">Изменение годовой доходности</CardTitle>
+        <CardTitle className="mb-4">{t('project_change_yearly_profit')}</CardTitle>
         <ReactApexChart
           options={options}
           series={series}
@@ -22,11 +29,11 @@ const OverviewChart = ({ apyChanging }) => {
         />
       </CardBody>
     </Card>
-  )
-}
+  );
+};
 
 OverviewChart.propTypes = {
   apyChanging: PropTypes.array,
-}
+};
 
-export default OverviewChart
+export default OverviewChart;

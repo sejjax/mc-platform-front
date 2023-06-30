@@ -146,10 +146,10 @@ dd {
 
 // ------------ FORM  //
 
-[type="tel"],
-[type="url"],
-[type="email"],
-[type="number"] {
+[type='tel'],
+[type='url'],
+[type='email'],
+[type='number'] {
   &::placeholder {
     text-align: right;
   }
@@ -404,7 +404,9 @@ dd {
 // }
 
 .input-group
-  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(
+    .invalid-tooltip
+  ):not(.invalid-feedback) {
   margin-right: -1px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -412,8 +414,7 @@ dd {
   border-bottom-left-radius: $input-border-radius;
 }
 
-.input-group:not(.has-validation)
-  > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu),
+.input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu),
 .input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n + 3) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;

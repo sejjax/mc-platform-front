@@ -1,14 +1,14 @@
 const getAuthToken = () => {
-  let accessToken
+  let accessToken;
 
-  if (localStorage.getItem("authUser")) {
-    accessToken = JSON.parse(localStorage.getItem("authUser")).accessToken
+  if (localStorage.getItem('authUser')) {
+    accessToken = JSON.parse(localStorage.getItem('authUser')).accessToken;
   }
-  if (sessionStorage.getItem("authUser")) {
-    accessToken = JSON.parse(sessionStorage.getItem("authUser")).accessToken
+  if (sessionStorage.getItem('authUser')) {
+    accessToken = JSON.parse(sessionStorage.getItem('authUser')).accessToken;
   }
 
-  return accessToken
-}
+  return accessToken;
+};
 
-export default getAuthToken
+export default getAuthToken;

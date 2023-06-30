@@ -1,18 +1,20 @@
-import PropTypes from "prop-types"
-import React from "react"
-import BootstrapTable from "react-bootstrap-table-next"
-import paginationFactory from "react-bootstrap-table2-paginator"
+import React from 'react';
+import { useMemo } from 'react';
+import { useState } from 'react';
 
-import CountryFlag from "./CountryFlag"
+import { roundToDynamicNumbers } from 'helpers/Utils';
+import { useDebounce } from 'hooks/useDebounce';
+import PropTypes from 'prop-types';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import BootstrapTable from 'react-bootstrap-table-next';
+import { Link, withRouter } from 'react-router-dom';
+import { Input, Label } from 'reactstrap';
 
-import "../scss/list.scss"
-import { countryName } from "constants/countries"
-import { useMemo } from "react"
-import { Link, withRouter } from "react-router-dom"
-import { Input, Label } from "reactstrap"
-import { useState } from "react"
-import { roundToDynamicNumbers } from "helpers/Utils"
-import { useDebounce } from "hooks/useDebounce"
+import { countryName } from 'constants/countries';
+
+import { t } from '../../../i18n';
+import '../scss/list.scss';
+import CountryFlag from './CountryFlag';
 
 export function headerFormatter(column, colIndex, { sortElement }) {
   return (
@@ -20,161 +22,150 @@ export function headerFormatter(column, colIndex, { sortElement }) {
       <p>{column.text}</p>
       {sortElement}
     </div>
-  )
+  );
 }
 
 const List = ({ partners, userPartnerId, fullName }) => {
-  const [showOnlyFirstStructure, setShowOnlyFirstStructure] = useState(false)
-  const [search, setSearch] = useState("")
+  const [showOnlyFirstStructure, setShowOnlyFirstStructure] = useState(false);
+  const [search, setSearch] = useState('');
 
-  const debouncedSeach = useDebounce(search, 200)
+  const debouncedSeach = useDebounce(search, 200);
 
   const columns = useMemo(
     () => [
       {
-        dataField: "fullName",
-        text: "Имя партнёра",
+        dataField: 'fullName',
+        text: t('tables_title.partner_name'),
         sort: true,
         attrs: {
-          "data-label": "Имя партнёра",
+          'data-label': t('tables_title.partner_name'),
         },
         headerFormatter,
         formatter: (cell, row) => {
           const partnerFullName =
             row.referrerId === userPartnerId
               ? fullName
-              : partners.find(partner => partner.partnerId === row.referrerId)
-                  ?.fullName ?? ""
+              : partners.find((partner) => partner.partnerId === row.referrerId)?.fullName ?? '';
           return (
             <>
               <div className="fw-bold">{cell}</div>
-              <div>Пригласил: {partnerFullName}</div>
+              <div>{t('team_referrer_name', { partnerFullName })}</div>
             </>
-          )
+          );
         },
       },
       {
-        dataField: "mobile",
-        text: "Номер телефона",
+        dataField: 'mobile',
+        text: t('tables_title.mobile'),
         sort: true,
         attrs: {
-          "data-label": "Номер телефона",
+          'data-label': t('tables_title.mobile'),
         },
         headerFormatter,
       },
       {
-        dataField: "createdAt",
-        text: "Дата регистрации",
+        dataField: 'partnerId',
+        text: t('tables_title.partner_id'),
+      },
+      {
+        dataField: 'createdAt',
+        text: t('tables_title.register_date'),
         sort: true,
         attrs: {
-          "data-label": "Дата регистрации",
+          'data-label': t('tables_title.register_date'),
         },
         headerFormatter,
-        formatter: cell => {
-          return (
-            <>
-              {cell
-                .toLocaleString()
-                .slice(0, 10)
-                .split("-")
-                .reverse()
-                .join(".")}
-            </>
-          )
+        formatter: (cell) => {
+          return <>{cell.toLocaleString().slice(0, 10).split('-').reverse().join('.')}</>;
         },
       },
       {
-        dataField: "level",
-        text: "Уровень пользователя",
+        dataField: 'level',
+        text: t('tables_title.user_level'),
         sort: true,
         attrs: {
-          "data-label": "Уровень пользователя",
+          'data-label': t('tables_title.user_level'),
         },
         headerFormatter,
-        formatter: cell => cell + 1,
+        formatter: (cell) => cell + 1,
       },
       {
-        dataField: "firstReferrals",
-        text: "Партнёров привлечено",
+        dataField: 'firstReferrals',
+        text: t('tables_title.referrals_amount'),
         attrs: {
-          "data-label": "Партнёров привлечено",
+          'data-label': t('tables_title.referrals_amount'),
         },
         sort: true,
         headerFormatter,
         formatter: (cell, row) => {
-          const redirectPath = `/team/structure/${row.partnerId}`
+          const redirectPath = `/team/structure/${row.partnerId}`;
           return (
             <>
-              {cell}{" "}
-              {parseInt(cell) !== 0 && row.agreement === "1" && (
-                <Link to={redirectPath} target={"_blank"}>
-                  Структура
+              {cell}{' '}
+              {parseInt(cell) !== 0 && row.agreement === '1' && (
+                <Link to={redirectPath} target={'_blank'}>
+                  {t('common_structure')}
                 </Link>
               )}
             </>
-          )
+          );
         },
       },
       {
-        dataField: "country",
+        dataField: 'country',
         sort: true,
         attrs: {
-          "data-label": "Страна",
+          'data-label': t('tables_title.country'),
         },
-        text: "Страна",
+        text: t('tables_title.country'),
         headerFormatter,
-        formatter: country => {
-          return (
-            <CountryFlag countryCode={country} title={countryName[country]} />
-          )
+        formatter: (country) => {
+          return <CountryFlag countryCode={country} title={countryName[country]} />;
         },
       },
       {
-        dataField: "deposit_amount",
+        dataField: 'deposit_amount',
         sort: true,
         attrs: {
-          "data-label": "Личные инвестиции",
+          'data-label': t('tables_title.deposit_amount'),
         },
-        text: "Личные инвестиции",
+        text: t('tables_title.deposit_amount'),
         headerFormatter,
-        sortValue: cell => (typeof cell === "number" ? cell : -1),
-        formatter: cell =>
-          typeof cell === "number" ? roundToDynamicNumbers(cell, 1) : cell,
+        sortValue: (cell) => (typeof cell === 'number' ? cell : -1),
+        formatter: (cell) => (typeof cell === 'number' ? roundToDynamicNumbers(cell, 1) : cell),
       },
       {
-        dataField: "teamDeposit",
+        dataField: 'teamDeposit',
         sort: true,
         attrs: {
-          "data-label": "Структурные инвестиции",
+          'data-label': t('tables_title.structure_amount'),
         },
-        text: "Структурные инвестиции",
+        text: t('tables_title.structure_amount'),
         headerFormatter,
-        sortValue: cell => (typeof cell === "number" ? cell : -1),
-        formatter: cell =>
-          typeof cell === "number" ? roundToDynamicNumbers(cell, 1) : cell,
+        sortValue: (cell) => (typeof cell === 'number' ? cell : -1),
+        formatter: (cell) => (typeof cell === 'number' ? roundToDynamicNumbers(cell, 1) : cell),
       },
     ],
-    [userPartnerId, fullName, partners]
-  )
+    [userPartnerId, fullName, partners],
+  );
 
   const productData = useMemo(() => {
-    const partnersData = [...partners]
+    const partnersData = [...partners];
     partnersData.sort((a, b) => {
-      const firstDate = new Date(a.createdAt)
-      const secondDate = new Date(b.createdAt)
+      const firstDate = new Date(a.createdAt);
+      const secondDate = new Date(b.createdAt);
 
-      if (firstDate > secondDate) return -1
-      if (firstDate < secondDate) return 1
-      return 0
-    })
-    if (showOnlyFirstStructure)
-      return partnersData.filter(item => item.ref_level === 1)
-    return partnersData
-  }, [partners, showOnlyFirstStructure])
+      if (firstDate > secondDate) return -1;
+      if (firstDate < secondDate) return 1;
+      return 0;
+    });
+    if (showOnlyFirstStructure) return partnersData.filter((item) => item.ref_level === 1);
+    return partnersData;
+  }, [partners, showOnlyFirstStructure]);
 
   const searchedProductData = useMemo(() => {
     if (debouncedSeach) {
-      const getItemSearchedValues = item => {
+      const getItemSearchedValues = (item) => {
         return Object.values({
           fullName: item.fullName,
           mobile: item.mobile,
@@ -183,27 +174,25 @@ const List = ({ partners, userPartnerId, fullName }) => {
           teamDeposit: item.teamDeposit,
           country: item.country,
           createdAt: item.createdAt,
-        })
-      }
-      const debouncedSearchLowerCase = debouncedSeach.toLowerCase()
-      return productData.filter(item => {
-        const values = getItemSearchedValues(item)
+        });
+      };
+      const debouncedSearchLowerCase = debouncedSeach.toLowerCase();
+      return productData.filter((item) => {
+        const values = getItemSearchedValues(item);
         for (const value of values) {
-          if (
-            value?.toString()?.toLowerCase()?.includes(debouncedSearchLowerCase)
-          ) {
-            return true
+          if (value?.toString()?.toLowerCase()?.includes(debouncedSearchLowerCase)) {
+            return true;
           }
         }
-        return false
-      })
+        return false;
+      });
     }
-    return productData
-  }, [productData, debouncedSeach])
+    return productData;
+  }, [productData, debouncedSeach]);
 
   const paginationOptions = {
-    paginationPosition: "top",
-  }
+    paginationPosition: 'top',
+  };
 
   return (
     <>
@@ -212,17 +201,17 @@ const List = ({ partners, userPartnerId, fullName }) => {
           <Input
             type="checkbox"
             checked={showOnlyFirstStructure}
-            onChange={e => setShowOnlyFirstStructure(e.target.checked)}
-          />{" "}
-          <span> Только первая линия</span>
+            onChange={(e) => setShowOnlyFirstStructure(e.target.checked)}
+          />{' '}
+          <span>{t('team_first_line_checkbox_label')}</span>
         </Label>
         <Input
           style={{
-            maxWidth: "200px",
+            maxWidth: '200px',
           }}
-          placeholder="Поиск"
+          placeholder={t('common_search')}
           value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
       <BootstrapTable
@@ -238,14 +227,14 @@ const List = ({ partners, userPartnerId, fullName }) => {
         responsive
       />
     </>
-  )
-}
+  );
+};
 
 List.propTypes = {
   partners: PropTypes.array,
   fullName: PropTypes.any,
   userPartnerId: PropTypes.any,
   history: PropTypes.any,
-}
+};
 
-export default withRouter(List)
+export default withRouter(List);

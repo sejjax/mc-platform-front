@@ -1,25 +1,25 @@
-const getImageReader = async image => {
+const getImageReader = async (image) => {
   return new Promise((resolve, reject) => {
     if (image) {
       try {
-        const fileReader = new FileReader()
+        const fileReader = new FileReader();
 
         fileReader.onload = () => {
-          resolve(fileReader.result)
-        }
+          resolve(fileReader.result);
+        };
 
-        fileReader.onerror = error => {
-          reject(error)
-        }
+        fileReader.onerror = (error) => {
+          reject(error);
+        };
 
-        fileReader.readAsDataURL(image)
+        fileReader.readAsDataURL(image);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
     } else {
-      resolve(null)
+      resolve(null);
     }
-  })
-}
+  });
+};
 
-export default getImageReader
+export default getImageReader;

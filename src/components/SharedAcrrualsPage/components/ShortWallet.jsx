@@ -1,9 +1,10 @@
-import React from "react"
-import { UncontrolledTooltip } from "reactstrap"
+import React from 'react';
+
+import { UncontrolledTooltip } from 'reactstrap';
 
 const ShortWallet = ({ id, wallet }) => {
-  const shortWallet = `${wallet.slice(0, 5)}...${wallet.slice(-5)}`
-  const tooltipId = `wallet__addr${id}`
+  const shortWallet = `${wallet.slice(0, 5)}...${wallet.slice(-5)}`;
+  const tooltipId = `wallet__addr${id}`;
   return (
     <div>
       <span id={tooltipId}>{shortWallet}</span>
@@ -11,7 +12,7 @@ const ShortWallet = ({ id, wallet }) => {
         {wallet}
       </UncontrolledTooltip>
     </div>
-  )
-}
+  );
+};
 
-export default ShortWallet
+export default ShortWallet;

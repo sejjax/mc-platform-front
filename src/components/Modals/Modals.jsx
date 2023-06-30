@@ -1,6 +1,7 @@
-import AgreementModal from "components/AgreementModal/AgreementModal"
-import WalletConnectModal from "components/WalletConnectModal/WalletConnectModal"
-import React from "react"
+import React from 'react';
+
+import AgreementModal from 'components/AgreementModal/AgreementModal';
+import WalletConnectModal from 'components/WalletConnectModal/WalletConnectModal';
 
 const Modals = () => {
   return (
@@ -8,7 +9,7 @@ const Modals = () => {
       <AgreementModal />
       <WalletConnectModal />
     </>
-  )
-}
+  );
+};
 
-export default Modals
+export default Modals;

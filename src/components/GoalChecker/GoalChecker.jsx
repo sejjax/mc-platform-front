@@ -1,6 +1,9 @@
-import React, { FC, ReactElement } from "react"
-import "./GoalChecker.scss"
-import { formatMoney } from "helpers/dollarsUS"
+import React, { FC, ReactElement } from 'react';
+
+import { formatMoney } from 'helpers/dollarsUS';
+
+import { t } from '../../i18n';
+import './GoalChecker.scss';
 
 /**
  * @typedef {object} Props
@@ -24,15 +27,16 @@ export const GoalChecker = ({ completedPoint, endPoint, startPoint = 0 }) => {
           className="level__line_first"
           style={{
             width: `${(completedPoint / endPoint) * 100}%`,
-          }}
-        ></div>
+          }}></div>
       </div>
       <div className="goal__checker_amount">
-        Сделано: {formatMoney(completedPoint)}
+        {t('goal_checker_done', { value: formatMoney(completedPoint) })}
       </div>
       <div className="goal__checker_amount">
-        Осталось: {formatMoney(endPoint - completedPoint, undefined, false)}
+        {t('goal_checker_remaining', {
+          value: formatMoney(endPoint - completedPoint, undefined, false),
+        })}
       </div>
     </div>
-  )
-}
+  );
+};

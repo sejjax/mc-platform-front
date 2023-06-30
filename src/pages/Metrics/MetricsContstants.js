@@ -1,168 +1,174 @@
-import { countryName } from "constants/countries"
-import { addHeaderFormatterToTableColumns } from "helpers/table_helper"
-import { roundToDynamicNumbers } from "helpers/Utils"
-import CountryFlag from "pages/Team/components/CountryFlag"
-import React from "react"
-export const metricsTableNavItems = ["day", "week", "month", "year"]
+import React from 'react';
+
+import { roundToDynamicNumbers } from 'helpers/Utils';
+import { addHeaderFormatterToTableColumns } from 'helpers/table_helper';
+
+import CountryFlag from 'pages/Team/components/CountryFlag';
+
+import { countryName } from 'constants/countries';
+
+import { t } from '../../i18n';
+
+export const metricsTableNavItems = ['day', 'week', 'month', 'year'];
 export const metricsNavDisplayedTitles = {
-  day: "День",
-  week: "Неделя",
-  month: "Месяц",
-  year: "Год",
-}
+  day: t('common_day'),
+  week: t('common_week'),
+  month: t('common_month'),
+  year: t('common_year'),
+};
 
 export const projectsTable = addHeaderFormatterToTableColumns([
   {
-    dataField: "title",
-    text: "Название",
+    dataField: 'title',
+    text: t('tables_title.title'),
     sort: true,
     attrs: {
-      "data-label": "Название",
+      'data-label': t('tables_title.title'),
     },
   },
   {
-    dataField: "projectIncome",
-    text: "Доход",
+    dataField: 'projectIncome',
+    text: t('tables_title.revenue'),
     sort: true,
     attrs: {
-      "data-label": "Доход",
+      'data-label': t('tables_title.revenue'),
     },
     formatter(row) {
-      return <>{roundToDynamicNumbers(row, 100)}</>
+      return <>{roundToDynamicNumbers(row, 100)}</>;
     },
   },
   {
-    dataField: "amountToPay",
-    text: "К выплате",
+    dataField: 'amountToPay',
+    text: t('tables_title.to_pay'),
     sort: true,
     attrs: {
-      "data-label": "К выплате",
+      'data-label': t('tables_title.to_pay'),
     },
     formatter(row) {
-      return <>{roundToDynamicNumbers(row, 100)}</>
+      return <>{roundToDynamicNumbers(row, 100)}</>;
     },
   },
   {
-    dataField: "depositCount",
-    text: "Количество депозитов",
+    dataField: 'depositCount',
+    text: t('tables_title.deposit_count'),
     sort: true,
     attrs: {
-      "data-label": "Количество депозитов",
+      'data-label': t('tables_title.deposit_count'),
     },
   },
   {
-    dataField: "projectPayments",
-    text: "Выплаты",
+    dataField: 'projectPayments',
+    text: t('tables_title.payments'),
     sort: true,
     attrs: {
-      "data-label": "Выплаты",
+      'data-label': t('tables_title.payments'),
     },
     formatter(row) {
-      return <>{roundToDynamicNumbers(row, 100)}</>
+      return <>{roundToDynamicNumbers(row, 100)}</>;
     },
   },
-])
+]);
 export const usersTable = addHeaderFormatterToTableColumns([
   {
-    dataField: "fio",
-    text: "ФИО",
+    dataField: 'fio',
+    text: t('tables_title.full_name'),
     sort: true,
     attrs: {
-      "data-label": "ФИО",
+      'data-label': t('tables_title.full_name'),
     },
   },
   {
-    dataField: "mobile",
-    text: "Телефон",
+    dataField: 'mobile',
+    text: t('common_phone'),
     sort: true,
     attrs: {
-      "data-label": "Телефон",
+      'data-label': t('common_phone'),
     },
   },
   {
-    dataField: "country",
-    text: "Страна",
+    dataField: 'country',
+    text: t('tables_title.country'),
     sort: true,
     attrs: {
-      "data-label": "Страна",
+      'data-label': t('tables_title.country'),
     },
     formatter(row) {
-      return <CountryFlag countryCode={row} title={countryName[row]} />
+      return <CountryFlag countryCode={row} title={countryName[row]} />;
     },
   },
   {
-    dataField: "referralsCount",
-    text: "Партнеров привлечено",
+    dataField: 'referralsCount',
+    text: t('tables_title.partners_count'),
     sort: true,
     attrs: {
-      "data-label": "Партнеров привлечено",
+      'data-label': t('tables_title.partners_count'),
     },
   },
   {
-    dataField: "teamDeposit",
-    text: "Приход средств от команды",
+    dataField: 'teamDeposit',
+    text: t('team_profitability'),
     sort: true,
     attrs: {
-      "data-label": "Приход средств от команды",
+      'data-label': t('team_profitability'),
     },
     formatter(row) {
-      return <>{roundToDynamicNumbers(row, 100)}</>
+      return <>{roundToDynamicNumbers(row, 100)}</>;
     },
   },
   {
-    dataField: "depositAmount",
-    text: "Средств инвестировано",
+    dataField: 'depositAmount',
+    text: t('tables_title.funds_investment'),
     sort: true,
     attrs: {
-      "data-label": "Средств инвестировано",
+      'data-label': t('tables_title.funds_investment'),
     },
     formatter(row) {
-      return <>{roundToDynamicNumbers(row, 100)}</>
+      return <>{roundToDynamicNumbers(row, 100)}</>;
     },
   },
   {
-    dataField: "productIncome",
-    text: "Доход от продуктов",
+    dataField: 'productIncome',
+    text: t('tables_title.products_income'),
     sort: true,
     attrs: {
-      "data-label": "Доход от продуктов",
+      'data-label': t('tables_title.products_income'),
     },
     formatter(row) {
-      return <>{roundToDynamicNumbers(row, 100)}</>
+      return <>{roundToDynamicNumbers(row, 100)}</>;
     },
   },
   {
-    dataField: "referralsIncome",
-    text: "Дохов от партнеров",
+    dataField: 'referralsIncome',
+    text: t('tables_title.partners_income'),
     sort: true,
     attrs: {
-      "data-label": "Дохов от партнеров",
+      'data-label': t('tables_title.partners_income'),
     },
     formatter(row) {
-      return <>{roundToDynamicNumbers(row, 100)}</>
+      return <>{roundToDynamicNumbers(row, 100)}</>;
     },
   },
-])
+]);
 
 export const pageOptions = {
   sizePerPage: 100,
   custom: true,
   sizePerPageList: [
     {
-      text: "10",
+      text: '10',
       value: 10,
     },
     {
-      text: "25",
+      text: '25',
       value: 25,
     },
     {
-      text: "50",
+      text: '50',
       value: 50,
     },
     {
-      text: "100",
+      text: '100',
       value: 100,
     },
   ],
-}
+};

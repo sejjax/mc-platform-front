@@ -1,7 +1,6 @@
 export const stackingTypeContents = [
   {
-    buttonLabel: "+15%",
-    value: "15",
-    
+    buttonLabel: '+15%',
+    value: '15',
   },
-]
+];

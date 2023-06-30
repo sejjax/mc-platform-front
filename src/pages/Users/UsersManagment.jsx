@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
-import { MetaTags } from "react-meta-tags"
+import React, { useEffect, useState } from 'react';
+
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import { MetaTags } from 'react-meta-tags';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   Card,
   CardBody,
@@ -12,31 +16,31 @@ import {
   Row,
   TabContent,
   TabPane,
-} from "reactstrap"
-import Breadcrumbs from "../../components/Common/Breadcrumb"
-import UsersTable from "./components/UsersTable/UsersTable"
-import UsersAccess from "./components/UsersAccess/UsersAccess"
-import classnames from "classnames"
-import { usersNavItems } from "./UsersManagmentConstants"
-import StatusMessage from "./components/StatusMessage/StatusMessage"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
-import { getStatusMessage } from "store/actions"
+} from 'reactstrap';
 
-const UsersManagment = props => {
-  const [customActiveTab, setcustomActiveTab] = useState(0)
+import { getStatusMessage } from 'store/actions';
 
-  const dispatch = useDispatch()
+import Breadcrumbs from '../../components/Common/Breadcrumb';
+import StatusMessage from './components/StatusMessage/StatusMessage';
+import UsersAccess from './components/UsersAccess/UsersAccess';
+import UsersTable from './components/UsersTable/UsersTable';
 
-  const { statusMessage } = useSelector(state => state.Users)
+import { usersNavItems } from './UsersManagmentConstants';
 
-  const onTabClick = tabNumber => {
+const UsersManagment = (props) => {
+  const [customActiveTab, setcustomActiveTab] = useState(0);
+
+  const dispatch = useDispatch();
+
+  const { statusMessage } = useSelector((state) => state.Users);
+
+  const onTabClick = (tabNumber) => {
     return () => {
       if (customActiveTab !== tabNumber) {
-        setcustomActiveTab(tabNumber)
+        setcustomActiveTab(tabNumber);
       }
-    }
-  }
+    };
+  };
   return (
     <React.Fragment>
       {statusMessage !== null && <StatusMessage success={statusMessage} />}
@@ -45,23 +49,18 @@ const UsersManagment = props => {
           <title>Users</title>
         </MetaTags>
         <Container fluid>
-          <Breadcrumbs
-            title="Users"
-            hasBreadcrumbItem={false}
-            breadcrumbItem="Users"
-          />
+          <Breadcrumbs title="Users" hasBreadcrumbItem={false} breadcrumbItem="Users" />
           <Card>
             <CardBody>
               <Nav tabs className="nav-tabs-custom align-items-end">
                 {usersNavItems.map((tabName, item) => (
                   <NavItem key={`navItem_${tabName}`}>
                     <NavLink
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: 'pointer' }}
                       className={classnames({
                         active: customActiveTab === item,
                       })}
-                      onClick={onTabClick(item)}
-                    >
+                      onClick={onTabClick(item)}>
                       <span className="d-block d-sm-none">
                         <i className="fas fa-home" />
                       </span>
@@ -84,9 +83,9 @@ const UsersManagment = props => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-UsersManagment.propTypes = {}
+UsersManagment.propTypes = {};
 
-export default UsersManagment
+export default UsersManagment;

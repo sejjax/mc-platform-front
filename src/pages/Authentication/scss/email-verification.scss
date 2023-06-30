@@ -79,8 +79,8 @@
   position: absolute;
   width: 130px;
   height: 130px;
-  background: linear-gradient(0deg, #ff5c00, #ff5c00),
-    linear-gradient(0deg, #ff5c00, #ff5c00), #ff5c00;
+  background: linear-gradient(0deg, #ff5c00, #ff5c00), linear-gradient(0deg, #ff5c00, #ff5c00),
+    #ff5c00;
   mix-blend-mode: screen;
   filter: blur(40px);
   top: 20px;
@@ -89,8 +89,8 @@
 .email__verification_blur_right {
   position: absolute;
   width: 130px;
-  background: linear-gradient(0deg, #ff5c00, #ff5c00),
-    linear-gradient(0deg, #ff5c00, #ff5c00), #ff5c00;
+  background: linear-gradient(0deg, #ff5c00, #ff5c00), linear-gradient(0deg, #ff5c00, #ff5c00),
+    #ff5c00;
   mix-blend-mode: screen;
   filter: blur(40px);
   height: 130px;

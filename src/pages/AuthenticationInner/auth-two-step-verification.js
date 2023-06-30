@@ -1,23 +1,14 @@
-import React from "react"
-import MetaTags from 'react-meta-tags';
+import React from 'react';
 
 //Verification code package
-import AuthCode from "react-auth-code-input"
-
-import { Link } from "react-router-dom"
-import {
-  Card,
-  CardBody,
-  Col,
-  Container,
-  Form,
-  FormGroup,
-  Row,
-} from "reactstrap"
+import AuthCode from 'react-auth-code-input';
+import MetaTags from 'react-meta-tags';
+import { Link } from 'react-router-dom';
+import { Card, CardBody, Col, Container, Form, FormGroup, Row } from 'reactstrap';
 
 // import images
-import logodark from "../../assets/images/logo-dark.png"
-import logolight from "../../assets/images/logo-light.png"
+import logodark from '../../assets/images/logo-dark.png';
+import logolight from '../../assets/images/logo-light.png';
 
 const TwostepVerification = () => {
   return (
@@ -31,18 +22,8 @@ const TwostepVerification = () => {
             <Col lg={12}>
               <div className="text-center mb-5 text-muted">
                 <Link to="dashboard" className="d-block auth-logo">
-                  <img
-                    src={logodark}
-                    alt=""
-                    height="20"
-                    className="auth-logo-dark mx-auto"
-                  />
-                  <img
-                    src={logolight}
-                    alt=""
-                    height="20"
-                    className="auth-logo-light mx-auto"
-                  />
+                  <img src={logodark} alt="" height="20" className="auth-logo-dark mx-auto" />
+                  <img src={logolight} alt="" height="20" className="auth-logo-light mx-auto" />
                 </Link>
                 <p className="mt-3">React Admin & Dashboard Template</p>
               </div>
@@ -62,20 +43,15 @@ const TwostepVerification = () => {
                       <div className="p-2 mt-4">
                         <h4>Verify your email</h4>
                         <p className="mb-5">
-                          Please enter the 4 digit code sent to{" "}
-                          <span className="font-weight-semibold">
-                            example@abc.com
-                          </span>
+                          Please enter the 4 digit code sent to{' '}
+                          <span className="font-weight-semibold">example@abc.com</span>
                         </p>
 
                         <Form>
                           <Row>
                             <Col xs={12}>
                               <FormGroup className="verification">
-                                <label
-                                  htmlFor="digit1-input"
-                                  className="sr-only"
-                                >
+                                <label htmlFor="digit1-input" className="sr-only">
                                   Dight 1
                                 </label>
                                 <AuthCode
@@ -83,15 +59,15 @@ const TwostepVerification = () => {
                                   className="form-control form-control-lg text-center"
                                   allowedCharacters="^[0-9]"
                                   inputStyle={{
-                                    width: "76px",
-                                    height: "42px",
-                                    padding: "8px",
-                                    borderRadius: "8px",
-                                    fontSize: "16px",
-                                    textAlign: "center",
-                                    marginRight: "15px",
-                                    border: "1px solid #ced4da",
-                                    textTransform: "uppercase",
+                                    width: '76px',
+                                    height: '42px',
+                                    padding: '8px',
+                                    borderRadius: '8px',
+                                    fontSize: '16px',
+                                    textAlign: 'center',
+                                    marginRight: '15px',
+                                    border: '1px solid #ced4da',
+                                    textTransform: 'uppercase',
                                   }}
                                   onChange={() => null}
                                 />
@@ -101,10 +77,7 @@ const TwostepVerification = () => {
                         </Form>
 
                         <div className="mt-4">
-                          <Link
-                            to="dashboard"
-                            className="btn btn-success w-md"
-                          >
+                          <Link to="dashboard" className="btn btn-success w-md">
                             Confirm
                           </Link>
                         </div>
@@ -115,14 +88,14 @@ const TwostepVerification = () => {
               </Card>
               <div className="mt-5 text-center">
                 <p>
-                  Did&apos;t receive a code ?{" "}
+                  Did&apos;t receive a code ?{' '}
                   <a href="#" className="fw-medium text-primary">
-                    {" "}
-                    Resend{" "}
-                  </a>{" "}
+                    {' '}
+                    Resend{' '}
+                  </a>{' '}
                 </p>
                 <p>
-                  © {new Date().getFullYear()} Skote. Crafted with{" "}
+                  © {new Date().getFullYear()} Skote. Crafted with{' '}
                   <i className="mdi mdi-heart text-danger"></i> by Themesbrand
                 </p>
               </div>
@@ -131,6 +104,6 @@ const TwostepVerification = () => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 export default TwostepVerification;

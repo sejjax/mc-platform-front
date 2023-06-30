@@ -1,38 +1,39 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
-import { Button, Card, CardBody, Input, Label } from "reactstrap"
-import searchImg from "assets/images/users/search.svg"
-import searchFailImg from "assets/images/users/error-close.svg"
-import searchSuccessImg from "assets/images/users/find-success.svg"
-import { useEffect } from "react"
-import axios from "axios"
-import { useSelector } from "react-redux"
-import { useFormik } from "formik"
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 
-const UsersAccess = props => {
-  const users = useSelector(state => state.Users.users)
+import searchFailImg from 'assets/images/users/error-close.svg';
+import searchSuccessImg from 'assets/images/users/find-success.svg';
+import searchImg from 'assets/images/users/search.svg';
+import axios from 'axios';
+import { useFormik } from 'formik';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { Button, Card, CardBody, Input, Label } from 'reactstrap';
+
+const UsersAccess = (props) => {
+  const users = useSelector((state) => state.Users.users);
 
   const searchUserHandler = () => {
-    console.log(formik.values.searchUserId)
-  }
+    console.log(formik.values.searchUserId);
+  };
 
-  const selectUserHandler = item => {
-    formik.setFieldValue("selectedUser", item.id)
-    formik.setFieldValue("permissions", item.permissions)
-  }
+  const selectUserHandler = (item) => {
+    formik.setFieldValue('selectedUser', item.id);
+    formik.setFieldValue('permissions', item.permissions);
+  };
 
   const updateUserRights = () => {
-    console.log(formik.values)
-  }
+    console.log(formik.values);
+  };
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      searchUserId: "",
+      searchUserId: '',
       selectedUser: null,
       permissions: null,
     },
-  })
+  });
 
   return (
     <>
@@ -45,10 +46,7 @@ const UsersAccess = props => {
               onChange={formik.handleChange}
               placeholder="Email or Personal ID"
             />
-            <div
-              className="users__access_search_img_wrapper"
-              onClick={searchUserHandler}
-            >
+            <div className="users__access_search_img_wrapper" onClick={searchUserHandler}>
               <img src={searchImg} alt="Поиск" />
             </div>
           </div>
@@ -60,8 +58,8 @@ const UsersAccess = props => {
                 </div>
                 <div className="users__access_find_content_wrapper ">
                   <div>Users has been successfully found</div>
-                  Please make sure that this particular user will be promoted
-                  and mark the radio button next to the user name
+                  Please make sure that this particular user will be promoted and mark the radio
+                  button next to the user name
                 </div>
               </div>
             ) : (
@@ -84,10 +82,9 @@ const UsersAccess = props => {
                     <Card
                       className={`users__access_finder_user_wrapper ${
                         +formik.values.selectedUser === item.id
-                          ? "users__access_finder_user_wrapper_active"
-                          : ""
-                      }`}
-                    >
+                          ? 'users__access_finder_user_wrapper_active'
+                          : ''
+                      }`}>
                       <CardBody className="d-flex users__access_finder_user_cardbody">
                         <Input
                           type="radio"
@@ -96,12 +93,8 @@ const UsersAccess = props => {
                           onChange={() => selectUserHandler(item)}
                         />
                         <div className="ms-2">
-                          <div className="users__access_login">
-                            {item.username}
-                          </div>
-                          <div className="users__access_email mt-0.5">
-                            {item.email}
-                          </div>
+                          <div className="users__access_login">{item.username}</div>
+                          <div className="users__access_email mt-0.5">{item.email}</div>
                           <div className="d-flex mt-4">
                             <div className="users__access_partner">
                               Partner ID
@@ -114,16 +107,13 @@ const UsersAccess = props => {
                           </div>
                           <div className="users__access_perm">
                             Permissions
-                            <div>
-                              Administrator Financial Controller Notification
-                              Manager
-                            </div>
+                            <div>Administrator Financial Controller Notification Manager</div>
                           </div>
                         </div>
                       </CardBody>
                     </Card>
                   </Label>
-                )
+                );
               })
             ) : (
               <Card className="users__access_finder_user_wrapper users__access_finder_user_wrapper_active">
@@ -131,9 +121,7 @@ const UsersAccess = props => {
                   <Input type="radio" />
                   <div className="ms-2">
                     <div className="users__access_login">solo</div>
-                    <div className="users__access_email mt-0.5">
-                      stan_smith@gmail.com
-                    </div>
+                    <div className="users__access_email mt-0.5">stan_smith@gmail.com</div>
                     <div className="d-flex mt-4">
                       <div className="users__access_partner">
                         Partner ID
@@ -146,9 +134,7 @@ const UsersAccess = props => {
                     </div>
                     <div className="users__access_perm">
                       Permissions
-                      <div>
-                        Administrator Financial Controller Notification Manager
-                      </div>
+                      <div>Administrator Financial Controller Notification Manager</div>
                     </div>
                   </div>
                 </CardBody>
@@ -165,7 +151,7 @@ const UsersAccess = props => {
                       <Input
                         type="checkbox"
                         name="permissions"
-                        checked={formik.values.permissions.indexOf("1") !== -1}
+                        checked={formik.values.permissions.indexOf('1') !== -1}
                         value="1"
                         onChange={formik.handleChange}
                       />
@@ -177,7 +163,7 @@ const UsersAccess = props => {
                       <Input
                         type="checkbox"
                         name="permissions"
-                        checked={formik.values.permissions.indexOf("2") !== -1}
+                        checked={formik.values.permissions.indexOf('2') !== -1}
                         value="2"
                         onChange={formik.handleChange}
                       />
@@ -189,7 +175,7 @@ const UsersAccess = props => {
                       <Input
                         type="checkbox"
                         name="permissions"
-                        checked={formik.values.permissions.indexOf("3") !== -1}
+                        checked={formik.values.permissions.indexOf('3') !== -1}
                         value="3"
                         onChange={formik.handleChange}
                       />
@@ -209,9 +195,9 @@ const UsersAccess = props => {
         </CardBody>
       </Card>
     </>
-  )
-}
+  );
+};
 
-UsersAccess.propTypes = {}
+UsersAccess.propTypes = {};
 
-export default UsersAccess
+export default UsersAccess;

@@ -1,3 +1,3 @@
- const WhiteListImages = ['image/jpeg', 'image/gif', 'image/png', 'image/webp'];
+const WhiteListImages = ['image/jpeg', 'image/gif', 'image/png', 'image/webp'];
 
- export default WhiteListImages
+export default WhiteListImages;

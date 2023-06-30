@@ -2,10 +2,10 @@
 // Forms.scss
 //
 
-[type="tel"],
-[type="url"],
-[type="email"],
-[type="number"] {
+[type='tel'],
+[type='url'],
+[type='email'],
+[type='number'] {
   &::placeholder {
     text-align: left /*rtl: right*/;
   }
@@ -47,14 +47,14 @@
     &:checked {
       background-color: $card-bg !important;
 
-      &[type="checkbox"] {
+      &[type='checkbox'] {
         background-image: none;
       }
 
       &:after {
         position: absolute;
-        content: "\F012C";
-        font-family: "Material Design Icons";
+        content: '\F012C';
+        font-family: 'Material Design Icons';
         top: -4px !important;
         left: 1px; /*rtl: -4px */
         font-size: 16px;
@@ -78,13 +78,13 @@
     &:checked {
       background-color: $card-bg !important;
 
-      &[type="checkbox"] {
+      &[type='checkbox'] {
         background-image: none;
       }
 
       &:after {
         position: absolute;
-        content: "";
+        content: '';
         top: 3px !important;
         left: 3px;
         right: 3px;

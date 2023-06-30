@@ -1,14 +1,15 @@
-import getAuthUser from "helpers/GetAuthUser";
-import React from "react";
-import { Redirect } from "react-router-dom";
+import React from 'react';
 
-const withAuthRedirect = Component => {
-  const WithAuthRedirect = props => {
+import getAuthUser from 'helpers/GetAuthUser';
+import { Redirect } from 'react-router-dom';
+
+const withAuthRedirect = (Component) => {
+  const WithAuthRedirect = (props) => {
     const authUser = getAuthUser();
-    if (authUser) return <Redirect to={"/dashboard"} />;
+    if (authUser) return <Redirect to={'/dashboard'} />;
     return <Component {...props} />;
   };
-  WithAuthRedirect.displayName = "withAuthRedirect";
+  WithAuthRedirect.displayName = 'withAuthRedirect';
   return WithAuthRedirect;
 };
 

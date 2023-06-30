@@ -151,7 +151,7 @@
 
 // Compact sidebar
 
-body[data-sidebar-size="small"] {
+body[data-sidebar-size='small'] {
   #page-topbar {
     left: 0;
     right: $sidebar-width-sm;
@@ -201,7 +201,7 @@ body[data-sidebar-size="small"] {
       margin-right: $sidebar-collapsed-width;
     }
 
-    body[data-sidebar-size="small"].vertical-collpsed .footer {
+    body[data-sidebar-size='small'].vertical-collpsed .footer {
       left: 70px;
     }
   }
@@ -214,7 +214,7 @@ body[data-sidebar-size="small"] {
 
 // Horizontal layout
 
-body[data-layout="horizontal"] {
+body[data-layout='horizontal'] {
   #page-topbar {
     right: 0;
   }

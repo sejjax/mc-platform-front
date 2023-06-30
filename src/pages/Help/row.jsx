@@ -1,18 +1,13 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react';
 
-import { Agency } from "./styles/licenses"
+import PropTypes from 'prop-types';
+
+import { Agency } from './styles/licenses';
 
 const Row = ({ data }) => {
-  const { stateAgency = {}, name = "", license = "" } = data
+  const { stateAgency = {}, name = '', license = '' } = data;
 
-  const {
-    agensyName = "",
-    address = "",
-    index = "",
-    mobile = "",
-    coordinate = "",
-  } = stateAgency
+  const { agensyName = '', address = '', index = '', mobile = '', coordinate = '' } = stateAgency;
 
   return (
     <>
@@ -34,10 +29,10 @@ const Row = ({ data }) => {
         </p>
       </Agency>
     </>
-  )
-}
+  );
+};
 
-export default Row
+export default Row;
 
 Row.propTypes = {
   data: PropTypes.shape({
@@ -51,4 +46,4 @@ Row.propTypes = {
       coordinate: PropTypes.string,
     }),
   }),
-}
+};

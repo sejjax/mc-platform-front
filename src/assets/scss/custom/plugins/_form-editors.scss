@@ -57,7 +57,7 @@
     color: $gray-700 !important;
   }
 
-  &:not([dir="rtl"]) .tox-toolbar__group:not(:last-of-type) {
+  &:not([dir='rtl']) .tox-toolbar__group:not(:last-of-type) {
     border-right: 1px solid darken($light, 5%) !important;
   }
 }

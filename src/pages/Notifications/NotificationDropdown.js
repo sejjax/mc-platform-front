@@ -1,25 +1,25 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
-import { Dropdown, DropdownToggle, DropdownMenu, Row, Col } from "reactstrap"
-import { Notifications } from "./Notifications"
+import React, { useState } from 'react';
 
-const NotificationDropdown = props => {
+import PropTypes from 'prop-types';
+import { Col, Dropdown, DropdownMenu, DropdownToggle, Row } from 'reactstrap';
+
+import { Notifications } from './Notifications';
+
+const NotificationDropdown = (props) => {
   // Declare a new state variable, which we'll call "menu"
-  const [menu, setMenu] = useState(false)
+  const [menu, setMenu] = useState(false);
 
   return (
     <Dropdown
       isOpen={menu}
       toggle={() => setMenu(!menu)}
       className="dropdown d-inline-block"
-      tag="li"
-    >
+      tag="li">
       <DropdownToggle
         className="btn header-item noti-icon"
         tag="button"
-        id="page-header-notifications-dropdown"
-      >
-        <i className="bx bx-bell bx-tada" style={{ animation: "none" }} />
+        id="page-header-notifications-dropdown">
+        <i className="bx bx-bell bx-tada" style={{ animation: 'none' }} />
         <span className="badge bg-danger rounded-pill"></span>
       </DropdownToggle>
 
@@ -27,11 +27,11 @@ const NotificationDropdown = props => {
         {/* <Notifications></Notifications> */}
       </DropdownMenu>
     </Dropdown>
-  )
-}
+  );
+};
 
-export default NotificationDropdown
+export default NotificationDropdown;
 
 NotificationDropdown.propTypes = {
   t: PropTypes.any,
-}
+};

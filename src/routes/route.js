@@ -1,42 +1,34 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { Route, Redirect } from "react-router-dom"
+import React from 'react';
 
-const Authmiddleware = ({
-  component: Component,
-  layout: Layout,
-  isAuthProtected,
-  ...rest
-}) => (
+import PropTypes from 'prop-types';
+import { Redirect, Route } from 'react-router-dom';
+
+const Authmiddleware = ({ component: Component, layout: Layout, isAuthProtected, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
       if (
         isAuthProtected &&
-        !localStorage.getItem("authUser") &&
-        !sessionStorage.getItem("authUser")
+        !localStorage.getItem('authUser') &&
+        !sessionStorage.getItem('authUser')
       ) {
-        return (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        )
+        return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
       }
 
       return (
         <Layout>
           <Component {...props} />
         </Layout>
-      )
+      );
     }}
   />
-)
+);
 
 Authmiddleware.propTypes = {
   isAuthProtected: PropTypes.bool,
   component: PropTypes.any,
   location: PropTypes.object,
   layout: PropTypes.any,
-}
+};
 
-export default Authmiddleware
+export default Authmiddleware;

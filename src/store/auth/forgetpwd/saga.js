@@ -1,28 +1,28 @@
-import { takeEvery, fork, put, all } from "redux-saga/effects"
+import { all, fork, put, takeEvery } from 'redux-saga/effects';
+
+import authService from 'services/authService';
 
 // Login Redux States
-import { FORGET_PASSWORD } from "./actionTypes"
-import { userForgetPasswordSuccess, userForgetPasswordError } from "./actions"
-
-import authService from "services/authService"
+import { FORGET_PASSWORD } from './actionTypes';
+import { userForgetPasswordError, userForgetPasswordSuccess } from './actions';
 
 //If user is send successfully send mail link then dispatch redux action's are directly from here.
 function* forgetUser({ payload: { email } }) {
   try {
-    const response = yield authService.forgotPassword(email)
+    const response = yield authService.forgotPassword(email);
 
-    yield put(userForgetPasswordSuccess(response))
+    yield put(userForgetPasswordSuccess(response));
   } catch (error) {
-    yield put(userForgetPasswordError(error))
+    yield put(userForgetPasswordError(error));
   }
 }
 
 export function* watchUserPasswordForget() {
-  yield takeEvery(FORGET_PASSWORD, forgetUser)
+  yield takeEvery(FORGET_PASSWORD, forgetUser);
 }
 
 function* forgetPasswordSaga() {
-  yield all([fork(watchUserPasswordForget)])
+  yield all([fork(watchUserPasswordForget)]);
 }
 
-export default forgetPasswordSaga
+export default forgetPasswordSaga;

@@ -1,19 +1,18 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { Container, Row, Col } from "reactstrap"
-import MetaTags from "react-meta-tags"
+import React from 'react';
+
+import MetaTags from 'react-meta-tags';
+import { Link } from 'react-router-dom';
+import { Col, Container, Row } from 'reactstrap';
 
 //Import Images
-import error from "../../assets/images/error-img.png"
+import error from '../../assets/images/error-img.png';
 
 const Pages404 = () => {
   return (
     <React.Fragment>
       <div className="account-pages my-5 pt-5">
         <MetaTags>
-          <title>
-            404 Error Page | Skote - React Admin & Dashboard Template
-          </title>
+          <title>404 Error Page | Skote - React Admin & Dashboard Template</title>
         </MetaTags>
         <Container>
           <Row>
@@ -41,7 +40,7 @@ const Pages404 = () => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default Pages404
+export default Pages404;

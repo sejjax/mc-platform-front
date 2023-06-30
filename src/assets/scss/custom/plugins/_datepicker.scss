@@ -2,7 +2,7 @@
 // Datepicker
 //
 
-[dir="rtl"] {
+[dir='rtl'] {
   .datepicker {
     right: 0 !important;
     left: auto;
@@ -118,7 +118,7 @@
       }
     }
 
-    &[data-view="week"] {
+    &[data-view='week'] {
       > li {
         font-weight: $fw-medium;
       }

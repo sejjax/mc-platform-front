@@ -1,12 +1,12 @@
 import {
+  EDIT_PROFILE,
   PROFILE_ERROR,
   PROFILE_SUCCESS,
-  EDIT_PROFILE,
-  RESET_PROFILE_FLAG,
-  SET_PROFILE_DATA,
   RESET_PROFILE_DATA,
+  RESET_PROFILE_FLAG,
   SET_AGREEMENT,
-} from "./actionTypes"
+  SET_PROFILE_DATA,
+} from './actionTypes';
 
 const initialState = {
   error: null,
@@ -31,57 +31,57 @@ const initialState = {
     username: null,
     agreement: null,
   },
-}
+};
 
 const profile = (state = initialState, action) => {
   switch (action.type) {
     case EDIT_PROFILE:
       return {
         ...state,
-      }
+      };
 
     case SET_AGREEMENT:
-      return { ...state, user: { ...state.user, agreement: action.payload } }
+      return { ...state, user: { ...state.user, agreement: action.payload } };
 
     case SET_PROFILE_DATA:
       return {
         ...state,
         isAuth: true,
         user: { ...state.user, ...action.payload },
-      }
+      };
 
     case RESET_PROFILE_DATA:
       return {
         ...state,
         isAuth: false,
         user: { ...initialState.user },
-      }
+      };
     case PROFILE_SUCCESS:
       return {
         ...state,
         success: action.payload,
-      }
+      };
 
     case PROFILE_ERROR:
       return {
         ...state,
         error: action.payload,
-      }
+      };
 
     case RESET_PROFILE_FLAG:
       return {
         ...state,
         success: null,
-      }
+      };
 
     default:
       return {
         ...state,
-      }
+      };
   }
-}
+};
 
-export default profile
+export default profile;
 // {
 //     country: null,
 

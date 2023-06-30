@@ -1,15 +1,15 @@
 export const partnerLevelToDisplayedName = {
-  0: "Начинающий",
-  1: "Партнёр",
-  2: "Консультант",
-  3: "Менеджер",
-  4: "Старший менеджер",
-  5: "Лидер",
-  6: "Директор",
-  7: "Gold - Директор",
-  8: "Platinum - Директор",
-  9: "Diamond - Директор",
-}
+  0: 'Начинающий',
+  1: 'Партнёр',
+  2: 'Консультант',
+  3: 'Менеджер',
+  4: 'Старший менеджер',
+  5: 'Лидер',
+  6: 'Директор',
+  7: 'Gold - Директор',
+  8: 'Platinum - Директор',
+  9: 'Diamond - Директор',
+};
 
 // export const firstStructureLevels = {
 //   0: 0,
@@ -47,7 +47,7 @@ export const firstStructureLevels = {
   7: 100000,
   8: 200000,
   9: 300000,
-}
+};
 export const allStructureLevels = {
   0: 0,
   1: 1000,
@@ -59,4 +59,4 @@ export const allStructureLevels = {
   7: 15000000,
   8: 75000000,
   9: 375000000,
-}
+};

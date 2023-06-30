@@ -1,66 +1,58 @@
-import React from "react"
-import PropTypes from "prop-types"
-import MetaTags from "react-meta-tags"
-import { Link } from "react-router-dom"
-import {
-  Col,
-  Container,
-  Form,
-  Row,
-  Input,
-  Label,
-  FormFeedback,
-  Alert,
-} from "reactstrap"
-import FullScreenLogo from "./FullScreenLogo"
-import * as Yup from "yup"
-import { useFormik } from "formik"
-import { useSelector, useDispatch } from "react-redux"
-import { loginUser } from "../../store/actions"
+import React from 'react';
 
-import PasswordInput from "../../components/Custom/passwordInput"
+import { useFormik } from 'formik';
+import withAuthRedirect from 'hocs/withAuthRedirect';
+import PropTypes from 'prop-types';
+import MetaTags from 'react-meta-tags';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Alert, Col, Container, Form, FormFeedback, Input, Label, Row } from 'reactstrap';
+import * as Yup from 'yup';
 
-import withAuthRedirect from "hocs/withAuthRedirect"
+import PasswordInput from '../../components/Custom/passwordInput';
 
-const Login = props => {
-  const dispatch = useDispatch()
+import { t } from '../../i18n';
+import { loginUser } from '../../store/actions';
+import FullScreenLogo from './FullScreenLogo';
+
+const Login = (props) => {
+  const dispatch = useDispatch();
   const validation = useFormik({
     enableReinitialize: false,
 
     initialValues: {
-      identifier: "",
-      password: "",
+      identifier: '',
+      password: '',
       rememberMe: true,
     },
     validationSchema: Yup.object({
-      identifier: Yup.string().required("Введите Email"),
-      password: Yup.string().required("Введите пароль"),
+      identifier: Yup.string().required(t('common_email_hint')),
+      password: Yup.string().required(t('common_password_hint')),
     }),
-    onSubmit: values => {
-      dispatch(loginUser(values, props.history))
+    onSubmit: (values) => {
+      dispatch(loginUser(values, props.history));
     },
-  })
+  });
 
-  const { error } = useSelector(state => ({
+  const { error } = useSelector((state) => ({
     error: state.Login.error,
-  }))
+  }));
 
   return (
     <React.Fragment>
       <div>
         <MetaTags>
-          <title> Вход в личный кабинет MCapital </title>
+          <title>{t('auth_login_meta_title')}</title>
         </MetaTags>
         <Container
           fluid
           className="p-0"
           style={{
-            backgroundColor: "#fff",
-            height: "100vh",
-            display: "flex",
-            width: "100%",
-          }}
-        >
+            backgroundColor: '#fff',
+            height: '100vh',
+            display: 'flex',
+            width: '100%',
+          }}>
           <Row className="g-0 w-100">
             <FullScreenLogo />
 
@@ -70,39 +62,34 @@ const Login = props => {
                   <div className="d-flex flex-column h-100">
                     <div className="my-auto">
                       <div>
-                        <h5 className="text-primary">Добро Пожаловать!</h5>
-                        <p className="text-muted">Войдите в платформу</p>
+                        <h5 className="text-primary">{t('auth_login_welcome')}</h5>
+                        <p className="text-muted">{t('auth_enter_platform')}</p>
                       </div>
 
                       <div className="mt-4">
                         <Form
                           className="form-horizontal"
-                          onSubmit={e => {
-                            e.preventDefault()
-                            validation.handleSubmit()
-                          }}
-                        >
-                          {error ? <Alert color="danger">{error}</Alert> : null}
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            validation.handleSubmit();
+                          }}>
+                          {error ? <Alert color="danger">{`${t(error)}`}</Alert> : null}
 
                           <div className="mb-3">
-                            <Label className="form-label">Email</Label>
+                            <Label className="form-label">{`${t('common_email')}`}</Label>
                             <Input
                               name="identifier"
                               className="form-control"
-                              placeholder="Введите Email"
+                              placeholder={`${t('common_email_placeholder')}`}
                               type="text"
                               onChange={validation.handleChange}
                               onBlur={validation.handleBlur}
-                              value={validation.values.identifier || ""}
+                              value={validation.values.identifier || ''}
                               invalid={
-                                validation.touched.identifier &&
-                                validation.errors.identifier
-                                  ? true
-                                  : false
+                                !!(validation.touched.identifier && validation.errors.identifier)
                               }
                             />
-                            {validation.touched.identifier &&
-                            validation.errors.identifier ? (
+                            {validation.touched.identifier && validation.errors.identifier ? (
                               <FormFeedback type="invalid">
                                 {validation.errors.identifier}
                               </FormFeedback>
@@ -112,33 +99,26 @@ const Login = props => {
                           <div className="mb-3">
                             <div
                               style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                              }}>
                               <Label className="form-label" htmlFor="password">
-                                Пароль
+                                {`${t('common_password')}`}
                               </Label>
                               <Link to="/forgot-password">
-                                <span style={{ color: "gray" }}>
-                                  Забыли пароль?
-                                </span>
+                                <span style={{ color: 'gray' }}>{t('auth_forgot_password')}</span>
                               </Link>
                             </div>
 
                             <PasswordInput
                               validation={validation}
                               name="password"
-                              placeholder="Введите Пароль"
+                              placeholder={`${t('common_password_placeholder')}`}
                               invalid={
-                                validation.touched.password &&
-                                validation.errors.password
-                                  ? true
-                                  : false
+                                !!(validation.touched.password && validation.errors.password)
                               }
                             />
-                            {validation.touched.password &&
-                            validation.errors.password ? (
+                            {validation.touched.password && validation.errors.password ? (
                               <FormFeedback type="invalid">
                                 {validation.errors.password}
                               </FormFeedback>
@@ -155,33 +135,24 @@ const Login = props => {
                               onChange={validation.handleChange}
                               onBlur={validation.handleBlur}
                             />
-                            <label
-                              className="form-check-label"
-                              htmlFor="auth-remember-check"
-                            >
-                              Запомнить меня
+                            <label className="form-check-label" htmlFor="auth-remember-check">
+                              {`${t('auth_login_remember_me')}`}
                             </label>
                           </div>
 
                           <div className="mt-3 d-grid">
-                            <button
-                              className="btn btn-primary btn-block "
-                              type="submit"
-                            >
-                              Войти
+                            <button className="btn btn-primary btn-block " type="submit">
+                              {t('auth_login')}
                             </button>
                           </div>
                         </Form>
 
                         <div className="mt-5 text-center">
                           <p>
-                            Нет аккаунта?
-                            <Link
-                              to="register"
-                              className="fw-medium text-primary"
-                            >
-                              {" "}
-                              Зарегистрируйтесь
+                            {t('auth_login_no_account')}
+                            <Link to="register" className="fw-medium text-primary">
+                              {' '}
+                              {t('auth_login_register')}
                             </Link>
                           </p>
                         </div>
@@ -195,11 +166,11 @@ const Login = props => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 Login.propTypes = {
   history: PropTypes.object,
-}
+};
 
-export default withAuthRedirect(Login)
+export default withAuthRedirect(Login);

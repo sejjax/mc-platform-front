@@ -1,25 +1,24 @@
 // @flow
-import {
-  CHANGE_LAYOUT,
-  CHANGE_LAYOUT_WIDTH,
-  CHANGE_SIDEBAR_THEME,
-  CHANGE_SIDEBAR_TYPE,
-  CHANGE_TOPBAR_THEME,
-  CHANGE_SIDEBAR_THEME_IMAGE,
-  CHANGE_PRELOADER,
-  TOGGLE_LEFTMENU,
-  SHOW_SIDEBAR,
-} from "./actionTypes"
-
 //constants
 import {
   layoutTypes,
   layoutWidthTypes,
-  topBarThemeTypes,
   leftBarThemeImageTypes,
-  leftSidebarTypes,
   leftSideBarThemeTypes,
-} from "../../constants/layout"
+  leftSidebarTypes,
+  topBarThemeTypes,
+} from '../../constants/layout';
+import {
+  CHANGE_LAYOUT,
+  CHANGE_LAYOUT_WIDTH,
+  CHANGE_PRELOADER,
+  CHANGE_SIDEBAR_THEME,
+  CHANGE_SIDEBAR_THEME_IMAGE,
+  CHANGE_SIDEBAR_TYPE,
+  CHANGE_TOPBAR_THEME,
+  SHOW_SIDEBAR,
+  TOGGLE_LEFTMENU,
+} from './actionTypes';
 
 const INIT_STATE = {
   layoutType: layoutTypes.VERTICAL,
@@ -33,7 +32,7 @@ const INIT_STATE = {
   isMobile: false,
   showSidebar: true,
   leftMenu: false,
-}
+};
 
 const Layout = (state = INIT_STATE, action) => {
   switch (action.type) {
@@ -41,52 +40,52 @@ const Layout = (state = INIT_STATE, action) => {
       return {
         ...state,
         layoutType: action.payload,
-      }
+      };
     case CHANGE_PRELOADER:
       return {
         ...state,
         isPreloader: action.payload,
-      }
+      };
 
     case CHANGE_LAYOUT_WIDTH:
       return {
         ...state,
         layoutWidth: action.payload,
-      }
+      };
     case CHANGE_SIDEBAR_THEME:
       return {
         ...state,
         leftSideBarTheme: action.payload,
-      }
+      };
     case CHANGE_SIDEBAR_THEME_IMAGE:
       return {
         ...state,
         leftSideBarThemeImage: action.payload,
-      }
+      };
     case CHANGE_SIDEBAR_TYPE:
       return {
         ...state,
         leftSideBarType: action.payload.sidebarType,
-      }
+      };
     case CHANGE_TOPBAR_THEME:
       return {
         ...state,
         topbarTheme: action.payload,
-      }
+      };
     case SHOW_SIDEBAR:
       return {
         ...state,
         showSidebar: action.payload,
-      }
+      };
     case TOGGLE_LEFTMENU:
       return {
         ...state,
         leftMenu: action.payload,
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default Layout
+export default Layout;

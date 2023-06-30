@@ -1,32 +1,26 @@
-import React, { useState } from "react"
-import { Button, Input, InputGroup, FormFeedback } from "reactstrap"
-import PropTypes from "prop-types"
+import React, { useState } from 'react';
 
-import eyesIcon from "assets/images/icons/eye.svg"
+import eyesIcon from 'assets/images/icons/eye.svg';
+import PropTypes from 'prop-types';
+import { Button, FormFeedback, Input, InputGroup } from 'reactstrap';
 
-const PasswordInput = ({
-  validation,
-  name,
-  placeholder,
-  invalid,
-  showPassword = false,
-}) => {
-  const [show, setShow] = useState(showPassword)
+const PasswordInput = ({ validation, name, placeholder, invalid, showPassword = false }) => {
+  const [show, setShow] = useState(showPassword);
 
   const showHandler = () => {
-    setShow(!show)
-  }
+    setShow(!show);
+  };
 
   return (
     <InputGroup>
       <Input
         style={{
-          position: "relative",
+          position: 'relative',
         }}
         name={name}
         id={name}
-        value={validation.values[name] || ""}
-        type={show ? "text" : "password"}
+        value={validation.values[name] || ''}
+        type={show ? 'text' : 'password'}
         placeholder={placeholder}
         onChange={validation.handleChange}
         onBlur={validation.handleBlur}
@@ -35,23 +29,20 @@ const PasswordInput = ({
       <Button
         color="secondary"
         style={{
-          backgroundColor: "#EFF2F7",
-          border: "1px solid #CED4DA",
-          borderLeft: "unset",
-          zIndex: "0",
+          backgroundColor: '#EFF2F7',
+          border: '1px solid #CED4DA',
+          borderLeft: 'unset',
+          zIndex: '0',
         }}
-        onClick={showHandler}
-      >
+        onClick={showHandler}>
         <img src={eyesIcon} />
       </Button>
-      {invalid ? (
-        <FormFeedback type="invalid">{validation.errors[name]}</FormFeedback>
-      ) : null}
+      {invalid ? <FormFeedback type="invalid">{validation.errors[name]}</FormFeedback> : null}
     </InputGroup>
-  )
-}
+  );
+};
 
-export default PasswordInput
+export default PasswordInput;
 
 PasswordInput.propTypes = {
   validation: PropTypes.shape({
@@ -65,4 +56,4 @@ PasswordInput.propTypes = {
   showPassword: PropTypes.bool,
   placeholder: PropTypes.string.isRequired,
   invalid: PropTypes.bool.isRequired,
-}
+};

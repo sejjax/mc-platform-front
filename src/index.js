@@ -1,14 +1,16 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import App from "./App"
-import * as serviceWorker from "./serviceWorker"
-import { BrowserRouter } from "react-router-dom"
-import "./i18n"
-import { Provider } from "react-redux"
+import React from 'react';
 
-import store from "./store"
-import { ToastProvider } from "react-toast-notifications"
-import WalletConnectWrapper from "components/WalletConnectWrapper/WalletConnectWrapper"
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { ToastProvider } from 'react-toast-notifications';
+
+import WalletConnectWrapper from 'components/WalletConnectWrapper/WalletConnectWrapper';
+
+import App from './App';
+import './i18n';
+import * as serviceWorker from './serviceWorker';
+import store from './store';
 
 const app = (
   <Provider store={store}>
@@ -22,7 +24,7 @@ const app = (
       </ToastProvider>
     </BrowserRouter>
   </Provider>
-)
+);
 
-ReactDOM.render(app, document.getElementById("root"))
-serviceWorker.unregister()
+ReactDOM.render(app, document.getElementById('root'));
+serviceWorker.unregister();

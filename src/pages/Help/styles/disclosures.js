@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css } from 'styled-components';
 
 export const Root = styled.div`
   font-size: 16px;
@@ -6,11 +6,11 @@ export const Root = styled.div`
   & > h3 {
     font-size: 20px;
   }
-`
+`;
 
 const maxWidth = css`
   max-width: 800px;
-`
+`;
 
 export const DiscloseresContainer = styled.div`
   display: grid;
@@ -19,9 +19,9 @@ export const DiscloseresContainer = styled.div`
   /* margin-top: 60px; */
 
   ${maxWidth}
-`
+`;
 export const BSAContainer = styled.div`
   display: grid;
   gap: 32px;
   ${maxWidth}
-`
+`;

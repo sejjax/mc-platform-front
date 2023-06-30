@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from "react"
-import { Card, CardBody, CardTitle } from "reactstrap"
+import React, { useEffect, useState } from 'react';
 
+import { map } from 'lodash';
 // RangeSlider
-import Nouislider from "nouislider-react"
-import PropTypes from "prop-types"
-
-import "./scss/risk-range-slider.scss"
-
-import { getRisks as onGetRisks } from "store/actions"
-
+import Nouislider from 'nouislider-react';
+import PropTypes from 'prop-types';
 //redux
-import { useSelector, useDispatch } from "react-redux"
-import { map } from "lodash"
+import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardBody, CardTitle } from 'reactstrap';
 
+import { getRisks as onGetRisks } from 'store/actions';
 
-const RangeSlider = props => {
-  const dispatch = useDispatch()
+import './scss/risk-range-slider.scss';
 
-  const { risks } = useSelector(state => ({
+const RangeSlider = (props) => {
+  const dispatch = useDispatch();
+
+  const { risks } = useSelector((state) => ({
     risks: state.Risk.risks,
-  }))
+  }));
 
-  const [slider, setSlider] = useState(0)
-  const [risk, setRisk] = useState(null)
+  const [slider, setSlider] = useState(0);
+  const [risk, setRisk] = useState(null);
 
   // useEffect(() => {
   //   dispatch(onGetRisks())
@@ -32,23 +30,19 @@ const RangeSlider = props => {
     setRisk(
       risks.find(({ code }, index) => {
         if (props?.risk?.code === code) {
-          setSlider(index)
-          return true
+          setSlider(index);
+          return true;
         }
-      })
-    )
-  }, [risks, props?.risk])
+      }),
+    );
+  }, [risks, props?.risk]);
 
   return (
     <React.Fragment>
       {risk && (
-        <Card className={"rrs-risks"}>
+        <Card className={'rrs-risks'}>
           <CardBody>
-            {risk?.name && (
-              <CardTitle
-                className={"rrs-title"}
-              >{`${risk.name} risk`}</CardTitle>
-            )}
+            {risk?.name && <CardTitle className={'rrs-title'}>{`${risk.name} risk`}</CardTitle>}
             <Nouislider
               accessibility
               disabled={props?.disabled}
@@ -60,27 +54,27 @@ const RangeSlider = props => {
               }}
               cssPrefix="rrs-"
               onSlide={(values, handle, unencodedValues) => {
-                setSlider(unencodedValues[0])
+                setSlider(unencodedValues[0]);
               }}
             />
-            <div className={"rrs-labels"}>
+            <div className={'rrs-labels'}>
               {map(risks, (current, index) => (
-                <span className={"rrs-label"} key={index}>
+                <span className={'rrs-label'} key={index}>
                   {current?.name}
                 </span>
               ))}
             </div>
-            <div className={"rrs-content"}>{risk?.description}</div>
+            <div className={'rrs-content'}>{risk?.description}</div>
           </CardBody>
         </Card>
       )}
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default RangeSlider
+export default RangeSlider;
 
 RangeSlider.propTypes = {
   risk: PropTypes.object,
   disabled: PropTypes.bool,
-}
+};

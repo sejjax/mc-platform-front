@@ -1,100 +1,102 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { Card, CardTitle, CardBody, Button } from "reactstrap"
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import { getNotifications } from "store/actions"
-import parse from "html-react-parser"
-import { useRef } from "react"
-import { useEffect } from "react"
-import { useState } from "react"
+import React from 'react';
+import { useRef } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
-const add_zero = num => {
+import parse from 'html-react-parser';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Button, Card, CardBody, CardTitle } from 'reactstrap';
+
+import { getNotifications } from 'store/actions';
+
+import { t } from '../../i18n';
+
+const add_zero = (num) => {
   if (num < 10) {
-    return "0" + num
+    return '0' + num;
   } else {
-    return num
+    return num;
   }
-}
+};
 
-const pretty_date_function = ts => {
-  let date = Date.parse(ts)
-  let d = new Date(date)
-  let month = Number(d.getMonth()) + 1
+const pretty_date_function = (ts) => {
+  let date = Date.parse(ts);
+  let d = new Date(date);
+  let month = Number(d.getMonth()) + 1;
   let buy_date =
     d.getFullYear() +
-    "-" +
+    '-' +
     add_zero(d.getDay()) +
-    "-" +
+    '-' +
     add_zero(month) +
-    " " +
+    ' ' +
     add_zero(d.getHours()) +
-    ":" +
-    d.getMinutes()
-  return buy_date
-}
+    ':' +
+    d.getMinutes();
+  return buy_date;
+};
 const Notifications = ({ notifications, onGetNotifications }) => {
-  const [height, setHeight] = useState(420)
+  const [height, setHeight] = useState(420);
 
   const hasNotifications = React.useMemo(() => {
     if (!notifications) {
-      return false
+      return false;
     }
     for (const count of notifications) {
       if (count !== 0) {
-        return true
+        return true;
       }
     }
-    return false
-  }, [notifications])
+    return false;
+  }, [notifications]);
 
   useEffect(() => {
-    const element = document.querySelector(".dashboard__left_card")
+    const element = document.querySelector('.dashboard__left_card');
     const resizeObserver = new ResizeObserver(([entry]) => {
-      setHeight(entry?.contentRect?.height ?? 420)
-    })
-    resizeObserver.observe(element)
-    return () => resizeObserver.disconnect()
-  }, [])
+      setHeight(entry?.contentRect?.height ?? 420);
+    });
+    resizeObserver.observe(element);
+    return () => resizeObserver.disconnect();
+  }, []);
 
   useEffect(() => {
-    onGetNotifications?.()
-  }, [onGetNotifications])
+    onGetNotifications?.();
+  }, [onGetNotifications]);
 
   return (
     <Card
       className="p-3 same-height"
       style={{
-        marginBottom: "0px",
+        marginBottom: '0px',
         maxHeight: height,
-      }}
-    >
-      <CardTitle style={{ paddingLeft: "0.55rem" }}>
+      }}>
+      <CardTitle style={{ paddingLeft: '0.55rem' }}>
         <div className="title">
-          <h4 className="title__count font-size-15">Уведомления</h4>
+          <h4 className="title__count font-size-15">{t('notification_title')}</h4>
           <Link className="font-size-13" to="/notificationslist">
-            Посмотреть все
+            {t('notification_view_all')}
           </Link>
         </div>
       </CardTitle>
       {!hasNotifications && (
         <div className="referrals-zero">
           <div>
-            <p>У Вас пока нет уведомлений</p>
+            <p>{t('notification_not_have_data')}</p>
           </div>
         </div>
       )}
-      <Card style={{ height: "100%", overflow: "auto", marginBottom: "0px" }}>
+      <Card style={{ height: '100%', overflow: 'auto', marginBottom: '0px' }}>
         {hasNotifications &&
-          notifications.map(n => (
+          notifications.map((n) => (
             <CardBody
               className="notification_card"
               key={n.id}
               style={{
-                padding: "0.5rem",
-                borderBottom: "1px solid rgb(239, 242, 247)",
-              }}
-            >
+                padding: '0.5rem',
+                borderBottom: '1px solid rgb(239, 242, 247)',
+              }}>
               <div className="notification_leftside">
                 <h4 className="notification_title" key={n.notification_title}>
                   {n.notification_title}
@@ -105,7 +107,7 @@ const Notifications = ({ notifications, onGetNotifications }) => {
               </div>
               <div className="notification_rightside">
                 <p className="notification_type" key={n.notification_type}>
-                  {n.notification_type?.title ?? ""}
+                  {n.notification_type?.title ?? ''}
                 </p>
               </div>
               {/* <div className="notification_bottom">
@@ -118,21 +120,21 @@ const Notifications = ({ notifications, onGetNotifications }) => {
           ))}
       </Card>
     </Card>
-  )
-}
+  );
+};
 
 Notifications.propTypes = {
   notifications: PropTypes.any,
   onGetNotifications: PropTypes.func,
-}
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     notifications: state.Notifications.notifications,
-  }
-}
-const mapDispatchToProps = dispatch => ({
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
   onGetNotifications: () => dispatch(getNotifications()),
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications)
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

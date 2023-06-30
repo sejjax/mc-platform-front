@@ -1,2 +1,2 @@
-export const FETCH_ACCRUALS = "FETCH_ACCRUALS"
-export const SET_ACCRUALS = "SET_ACCRUALS"
+export const FETCH_ACCRUALS = 'FETCH_ACCRUALS';
+export const SET_ACCRUALS = 'SET_ACCRUALS';

@@ -14,13 +14,13 @@ export const Wrapper = styled.div`
   font-size: 16px;
   color: #555555;
   font-weight: 400;
-`
+`;
 
 export const Link = styled.div`
   cursor: pointer;
   position: relative;
 
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
       color: #556ee6;
@@ -28,26 +28,26 @@ export const Link = styled.div`
       &:after {
         position: absolute;
         right: 0;
-        content: "";
+        content: '';
 
         width: 2px;
         height: 100%;
         background-color: #556ee6;
       }
     `}
-`
+`;
 
 export const StSection = styled.section`
   margin-bottom: 64px;
   font-size: 16px;
-  
+
   & > h2 {
     color: #333333;
     font-size: 32px;
     line-height: 1.2rem;
     padding-bottom: 32px;
   }
-`
+`;
 
 export const RulesWrapper = styled.div`
   padding-top: 15px;
@@ -55,13 +55,13 @@ export const RulesWrapper = styled.div`
 
 export const FeesLink = styled.a`
   color: #556ee6;
-`
+`;
 
 export const UL = styled.ul`
   padding: 0;
 
   font-size: 14px;
-  
+
   & > li {
     list-style: none;
   }
@@ -82,4 +82,4 @@ export const Grid = styled.div`
     padding: 0;
     margin: 0;
   }
-`
+`;

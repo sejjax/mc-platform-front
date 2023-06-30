@@ -1,51 +1,50 @@
-import { put, takeEvery } from "redux-saga/effects"
+import accessToken from 'helpers/jwt-token-access/accessToken';
+import { put, takeEvery } from 'redux-saga/effects';
 
+import authService from 'services/authService';
+
+import { resetProfileData, setProfileData } from '../profile/actions';
 // Login Redux States
-import { LOGIN_USER, LOGOUT_USER } from "./actionTypes"
-import { apiError, loginSuccess } from "./actions"
-
-import authService from "services/authService"
-import accessToken from "helpers/jwt-token-access/accessToken"
-import { resetProfileData, setProfileData } from "../profile/actions"
+import { LOGIN_USER, LOGOUT_USER } from './actionTypes';
+import { apiError, loginSuccess } from './actions';
 
 function* loginUser({ payload: { user, history } }) {
   try {
-    const response = yield authService.login(user)
+    const response = yield authService.login(user);
     if (user.rememberMe) {
-      localStorage.setItem("authUser", JSON.stringify(response))
+      localStorage.setItem('authUser', JSON.stringify(response));
     } else {
-      sessionStorage.setItem("authUser", JSON.stringify(response))
+      sessionStorage.setItem('authUser', JSON.stringify(response));
     }
 
-    accessToken.reload()
+    accessToken.reload();
 
-    yield put(loginSuccess(response))
-    yield put(setProfileData(response.user))
+    yield put(loginSuccess(response));
+    yield put(setProfileData(response.user));
 
-    history.push("/dashboard")
+    history.push('/dashboard');
   } catch (error) {
-    console.log(error)
-    yield put(apiError(error))
+    yield put(apiError(error));
   }
 }
 
 function* logoutUser({ payload: { history } }) {
   try {
-    localStorage.removeItem("authUser")
-    sessionStorage.removeItem("authUser")
+    localStorage.removeItem('authUser');
+    sessionStorage.removeItem('authUser');
 
-    accessToken.reload()
+    accessToken.reload();
 
-    yield put(resetProfileData())
-    history.push("/login")
+    yield put(resetProfileData());
+    history.push('/login');
   } catch (error) {
-    yield put(apiError(error))
+    yield put(apiError(error));
   }
 }
 
 function* authSaga() {
-  yield takeEvery(LOGIN_USER, loginUser)
-  yield takeEvery(LOGOUT_USER, logoutUser)
+  yield takeEvery(LOGIN_USER, loginUser);
+  yield takeEvery(LOGOUT_USER, logoutUser);
 }
 
-export default authSaga
+export default authSaga;

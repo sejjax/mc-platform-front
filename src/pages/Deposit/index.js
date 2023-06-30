@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react"
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import { withRouter } from "react-router-dom"
-import { withTranslation } from "react-i18next"
+import React, { useEffect, useState } from 'react';
 
-import getAuthUser from "helpers/GetAuthUser"
-import { MetaTags } from "react-meta-tags"
+import getAuthUser from 'helpers/GetAuthUser';
+import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
+import { MetaTags } from 'react-meta-tags';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import ZeroLevel from "./levelZero"
-import NonZero from "./nonZero"
+import ZeroLevel from './levelZero';
+import NonZero from './nonZero';
 
-const Deposit = props => {
-  const [userLevel, setUserLevel] = useState(null)
+const Deposit = (props) => {
+  const [userLevel, setUserLevel] = useState(null);
 
   useEffect(() => {
-    const user = getAuthUser()
+    const user = getAuthUser();
 
-    setUserLevel(user?.level || 1)
-  }, [props.success])
+    setUserLevel(user?.level || 1);
+  }, [props.success]);
 
   return (
     <React.Fragment>
@@ -28,19 +28,17 @@ const Deposit = props => {
         {userLevel === 0 ? <ZeroLevel /> : <NonZero />}
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 Deposit.propTypes = {
   success: PropTypes.any,
   t: PropTypes.any,
-}
+};
 
-const mapStateProps = state => {
-  const { error, success } = state.Profile
-  return { error, success }
-}
+const mapStateProps = (state) => {
+  const { error, success } = state.Profile;
+  return { error, success };
+};
 
-export default withRouter(
-  connect(mapStateProps, {})(withTranslation()(Deposit))
-)
+export default withRouter(connect(mapStateProps, {})(withTranslation()(Deposit)));

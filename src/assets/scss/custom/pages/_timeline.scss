@@ -13,7 +13,7 @@
       .event-down-icon {
         position: relative;
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           width: 100%;
           top: 16px;
@@ -38,7 +38,7 @@
         .down-arrow-icon {
           animation: fade-down 1.5s infinite linear;
           &:before {
-            content: "\ec4c";
+            content: '\ec4c';
           }
         }
       }

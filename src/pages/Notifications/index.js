@@ -1,28 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+
 import PropTypes from 'prop-types';
 import { MetaTags } from 'react-meta-tags';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { connect } from "react-redux"
 // import { withTranslation } from 'react-i18next';
-import { Container, Row, Col } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 
-import Breadcrumbs from "../../components/Common/Breadcrumb";
+import Breadcrumbs from '../../components/Common/Breadcrumb';
 
-import List from "./list"
+import { t } from '../../i18n';
+import List from './list';
 
 const NotificationsList = () => {
-
   return (
     <React.Fragment>
-      <div className='page-content'>
+      <div className="page-content">
         <MetaTags>
-          <title>Все уведомления MCapital</title>
+          <title>{t('notification_meta_title')}</title>
         </MetaTags>
         <Container fluid>
           <Breadcrumbs
-            title='Уведлмления'
+            title={t('notification_title')}
             hasBreadcrumbItem={false}
-            breadcrumbItem='Все уведомления'
+            breadcrumbItem={t('notification_all')}
           />
           <Row>
             <Col lg={12}>
@@ -32,10 +33,7 @@ const NotificationsList = () => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-
-
-export default withRouter(NotificationsList)
-
+export default withRouter(NotificationsList);

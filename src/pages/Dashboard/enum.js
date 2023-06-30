@@ -4,8 +4,8 @@ export const levels = {
   2: 'Second',
   3: 'Third',
   4: 'Fourth',
-  5: 'Fifth'
-}
+  5: 'Fifth',
+};
 
 export const months = [
   'January',
@@ -19,5 +19,5 @@ export const months = [
   'September',
   'October',
   'November',
-  'December'
-]
+  'December',
+];

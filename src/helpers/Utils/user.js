@@ -2,4 +2,4 @@
  * @param {number} level
  * @returns {number}
  */
-export const getDisplayedUserLevel = level => level + 1
+export const getDisplayedUserLevel = (level) => level + 1;

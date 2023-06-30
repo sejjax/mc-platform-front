@@ -1,53 +1,54 @@
-import classNames from "classnames"
-import DepositModal from "components/DepositModals/DepositModal/DepositModal"
-import { Progress } from "components/Progress/Progress"
-import parse from "html-react-parser"
-import { isEmpty, map } from "lodash"
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import { Button, Col, Row, Table } from "reactstrap"
-import {
-  getProjectDetailSuccess,
-  getProjects as onGetProjects,
-} from "store/actions"
-import Breadcrumbs from "../../components/Common/Breadcrumb"
-import { useFetchInvestorProAmount } from "./hooks/useFetchInvestorProAmount"
-import { useIsProjectDisabled } from "./hooks/useIsProjectDisabled"
-import { useProjectInvestmentTimeout } from "./hooks/useProjectInvestmentTimeout"
-import ProjectImage from "./projectImage"
-import ProjectTimer from "./projectTimer"
-import RangeSlider from "./rangeSlider"
-import { investorProAllLimit, investorProPerUserLimit } from "constants/deposit"
+import React, { useEffect, useState } from 'react';
 
-const selector = state => ({
+import classNames from 'classnames';
+import parse from 'html-react-parser';
+import { isEmpty, map } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { Button, Col, Row, Table } from 'reactstrap';
+
+import { getProjectDetailSuccess, getProjects as onGetProjects } from 'store/actions';
+
+import Breadcrumbs from '../../components/Common/Breadcrumb';
+import DepositModal from 'components/DepositModals/DepositModal/DepositModal';
+import { Progress } from 'components/Progress/Progress';
+
+import { investorProAllLimit, investorProPerUserLimit } from 'constants/deposit';
+
+import { t } from '../../i18n';
+import { useFetchInvestorProAmount } from './hooks/useFetchInvestorProAmount';
+import { useIsProjectDisabled } from './hooks/useIsProjectDisabled';
+import { useProjectInvestmentTimeout } from './hooks/useProjectInvestmentTimeout';
+import ProjectImage from './projectImage';
+import ProjectTimer from './projectTimer';
+import RangeSlider from './rangeSlider';
+
+const selector = (state) => ({
   projectCategory: state?.Project.projects,
-  isDepositButtonDisabledByInvestment:
-    state.Project.isDepositButtonDisabledByInvestment,
-})
+  isDepositButtonDisabledByInvestment: state.Project.isDepositButtonDisabledByInvestment,
+});
 
 const ProjectsList = () => {
-  const [investModal, setInvestModal] = useState(false)
-  const dispatch = useDispatch()
+  const [investModal, setInvestModal] = useState(false);
+  const dispatch = useDispatch();
 
-  const { projectCategory, isDepositButtonDisabledByInvestment } =
-    useSelector(selector)
-  useProjectInvestmentTimeout()
-  const investorProDepositAmount = useFetchInvestorProAmount()
-  const isProjectDisabled = useIsProjectDisabled(investorProDepositAmount)
+  const { projectCategory, isDepositButtonDisabledByInvestment } = useSelector(selector);
+  useProjectInvestmentTimeout();
+  const investorProDepositAmount = useFetchInvestorProAmount();
+  const isProjectDisabled = useIsProjectDisabled(investorProDepositAmount);
 
-  const params = useParams()
+  const params = useParams();
 
-  const investClickHandler = projectDetails => () => {
-    dispatch(getProjectDetailSuccess(projectDetails))
-    setInvestModal(true)
-  }
+  const investClickHandler = (projectDetails) => () => {
+    dispatch(getProjectDetailSuccess(projectDetails));
+    setInvestModal(true);
+  };
 
   useEffect(() => {
     if (params && params.type) {
-      dispatch(onGetProjects(params.type))
+      dispatch(onGetProjects(params.type));
     }
-  }, [params, dispatch])
+  }, [params, dispatch]);
 
   return (
     <React.Fragment>
@@ -60,25 +61,24 @@ const ProjectsList = () => {
                 <thead>
                   <tr>
                     <th scope="col" colSpan={2}>
-                      {projectCategory.name === "Портфели"
-                        ? "Портфели"
-                        : "Пакеты"}
+                      {projectCategory.name === t('common_portfolios')
+                        ? t('common_portfolios')
+                        : t('common_packages')}
                     </th>
                     <th scope="col" className="min-col-sm">
-                      Инвестиционный период
+                      {t('project_investment_period')}
                     </th>
                     <th scope="col" className="min-col-sm">
-                      Периодичность платежей
+                      {t('project_payment_period')}
                     </th>
                     <th scope="col" className="min-col-md" colSpan={2}>
-                      Годовая доходность
+                      {t('project_yearly_profit')}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {map(projectCategory.projects, (project, index) => {
-                    const isInvestorPro =
-                      project.service_name.includes("investor_pro")
+                    const isInvestorPro = project.service_name.includes('investor_pro');
                     return (
                       <tr key={index}>
                         <td className="after-none">
@@ -89,42 +89,30 @@ const ProjectsList = () => {
                         </td>
                         <td className="project__title after-none">
                           <div>
-                            <h5 className="text-truncate font-size-14">
-                              {project.name}
-                            </h5>
-                            <p className="text-muted mb-0">
-                              {parse(project.title)}
-                            </p>
+                            <h5 className="text-truncate font-size-14">{project.name}</h5>
+                            <p className="text-muted mb-0">{parse(project.title)}</p>
                           </div>
                         </td>
-                        <td data-label="Инвестиционный период">
-                          {project?.invest_period}
-                        </td>
-                        <td data-label="Периодичность платежей">
-                          {project?.payment_period}
-                        </td>
+                        <td data-label="Инвестиционный период">{project?.invest_period}</td>
+                        <td data-label="Периодичность платежей">{project?.payment_period}</td>
                         <td data-label="Годовая доходность">{project?.apy}%</td>
                         <td
-                          className={classNames("after-none", {
+                          className={classNames('after-none', {
                             td__with_timer: isInvestorPro,
-                          })}
-                        >
+                          })}>
                           <div className="d-flex flex-wrap gap-2 justify-content-end align-items-center w-100 media__flex_right btn__maybe_with_timer">
                             <Button
                               color="success"
                               onClick={investClickHandler(project)}
                               style={{
-                                width: "100%",
-                                maxWidth: "120px",
+                                width: '100%',
+                                maxWidth: '120px',
                               }}
-                              disabled={isProjectDisabled(project)}
-                            >
-                              Инвестировать
+                              disabled={isProjectDisabled(project)}>
+                              {t('common_invest')}
                             </Button>
                             {isDepositButtonDisabledByInvestment && (
-                              <span className="text-end">
-                                Ожидается начисление
-                              </span>
+                              <span className="text-end">{t('project_accrual_expected')}</span>
                             )}
                           </div>
                           {isInvestorPro && (
@@ -134,27 +122,25 @@ const ProjectsList = () => {
                                 <Progress
                                   completed={investorProDepositAmount.perUser}
                                   end={investorProPerUserLimit}
-                                  title="Куплено вами:"
+                                  title={t('project_bought_per_user')}
                                 />
                                 <Progress
-                                  completed={
-                                    investorProDepositAmount.allPackages
-                                  }
+                                  completed={investorProDepositAmount.allPackages}
                                   end={investorProAllLimit}
-                                  title="Всего куплено:"
+                                  title={t('project_total_bought')}
                                 />
                               </div>
                             </div>
                           )}
                         </td>
                       </tr>
-                    )
+                    );
                   })}
                 </tbody>
               </Table>
             </div>
           ) : (
-            <p>Пока что нет проектов в данной категории</p>
+            <p>{t('project_empty_text')}</p>
           )}
         </Col>
         <Col xl={3} sm={12}>
@@ -162,12 +148,9 @@ const ProjectsList = () => {
         </Col>
       </Row>
 
-      <DepositModal
-        isOpen={investModal}
-        closeHandler={() => setInvestModal(false)}
-      />
+      <DepositModal isOpen={investModal} closeHandler={() => setInvestModal(false)} />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default ProjectsList
+export default ProjectsList;

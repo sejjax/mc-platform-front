@@ -1,6 +1,8 @@
-import Breadcrumb from "components/Common/Breadcrumb"
-import React, { useEffect, useState } from "react"
-import { MetaTags } from "react-meta-tags"
+import React, { useEffect, useState } from 'react';
+
+import withForbiddenWithoutBuyingPackage from 'hocs/withForbiddenWithoutBuyingPackage';
+import parse from 'html-react-parser';
+import { MetaTags } from 'react-meta-tags';
 import {
   AccordionBody,
   AccordionHeader,
@@ -11,29 +13,31 @@ import {
   Container,
   Row,
   UncontrolledAccordion,
-} from "reactstrap"
+} from 'reactstrap';
 
-import { getHelpInfo } from "../../services/helpService"
-import parse from "html-react-parser"
-import withForbiddenWithoutBuyingPackage from "hocs/withForbiddenWithoutBuyingPackage"
+import { getHelpInfo } from '../../services/helpService';
+
+import Breadcrumb from 'components/Common/Breadcrumb';
+
+import { t } from '../../i18n';
 
 const Help = () => {
-  const [helpInfo, setHelpInfo] = useState(null)
+  const [helpInfo, setHelpInfo] = useState(null);
 
   useEffect(async () => {
-    const info = await getHelpInfo()
+    const info = await getHelpInfo();
 
-    setHelpInfo(info)
-  }, [])
+    setHelpInfo(info);
+  }, []);
 
   return (
     <>
       <div className="page-content">
         <MetaTags>
-          <title>Помощь - MCapital</title>
+          <title>{t('help_meta_title')}</title>
         </MetaTags>
         <Container fluid>
-          <Breadcrumb hasBreadcrumbItem={false} breadcrumbItem="Помощь" />
+          <Breadcrumb hasBreadcrumbItem={false} breadcrumbItem={t('sidebar_help_label')} />
           <Card>
             <CardBody>
               {helpInfo && (
@@ -43,9 +47,7 @@ const Help = () => {
                       {helpInfo.faqItems &&
                         helpInfo.faqItems.map((item, index) => (
                           <AccordionItem key={`${item.id}${index}`}>
-                            <AccordionHeader targetId={`${item.id}`}>
-                              {item.Header}
-                            </AccordionHeader>
+                            <AccordionHeader targetId={`${item.id}`}>{item.Header}</AccordionHeader>
                             <AccordionBody accordionId={`${item.id}`}>
                               {parse(item.Content)}
                             </AccordionBody>
@@ -60,7 +62,7 @@ const Help = () => {
         </Container>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default withForbiddenWithoutBuyingPackage(Help)
+export default withForbiddenWithoutBuyingPackage(Help);

@@ -1,41 +1,36 @@
-import React from "react"
-import {
-  EthereumClient,
-  modalConnectors,
-  walletConnectProvider,
-} from "@web3modal/ethereum"
-import { Web3Modal } from "@web3modal/react"
-import { configureChains, createClient, WagmiConfig } from "wagmi"
-import { bsc } from "wagmi/chains"
+import React from 'react';
 
-const chains = [bsc]
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum';
+import { Web3Modal } from '@web3modal/react';
+import { WagmiConfig, configureChains, createConfig } from 'wagmi';
+import { bsc, mainnet } from 'wagmi/chains';
 
-const projectId = process.env.REACT_APP_WALLET_CONNECT_PROJECT_ID
+const chains = [mainnet, bsc];
 
-const { provider } = configureChains(chains, [
-  walletConnectProvider({ projectId }),
-])
-const wagmiClient = createClient({
+const projectId = process.env.REACT_APP_WALLET_CONNECT_PROJECT_ID;
+
+const { provider } = configureChains(chains, [w3mProvider({ projectId })]);
+const wagmiClient = createConfig({
   autoConnect: true,
-  connectors: modalConnectors({
-    version: "1",
-    appName: "MC",
+  connectors: w3mConnectors({
+    version: '1',
+    appName: 'MC',
     chains,
     projectId,
   }),
   provider,
-})
+});
 
-const ethereumClient = new EthereumClient(wagmiClient, chains)
+const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 const WalletConnectWrapper = ({ children }) => {
   return (
     <>
-      <WagmiConfig client={wagmiClient}>{children}</WagmiConfig>
+      <WagmiConfig config={wagmiClient}>{children}</WagmiConfig>
 
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </>
-  )
-}
+  );
+};
 
-export default WalletConnectWrapper
+export default WalletConnectWrapper;

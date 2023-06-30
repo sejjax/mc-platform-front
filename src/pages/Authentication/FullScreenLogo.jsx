@@ -1,7 +1,9 @@
-import React from "react"
-import { Col } from "reactstrap"
-import fullScreenLogo from "assets/images/fullscreen-logo.png"
-import "./scss/fullscreen-logo.scss"
+import React from 'react';
+
+import fullScreenLogo from 'assets/images/fullscreen-logo.png';
+import { Col } from 'reactstrap';
+
+import './scss/fullscreen-logo.scss';
 
 const FullScreenLogo = () => {
   return (
@@ -11,6 +13,6 @@ const FullScreenLogo = () => {
         <img className="fullscreen__logo_mobile " src="/logo.png" alt="" />
       </Col>
     </React.Fragment>
-  )
-}
-export default FullScreenLogo
+  );
+};
+export default FullScreenLogo;

@@ -1,6 +1,7 @@
-import React from "react"
-import { FormFeedback, Input } from "reactstrap"
-import PropTypes from "prop-types"
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import { FormFeedback, Input } from 'reactstrap';
 
 const InputWithError = ({ name, formik, ...properties }) => {
   return (
@@ -19,11 +20,11 @@ const InputWithError = ({ name, formik, ...properties }) => {
         <FormFeedback type="invalid">{formik.errors[name]}</FormFeedback>
       ) : null}
     </>
-  )
-}
+  );
+};
 
 InputWithError.propTypes = {
   name: PropTypes.string,
   formik: PropTypes.any,
-}
-export default InputWithError
+};
+export default InputWithError;

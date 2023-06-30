@@ -1,24 +1,26 @@
-import PropTypes from "prop-types"
-import React, { useEffect } from "react"
-import { withRouter } from "react-router-dom"
-import { logoutUser } from "../../store/actions"
-import { useDispatch } from "react-redux"
-import { useDisconnect } from "wagmi"
+import React, { useEffect } from 'react';
 
-const Logout = props => {
-  const dispatch = useDispatch()
-  const { disconnect } = useDisconnect()
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { useDisconnect } from 'wagmi';
+
+import { logoutUser } from '../../store/actions';
+
+const Logout = (props) => {
+  const dispatch = useDispatch();
+  const { disconnect } = useDisconnect();
 
   useEffect(() => {
-    disconnect()
-    dispatch(logoutUser(props.history))
-  }, [])
+    disconnect();
+    dispatch(logoutUser(props.history));
+  }, []);
 
-  return <></>
-}
+  return <></>;
+};
 
 Logout.propTypes = {
   history: PropTypes.object,
-}
+};
 
-export default withRouter(Logout)
+export default withRouter(Logout);

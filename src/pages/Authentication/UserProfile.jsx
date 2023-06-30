@@ -1,158 +1,149 @@
-import MetaTags from "react-meta-tags"
-import React, { useState, useRef, useMemo } from "react"
+import React, { useMemo, useRef, useState } from 'react';
+import { useEffect } from 'react';
+
+import { useFormik } from 'formik';
+import getImageReader from 'helpers/GetImageReader';
+import WhiteListImages from 'helpers/WhiteListImages';
+import MetaTags from 'react-meta-tags';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import Select from 'react-select';
 import {
-  Container,
-  Row,
-  Col,
-  Card,
   Alert,
-  CardBody,
   Button,
-  Label,
-  Input,
-  FormFeedback,
+  Card,
+  CardBody,
+  Col,
+  Container,
   Form,
-} from "reactstrap"
-import { useFormik } from "formik"
-import countries from "constants/countries"
-import Select from "react-select"
-import { useSelector, useDispatch } from "react-redux"
-import { withRouter } from "react-router-dom"
-import blankAvatar from "../../assets/images/blankProfile.png"
-import { editProfile, uploadPhotoError } from "../../store/actions"
-import PasswordInput from "components/Custom/passwordInput"
-import schema from "yupshema/editProfile"
-import "./scss/profile.scss"
-import PhotoEditorModal from "components/DepositModals/PhotoEditor/PhotoEditorModal"
-import WhiteListImages from "helpers/WhiteListImages"
-import getImageReader from "helpers/GetImageReader"
-import ChangeDefaultWalletProfile from "./components/Profile/ChangeDefaultWalletProfile"
-import { useEffect } from "react"
+  FormFeedback,
+  Input,
+  Label,
+  Row,
+} from 'reactstrap';
+import schema from 'yupshema/editProfile';
+
+import ChangeDefaultWalletProfile from './components/Profile/ChangeDefaultWalletProfile';
+import PasswordInput from 'components/Custom/passwordInput';
+import PhotoEditorModal from 'components/DepositModals/PhotoEditor/PhotoEditorModal';
+
+import countries from 'constants/countries';
+
+import blankAvatar from '../../assets/images/blankProfile.png';
+import { t } from '../../i18n';
+import { editProfile, uploadPhotoError } from '../../store/actions';
+import './scss/profile.scss';
 
 const UserProfile = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [isFileUpload, setFileUpload] = useState(false)
-  const [photoPreview, setPhotoPreview] = useState(null)
-  const [photoType, setPhotoType] = useState(null)
+  const [isFileUpload, setFileUpload] = useState(false);
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [photoType, setPhotoType] = useState(null);
 
-  let fileInputRef = useRef(null)
+  let fileInputRef = useRef(null);
 
-  const handleFileChange = async e => {
-    const file = e.target.files[0]
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
 
     if (file) {
       if (!WhiteListImages.includes(file?.type)) {
-        return dispatch(uploadPhotoError("Некорректный формат изображения"))
+        return dispatch(uploadPhotoError('Некорректный формат изображения'));
       }
 
-      const result = await getImageReader(file)
+      const result = await getImageReader(file);
 
       if (result) {
-        setPhotoPreview(result)
-        setPhotoType(file?.type)
-        setFileUpload(true)
-        setOpenModal(true)
+        setPhotoPreview(result);
+        setPhotoType(file?.type);
+        setFileUpload(true);
+        setOpenModal(true);
       }
     }
-  }
+  };
 
-  const [openModal, setOpenModal] = useState(false)
+  const [openModal, setOpenModal] = useState(false);
 
-  const { error, success, errorUpload, successUpload, photo } = useSelector(
-    state => ({
-      error: state.Profile.error,
-      success: state.Profile.success,
-      errorUpload: state.PhotoUpload.error,
-      successUpload: state.PhotoUpload.upload,
-      photo: state.Photo.photo,
-    })
-  )
-  const { partnerId, email, fullName, country, mobile, agreement } =
-    useSelector(state => state.Profile.user)
+  const { error, success, errorUpload, successUpload, photo } = useSelector((state) => ({
+    error: state.Profile.error,
+    success: state.Profile.success,
+    errorUpload: state.PhotoUpload.error,
+    successUpload: state.PhotoUpload.upload,
+    photo: state.Photo.photo,
+  }));
+  const { partnerId, email, fullName, country, mobile, agreement, referrerName } = useSelector(
+    (state) => state.Profile.user,
+  );
 
-  const isOpenModal = useMemo(
-    () => isFileUpload && openModal,
-    [isFileUpload, openModal]
-  )
+  const isOpenModal = useMemo(() => isFileUpload && openModal, [isFileUpload, openModal]);
 
   const validation = useFormik({
     enableReinitialize: true,
 
     initialValues: {
-      fullName: fullName || "",
+      fullName: fullName || '',
       country: countries[0]?.options?.find(({ value }) => value === country),
-      mobile: mobile || "",
-      agreement: agreement === 1 ? true : false,
+      mobile: mobile || '',
+      agreement: agreement === 1,
+      oldPassword: '',
+      password: '',
     },
     validationSchema: schema,
 
-    onSubmit: values => {
-      dispatch(editProfile({ ...values, agreement: values.agreement ? 1 : 0 }))
-      setPhotoPreview("")
+    onSubmit: (values) => {
+      dispatch(editProfile({ ...values, agreement: values.agreement ? 1 : 0 }));
+      setPhotoPreview('');
     },
-  })
+  });
 
   return (
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>Профиль пользователя MCapital</title>
+          <title>{t('user_profile_meta_title')}</title>
         </MetaTags>
         <Container fluid>
           <Card>
             <CardBody>
               <Form
-                onSubmit={e => {
-                  e.preventDefault()
-                  validation.handleSubmit()
-                  return false
-                }}
-              >
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  validation.handleSubmit();
+                  return false;
+                }}>
                 <Row>
                   <Col md={12} lg={6}>
                     <Col xl={6} lg={10}>
                       <div className="form-group">
                         <div
                           style={{
-                            width: "100%",
-                            display: "grid",
-                            gridTemplateColumns: "1fr 5fr",
-                            gap: "10px",
-                          }}
-                        >
+                            width: '100%',
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 5fr',
+                            gap: '10px',
+                          }}>
                           <div>
                             <img
-                              src={
-                                photoPreview
-                                  ? photoPreview
-                                  : photo
-                                  ? photo
-                                  : blankAvatar
-                              }
+                              src={photoPreview ? photoPreview : photo ? photo : blankAvatar}
                               alt={`${fullName} photo`}
                               className="avatar-md rounded-circle"
                             />
                           </div>
-                          <div style={{ marginLeft: "24px" }}>
+                          <div style={{ marginLeft: '24px' }}>
                             <div className="text-muted">
-                              <Label className="form-label">Ваше имя</Label>
+                              <Label className="form-label">{t('user_profile_name')}</Label>
                               <Input
                                 name="fullName"
                                 className="form-control"
                                 type="text"
                                 onChange={validation.handleChange}
                                 onBlur={validation.handleBlur}
-                                value={validation.values.fullName || ""}
+                                value={String(validation.values.fullName) || ''}
                                 invalid={
-                                  validation.touched.fullName &&
-                                  validation.errors.fullName
-                                    ? true
-                                    : false
+                                  !!(validation.touched.fullName && validation.errors.fullName)
                                 }
                               />
-                              {validation.touched.username &&
-                              validation.errors.fullName ? (
+                              {validation.touched.fullName && validation.errors.fullName ? (
                                 <FormFeedback type="invalid">
                                   {validation.errors.fullName}
                                 </FormFeedback>
@@ -170,15 +161,14 @@ const UserProfile = () => {
                           ref={fileInputRef}
                         />
                         <Button
-                          style={{ width: "100%" }}
+                          style={{ width: '100%' }}
                           type="button"
                           color="primary"
-                          onClick={e => {
-                            e.preventDefault()
-                            fileInputRef.current.click()
-                          }}
-                        >
-                          {photo ? "Изменить фото" : "Добавить фото"}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            fileInputRef.current.click();
+                          }}>
+                          {photo ? t('user_profile_change_photo') : t('user_profile_add_photo')}
                         </Button>
                         <PhotoEditorModal
                           toggle={setOpenModal}
@@ -190,7 +180,7 @@ const UserProfile = () => {
 
                         {successUpload ? (
                           <Alert color="success" className="mt-3">
-                            Фото успешно загружено.
+                            {t('user_profile_photo_upload_success')}
                           </Alert>
                         ) : null}
                         {errorUpload ? (
@@ -200,76 +190,67 @@ const UserProfile = () => {
                         ) : null}
                       </div>
                       <Row className="mt-4">
-                        <Col lg={6}>
-                          <div className="form-group">
-                            <span>Реферальный ID</span>
-                            <div className="font-size-18 font-weight-600 mt-1">
-                              {partnerId}
+                        <Col lg={12}>
+                          <Label className="form-label">
+                            {t('user_profile_referrer_info_label')}
+                          </Label>
+                          <div className="referrer-block">
+                            <div>
+                              <span>{t('common_name')}</span>
+                              <div className="font-size-18 fw-bold">{referrerName}</div>
+                            </div>
+                            <div>
+                              <span>{t('user_profile_referrer_id')}</span>
+                              <div className="font-size-18 fw-bold">{partnerId}</div>
                             </div>
                           </div>
                         </Col>
                       </Row>
                       <div className="form-group mt-4">
                         <Label className="form-label" htmlFor="email">
-                          Email
+                          {t('common_email')}
                         </Label>
-                        <Input
-                          name="email"
-                          className="form-control"
-                          value={email}
-                          disabled
-                        />
+                        <Input name="email" className="form-control" value={email} disabled />
                       </div>
                       <div className="form-group mt-4">
                         <Label className="form-label" htmlFor="country">
-                          Страна
+                          {t('common_country')}
                         </Label>
                         <Select
                           id="country"
-                          placeholder="Выберите страну"
+                          placeholder={t('auth_register_choose_country')}
                           name="country"
-                          value={validation.values.country || "Выберите страну"}
-                          onChange={value =>
-                            validation.setFieldValue("country", value)
-                          }
+                          value={validation.values.country || t('auth_register_choose_country')}
+                          onChange={(value) => validation.setFieldValue('country', value)}
                           onBlur={validation.handleBlur}
                           options={countries}
                           invalid={!!validation.errors.country}
                         />
                         {validation.errors.country && (
                           <FormFeedback type="invalid" className="select__form_feedback">
-                            {validation.errors.country?.value ??
-                              validation.errors.country?.label}
+                            {validation.errors.country?.value ?? validation.errors.country?.label}
                           </FormFeedback>
                         )}
                       </div>
                       <div className="form-group mt-4">
                         <Label className="form-label" htmlFor="country">
-                          Номер телефона
+                          {t('common_phone_number')}
                         </Label>
                         <Input
                           name="mobile"
                           className="form-control"
                           onChange={validation.handleChange}
                           onBlur={validation.handleBlur}
-                          value={validation.values.mobile || ""}
-                          invalid={
-                            validation.touched.mobile &&
-                            validation.errors.mobile
-                              ? true
-                              : false
-                          }
+                          value={String(validation.values.mobile) || ''}
+                          invalid={!!(validation.touched.mobile && validation.errors.mobile)}
                         />
-                        {validation.touched.mobile &&
-                        validation.errors.mobile ? (
-                          <FormFeedback type="invalid">
-                            {validation.errors.mobile}
-                          </FormFeedback>
+                        {validation.touched.mobile && validation.errors.mobile ? (
+                          <FormFeedback type="invalid">{validation.errors.mobile}</FormFeedback>
                         ) : null}
                       </div>
                       <div className="form-group mt-4 mb-5">
                         <Label className="form-label" htmlFor="country">
-                          Адрес кошелька по умолчанию
+                          {t('user_profile_default_wallet_address')}
                         </Label>
                         {/* <Input
                           name="
@@ -297,45 +278,40 @@ const UserProfile = () => {
                   </Col>
                   <Col lg={6}>
                     <Col xl={6} lg={10}>
-                      <h3 className="font-size-20">Изменить пароль</h3>
+                      <h3 className="font-size-20">{t('user_profile_change_password')}</h3>
                       <div className="mt-5">
                         <Label className="form-label" htmlFor="oldPassword">
-                          Старый пароль
+                          {t('user_profile_old_password')}
                         </Label>
                         <PasswordInput
                           name="oldPassword"
                           validation={validation}
-                          placeholder="Введите старый пароль"
+                          placeholder={t('user_profile_old_password_placeholder')}
                           invalid={
-                            validation.touched.oldPassword &&
-                            validation.errors.oldPassword
-                              ? true
-                              : false
+                            !!(validation.touched.oldPassword && validation.errors.oldPassword)
                           }
                         />
                       </div>
                       <div className="mt-3">
                         <Label className="form-label" htmlFor="password">
-                          Новый пароль
+                          {t('user_profile_new_password')}
                         </Label>
                         <PasswordInput
                           name="password"
                           validation={validation}
-                          placeholder="Введите новый пароль"
-                          invalid={validation.errors.password ? true : false}
+                          placeholder={t('user_profile_new_password_placeholder')}
+                          invalid={!!validation.errors.password}
                         />
                       </div>
                       <div className="mt-3">
                         <Label className="form-label" htmlFor="confirmPassword">
-                          Подтвердите новый пароль
+                          {t('user_profile_confirm_new_password')}
                         </Label>
                         <PasswordInput
                           name="confirmPassword"
                           validation={validation}
-                          placeholder="Подтвердите новый пароль"
-                          invalid={
-                            validation.errors.confirmPassword ? true : false
-                          }
+                          placeholder={t('user_profile_confirm_new_password')}
+                          invalid={!!validation.errors.confirmPassword}
                         />
                       </div>
                       <div className="mt-3">
@@ -345,9 +321,8 @@ const UserProfile = () => {
                             type="checkbox"
                             checked={validation.values.checked}
                             onChange={validation.handleChange}
-                          />{" "}
-                          Согласен показывать личную информацию вышестоящим
-                          партнерам
+                          />{' '}
+                          {t('user_profile_agree_checkbox_label')}
                         </Label>
                       </div>
                     </Col>
@@ -357,18 +332,14 @@ const UserProfile = () => {
                   <Col lg={6}>
                     <Col xl={6} lg={10}>
                       {success ? (
-                        <Alert color="success">Профиль успешно обновлён.</Alert>
+                        <Alert color="success">{t('user_profile_successful_updated')}</Alert>
                       ) : null}
 
                       {error ? <Alert color="danger">{error}</Alert> : null}
 
                       <div className="mt-5">
-                        <Button
-                          style={{ width: "100%" }}
-                          type="submit"
-                          color="primary"
-                        >
-                          Сохранить изменения
+                        <Button style={{ width: '100%' }} type="submit" color="primary">
+                          {t('common_save_changes')}
                         </Button>
                       </div>
                     </Col>
@@ -380,7 +351,7 @@ const UserProfile = () => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default withRouter(UserProfile)
+export default withRouter(UserProfile);

@@ -1,39 +1,38 @@
-import PropTypes from "prop-types"
-import React, { useEffect } from "react"
+import React, { useEffect } from 'react';
 
-import { Switch, BrowserRouter as Router } from "react-router-dom"
-import { connect, useDispatch } from "react-redux"
+import getAuthUser from 'helpers/GetAuthUser';
+import PropTypes from 'prop-types';
+import { connect, useDispatch } from 'react-redux';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-// Import Routes all
-import { authProtectedRoutes, publicRoutes } from "./routes"
+import { fetchProfileData } from 'store/actions';
 
-// Import all middleware
-import Authmiddleware from "./routes/route"
-
+import NonAuthLayout from './components/NonAuthLayout';
 // layouts Format
-import VerticalLayout from "./components/VerticalLayout"
-import NonAuthLayout from "./components/NonAuthLayout"
+import VerticalLayout from './components/VerticalLayout';
+import Modals from 'components/Modals/Modals';
 
 // Import scss
-import "./assets/scss/theme.scss"
-import getAuthUser from "helpers/GetAuthUser"
-import { fetchProfileData } from "store/actions"
-import Modals from "components/Modals/Modals"
+import './assets/scss/theme.scss';
+// Import Routes all
+import { authProtectedRoutes, publicRoutes } from './routes';
+// Import all middleware
+import Authmiddleware from './routes/route';
 
 const App = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   function getLayout() {
-    const layoutCls = VerticalLayout
+    const layoutCls = VerticalLayout;
 
-    return layoutCls
+    return layoutCls;
   }
 
   useEffect(() => {
-    const user = getAuthUser()
-    user && dispatch(fetchProfileData())
-  }, [])
+    const user = getAuthUser();
+    user && dispatch(fetchProfileData());
+  }, []);
 
-  const Layout = getLayout()
+  const Layout = getLayout();
   return (
     <React.Fragment>
       <Router>
@@ -63,17 +62,17 @@ const App = () => {
         <Modals />
       </Router>
     </React.Fragment>
-  )
-}
+  );
+};
 
 App.propTypes = {
   layout: PropTypes.any,
-}
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     layout: state.Layout,
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, null)(App)
+export default connect(mapStateToProps, null)(App);

@@ -21,3 +21,13 @@
 .select__form_feedback {
   display: block !important;
 }
+
+.referrer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: 1px solid #a8adbd;
+  border-radius: 8px;
+  width: 100%;
+  padding: 8px 14px;
+}

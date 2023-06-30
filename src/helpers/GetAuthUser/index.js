@@ -1,14 +1,14 @@
 const getAuthUser = () => {
-  let user
+  let user;
 
-  if (localStorage.getItem("authUser")) {
-    user = JSON.parse(localStorage.getItem("authUser")).user
+  if (localStorage.getItem('authUser')) {
+    user = JSON.parse(localStorage.getItem('authUser')).user;
   }
-  if (sessionStorage.getItem("authUser")) {
-    user = JSON.parse(sessionStorage.getItem("authUser")).user
+  if (sessionStorage.getItem('authUser')) {
+    user = JSON.parse(sessionStorage.getItem('authUser')).user;
   }
 
-  return user
-}
+  return user;
+};
 
-export default getAuthUser
+export default getAuthUser;

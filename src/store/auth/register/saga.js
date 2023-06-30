@@ -1,31 +1,31 @@
-import { takeEvery, fork, put, all } from "redux-saga/effects"
-
-//Account Redux states
-import { REGISTER_USER } from "./actionTypes"
-import { registerUserSuccessful, registerUserFailed } from "./actions"
+import { all, fork, put, takeEvery } from 'redux-saga/effects';
 
 //Include Both Helper File with needed methods
-import AuthService from "services/authService"
+import AuthService from 'services/authService';
+
+//Account Redux states
+import { REGISTER_USER } from './actionTypes';
+import { registerUserFailed, registerUserSuccessful } from './actions';
 
 // Is user register successfull then direct plot user in redux.
 function* registerUser({ payload: { user, history } }) {
   try {
-    const response = yield AuthService.register(user)
+    const response = yield AuthService.register(user);
 
-    yield put(registerUserSuccessful(response))
+    yield put(registerUserSuccessful(response));
 
     // history.push("/login")
   } catch (error) {
-    yield put(registerUserFailed(error))
+    yield put(registerUserFailed(error));
   }
 }
 
 export function* watchUserRegister() {
-  yield takeEvery(REGISTER_USER, registerUser)
+  yield takeEvery(REGISTER_USER, registerUser);
 }
 
 function* accountSaga() {
-  yield all([fork(watchUserRegister)])
+  yield all([fork(watchUserRegister)]);
 }
 
-export default accountSaga
+export default accountSaga;

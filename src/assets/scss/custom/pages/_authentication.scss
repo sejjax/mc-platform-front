@@ -27,9 +27,9 @@
 // auth-pass-inputgroup
 
 .auth-pass-inputgroup {
-  input[type="input"] + .btn .mdi-eye-outline {
+  input[type='input'] + .btn .mdi-eye-outline {
     &:before {
-      content: "\F06D1";
+      content: '\F06D1';
     }
   }
 }
@@ -45,7 +45,7 @@
   }
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 300px;
     height: 300px;
@@ -53,7 +53,7 @@
   }
 
   .bg-overlay {
-    background: url("../../../images/bg-auth-overlay.png");
+    background: url('../../../images/bg-auth-overlay.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

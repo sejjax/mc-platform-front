@@ -192,22 +192,22 @@
       th {
         position: relative;
         &:before {
-          content: "\F0143";
+          content: '\F0143';
           position: absolute;
           left: 0;
           right: auto;
           top: 7px;
-          font: normal normal normal 24px/1 "Material Design Icons";
+          font: normal normal normal 24px/1 'Material Design Icons';
           opacity: 0.3;
         }
         &:after {
-          content: "\F0140";
+          content: '\F0140';
           position: absolute;
           left: 0;
           right: auto;
           top: 14px;
           opacity: 0.3;
-          font: normal normal normal 24px/1 "Material Design Icons";
+          font: normal normal normal 24px/1 'Material Design Icons';
         }
       }
 

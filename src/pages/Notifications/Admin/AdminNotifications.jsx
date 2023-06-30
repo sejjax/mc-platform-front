@@ -1,28 +1,34 @@
-import PropTypes from "prop-types"
-import React from "react"
-import { connect } from "react-redux"
-import { Button, Card, CardBody, Modal } from "reactstrap"
-import moment from "moment"
-import BootstrapTable from "react-bootstrap-table-next"
-import paginationFactory from "react-bootstrap-table2-paginator"
-// import './scss/list.scss';
-import { getAllNotifications } from "store/actions"
-import parse from "html-react-parser"
-import { Link } from "react-router-dom"
-import Breadcrumbs from "../../../components/Common/Breadcrumb"
-import { MetaTags } from "react-meta-tags"
-import { withRouter } from "react-router-dom"
+import React from 'react';
+import { useState } from 'react';
+
+import withAdmin from 'hocs/withAdmin';
+import parse from 'html-react-parser';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import BootstrapTable from 'react-bootstrap-table-next';
+import { MetaTags } from 'react-meta-tags';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { Button, Card, CardBody, Modal } from 'reactstrap';
 // import { withTranslation } from 'react-i18next';
-import { Container, Row, Col } from "reactstrap"
-import CustomDropdown from "./CustomDropdown/CustomDropdown"
-import { useState } from "react"
-import DeleteModalNotification from "./DeleteModal/DeleteModalNotification"
-import withAdmin from "hocs/withAdmin"
-import { ACCESS } from "constants/access"
+import { Col, Container, Row } from 'reactstrap';
+
+// import './scss/list.scss';
+import { getAllNotifications } from 'store/actions';
+
+import Breadcrumbs from '../../../components/Common/Breadcrumb';
+
+import { ACCESS } from 'constants/access';
+
+import { t } from '../../../i18n';
+import CustomDropdown from './CustomDropdown/CustomDropdown';
+import DeleteModalNotification from './DeleteModal/DeleteModalNotification';
 
 const paginationOptions = {
-  paginationPosition: "top",
-}
+  paginationPosition: 'top',
+};
 
 function headerFormatter(column, colIndex, { sortElement }) {
   return (
@@ -30,84 +36,84 @@ function headerFormatter(column, colIndex, { sortElement }) {
       <p>{column.text}</p>
       {sortElement}
     </div>
-  )
+  );
 }
 
 const columns = [
   {
-    dataField: "notification_type",
-    text: "Тип уведомления",
+    dataField: 'notification_type',
+    text: t('notification_type'),
     sort: true,
     headerFormatter,
     attrs: {
-      "data-label": "Тип уведомления",
+      'data-label': t('notification_type'),
     },
   },
   {
-    dataField: "notification_text",
-    text: "Уведомление",
-    classes: "wrap",
+    dataField: 'notification_text',
+    text: t('notification_title'),
+    classes: 'wrap',
     sort: true,
     attrs: {
-      "data-label": "Уведомление",
+      'data-label': t('notification_title'),
     },
     headerFormatter,
     formatter(row, cell) {
       return (
         <div>
           <p>
-            <span className="fw-bold">Заголовок: </span>
+            <span className="fw-bold">{t('common_title')} </span>
             {cell.notification_title}
           </p>
-          <div className="fw-bold">Текст:</div>
+          <div className="fw-bold">{t('common_text')}</div>
           <div>{parse(row)}</div>
         </div>
-      )
+      );
     },
   },
   {
-    dataField: "notification_date",
-    text: "Дата уведомления",
+    dataField: 'notification_date',
+    text: t('notification_date'),
     sort: true,
     headerFormatter,
     attrs: {
-      "data-label": "Дата уведомления",
+      'data-label': t('notification_date'),
     },
   },
   {
-    dataField: "delivery",
-    text: "Тип доставки",
+    dataField: 'delivery',
+    text: t('notification_delivery_type'),
     sort: true,
     headerFormatter,
     attrs: {
-      "data-label": "Тип доставки",
+      'data-label': t('notification_delivery_type'),
     },
     formatter(_cell, row) {
-      const displayIsSite = row.isSite ? "Сайт" : ""
+      const displayIsSite = row.isSite ? t('common_site') : '';
       const displayIsEmail = row.isEmail
         ? row.isSite
-          ? ", Почта"
-          : "Почта"
-        : ""
+          ? `, ${t('common_mail')}`
+          : t('common_mail')
+        : '';
       return (
         <>
           {displayIsSite}
           {displayIsEmail}
         </>
-      )
+      );
     },
   },
-]
+];
 
 const AdminNotifications = ({ notifications, onGetNotifications, history }) => {
   const [deleteModal, setDeleteModal] = useState({
     isOpen: false,
     selectedItem: null,
-  })
+  });
 
   React.useEffect(() => {
-    onGetNotifications?.()
-  }, [onGetNotifications])
+    onGetNotifications?.();
+  }, [onGetNotifications]);
 
   const notificationsData = React.useMemo(() => {
     return notifications.map(
@@ -121,35 +127,33 @@ const AdminNotifications = ({ notifications, onGetNotifications, history }) => {
         isEmail,
       }) => ({
         id,
-        notification_date: moment(notification_date).format(
-          "DD-MM-YYYY , hh : mm "
-        ),
-        notification_type: notification_type?.title || "",
+        notification_date: moment(notification_date).format('DD-MM-YYYY , hh : mm '),
+        notification_type: notification_type?.title || '',
         notification_title,
         notification_text,
         isSite,
         isEmail,
-      })
-    )
-  }, [notifications])
+      }),
+    );
+  }, [notifications]);
 
-  const editClickHandler = id => {
-    history.push(`/admin/notificationsCreate/${id}`)
-  }
+  const editClickHandler = (id) => {
+    history.push(`/admin/notificationsCreate/${id}`);
+  };
 
-  const deleteModalOpenHandler = id => {
-    setDeleteModal({ isOpen: true, selectedItem: id })
-  }
+  const deleteModalOpenHandler = (id) => {
+    setDeleteModal({ isOpen: true, selectedItem: id });
+  };
 
   const closeDeleteModal = () => {
-    setDeleteModal(prevState => ({ ...prevState, isOpen: false }))
-  }
+    setDeleteModal((prevState) => ({ ...prevState, isOpen: false }));
+  };
 
   const extendColumnsWithBtns = [
     ...columns,
     {
-      dataField: "buttons",
-      text: "",
+      dataField: 'buttons',
+      text: '',
       sort: false,
       formatter: (_, row) => {
         return (
@@ -157,22 +161,22 @@ const AdminNotifications = ({ notifications, onGetNotifications, history }) => {
             editClickHandler={() => editClickHandler(row.id)}
             deleteClickHandler={() => deleteModalOpenHandler(row.id)}
           />
-        )
+        );
       },
     },
-  ]
+  ];
 
   return (
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>Все уведомления MCapital</title>
+          <title>{t('notification_meta_title')}</title>
         </MetaTags>
         <Container fluid>
           <Breadcrumbs
-            title="Уведлмления"
+            title={t('notification_title')}
             hasBreadcrumbItem={false}
-            breadcrumbItem="Все уведомления"
+            breadcrumbItem={t('notification_all')}
           />
           <Row>
             <Col lg={12}>
@@ -180,11 +184,8 @@ const AdminNotifications = ({ notifications, onGetNotifications, history }) => {
                 <CardBody>
                   <div className="text-end">
                     <Button color="primary" className="notification__add_btn">
-                      <Link
-                        className="button_a"
-                        to={"/admin/notificationsCreate"}
-                      >
-                        Создать уведомление
+                      <Link className="button_a" to={'/admin/notificationsCreate'}>
+                        {t('notification_create_notification')}
                       </Link>
                     </Button>
                   </div>
@@ -212,8 +213,8 @@ const AdminNotifications = ({ notifications, onGetNotifications, history }) => {
         />
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 AdminNotifications.propTypes = {
   notifications: PropTypes.any,
@@ -223,18 +224,18 @@ AdminNotifications.propTypes = {
   addNotification: PropTypes.func,
   editNotificatio: PropTypes.func,
   history: PropTypes.any,
-}
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     notifications: state.Notifications.notifications,
-  }
-}
-const mapDispatchToProps = dispatch => ({
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
   onGetNotifications: () => dispatch(getAllNotifications()),
-})
+});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(withRouter(withAdmin(AdminNotifications, ACCESS.notifications)))
+  mapDispatchToProps,
+)(withRouter(withAdmin(AdminNotifications, ACCESS.notifications)));

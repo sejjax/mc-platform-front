@@ -1,25 +1,28 @@
-import React, { useCallback, useState } from "react"
-import { Row, Col, Card, CardBody, CardTitle, CardText } from "reactstrap"
-import PropTypes from "prop-types"
-import ByTokenForm from "pages/Deposit/byTokenForm"
-import CurrencyCard from "pages/Deposit/currencyCard"
-import BUSDIcon from "../../../assets/images/icons/BUSD.svg"
-import StackingForm from "./StackingForm/StackingForm"
-import { useSelector } from "react-redux"
+import React, { useCallback, useState } from 'react';
+
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardText, CardTitle, Col, Row } from 'reactstrap';
+
+import ByTokenForm from 'pages/Deposit/byTokenForm';
+import CurrencyCard from 'pages/Deposit/currencyCard';
+
+import BUSDIcon from '../../../assets/images/icons/BUSD.svg';
+import StackingForm from './StackingForm/StackingForm';
 
 const StackingModal = () => {
-  const [tokens, setTokens] = useState("BUSD")
+  const [tokens, setTokens] = useState('BUSD');
 
-  const changeTokenHandler = token => {
-    setTokens(token)
-  }
+  const changeTokenHandler = (token) => {
+    setTokens(token);
+  };
 
   const callback = useCallback(
-    token => {
-      changeTokenHandler(token)
+    (token) => {
+      changeTokenHandler(token);
     },
-    [tokens]
-  )
+    [tokens],
+  );
 
   return (
     <Row>
@@ -38,7 +41,7 @@ const StackingModal = () => {
                       icon={BUSDIcon}
                       currentPrice="1 BUSD = 1 $ = 1 MC"
                       onClick={callback}
-                      isActive={"BUSD" === tokens}
+                      isActive={'BUSD' === tokens}
                     />
                   </Col>
                 </Row>
@@ -53,7 +56,7 @@ const StackingModal = () => {
         </Card>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default StackingModal
+export default StackingModal;

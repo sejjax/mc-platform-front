@@ -1,34 +1,26 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useState } from 'react';
 
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardTitle,
-  CardText,
-} from "reactstrap"
+import { Card, CardBody, CardText, CardTitle, Col, Container, Row } from 'reactstrap';
 
-import CurrencyCard from "./currencyCard"
+import ByTokenForm from 'components/DepositModals/ByTokenForm/byTokenForm';
 
-import BUSDIcon from "../../assets/images/icons/BUSD.svg"
-import BNDIcon from "../../assets/images/icons/BNB.svg"
-import ByTokenForm from "components/DepositModals/ByTokenForm/byTokenForm"
+import BUSDIcon from '../../assets/images/icons/BUSD.svg';
+import { t } from '../../i18n';
+import CurrencyCard from './currencyCard';
 
 const NonZero = () => {
-  const [tokens, setTokens] = useState("BUSD")
+  const [tokens, setTokens] = useState('BUSD');
 
-  const changeTokenHandler = token => {
-    setTokens(token)
-  }
+  const changeTokenHandler = (token) => {
+    setTokens(token);
+  };
 
   const callback = useCallback(
-    token => {
-      changeTokenHandler(token)
+    (token) => {
+      changeTokenHandler(token);
     },
-    [tokens]
-  )
+    [tokens],
+  );
 
   return (
     <React.Fragment>
@@ -38,11 +30,11 @@ const NonZero = () => {
             <Card>
               <CardBody>
                 <CardTitle className="mb-3 font-size-18">
-                  Внести средства
+                  {t('dashboard_contribute_funds')}
                 </CardTitle>
                 <Card className="border">
                   <CardBody>
-                    <CardText className="font-size-14">Валюта</CardText>
+                    <CardText className="font-size-14">{t('common_currency')}</CardText>
                     <Row>
                       {/* <Col sm={4}>
                         <CurrencyCard
@@ -61,7 +53,7 @@ const NonZero = () => {
                           icon={BUSDIcon}
                           currentPrice="1 BUSD = 1 $ = 1 MC"
                           onClick={callback}
-                          isActive={"BUSD" === tokens}
+                          isActive={'BUSD' === tokens}
                         />
                       </Col>
                     </Row>
@@ -78,7 +70,7 @@ const NonZero = () => {
         </Row>
       </Container>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default NonZero
+export default NonZero;

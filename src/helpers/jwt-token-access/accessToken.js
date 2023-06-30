@@ -4,11 +4,11 @@ const accessToken = {
     return `Bearer ${this.token}`;
   },
   reload() {
-    if (localStorage.getItem("authUser")) {
-      this.token = JSON.parse(localStorage.getItem("authUser")).accessToken
+    if (localStorage.getItem('authUser')) {
+      this.token = JSON.parse(localStorage.getItem('authUser')).accessToken;
     }
-    if (sessionStorage.getItem("authUser")) {
-      this.token = JSON.parse(sessionStorage.getItem("authUser")).accessToken
+    if (sessionStorage.getItem('authUser')) {
+      this.token = JSON.parse(sessionStorage.getItem('authUser')).accessToken;
     }
 
     for (const cb of this.callbacks) {
@@ -19,8 +19,8 @@ const accessToken = {
   onUpdate(cb) {
     this.callbacks.push(cb);
   },
-}
+};
 
 accessToken.reload();
 
-export default accessToken
+export default accessToken;

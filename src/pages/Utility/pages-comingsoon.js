@@ -1,39 +1,39 @@
-import React from "react"
-import MetaTags from "react-meta-tags"
-import { Link } from "react-router-dom"
-import { Container, Row, Col } from "reactstrap"
+import React from 'react';
 
 //Import Countdown
-import Countdown from "react-countdown"
+import Countdown from 'react-countdown';
+import MetaTags from 'react-meta-tags';
+import { Link } from 'react-router-dom';
+import { Col, Container, Row } from 'reactstrap';
 
+import maintanence from '../../assets/images/coming-soon.svg';
 //Import Images
-import logo from "../../assets/images/logo-dark.png"
-import maintanence from "../../assets/images/coming-soon.svg"
+import logo from '../../assets/images/logo-dark.png';
 
 const PagesComingsoon = () => {
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
       // Render a completed state
-      return <span>You are good to go!</span>
+      return <span>You are good to go!</span>;
     } else {
       return (
         <>
           <div className="coming-box">
             {days} <span>Days</span>
-          </div>{" "}
+          </div>{' '}
           <div className="coming-box">
             {hours} <span>Hours</span>
-          </div>{" "}
+          </div>{' '}
           <div className="coming-box">
             {minutes} <span>Minutes</span>
-          </div>{" "}
+          </div>{' '}
           <div className="coming-box">
             {seconds} <span>Seconds</span>
           </div>
         </>
-      )
+      );
     }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -57,18 +57,13 @@ const PagesComingsoon = () => {
                 <Row className="justify-content-center mt-5">
                   <Col sm="4">
                     <div className="maintenance-img">
-                      <img
-                        src={maintanence}
-                        alt=""
-                        className="img-fluid mx-auto d-block"
-                      />
+                      <img src={maintanence} alt="" className="img-fluid mx-auto d-block" />
                     </div>
                   </Col>
                 </Row>
                 <h4 className="mt-5">Let&apos;s get started with Skote</h4>
                 <p className="text-muted">
-                  It will be as simple as Occidental in fact it will be
-                  Occidental.
+                  It will be as simple as Occidental in fact it will be Occidental.
                 </p>
 
                 <Row className="justify-content-center mt-5">
@@ -84,7 +79,7 @@ const PagesComingsoon = () => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default PagesComingsoon
+export default PagesComingsoon;

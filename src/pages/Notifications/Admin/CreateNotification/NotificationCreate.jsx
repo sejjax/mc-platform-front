@@ -1,59 +1,49 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
-import {
-  Card,
-  CardBody,
-  Container,
-  Row,
-  Col,
-  Label,
-  Input,
-  FormGroup,
-  Button,
-} from "reactstrap"
-import { MetaTags } from "react-meta-tags"
-import Breadcrumbs from "../../../../components/Common/Breadcrumb"
-import { useFormik } from "formik"
-import { useEffect } from "react"
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+
+import { useFormik } from 'formik';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import { MetaTags } from 'react-meta-tags';
+import { connect } from 'react-redux';
+import { useParams, withRouter } from 'react-router-dom';
+import { Button, Card, CardBody, Col, Container, FormGroup, Input, Label, Row } from 'reactstrap';
+
 import {
   getNotificationsTypeRequest,
   getOneNotificationRequest,
-} from "services/notificationsService"
-import { connect } from "react-redux"
-import { addNotification, editNotification } from "store/actions"
-import { useParams, withRouter } from "react-router-dom"
-import moment from "moment"
-import { createNotificationSchema } from "./yupSchema"
-import InputWithError from "components/InputWithError/InputWithError"
+} from 'services/notificationsService';
+import { addNotification, editNotification } from 'store/actions';
 
-const CreateNotification = ({
-  addNotification,
-  editNotification,
-  getNotification,
-  history,
-}) => {
-  const { notificationId } = useParams()
-  const [notificationTypes, setNotificationTypes] = useState([])
+import Breadcrumbs from '../../../../components/Common/Breadcrumb';
+import InputWithError from 'components/InputWithError/InputWithError';
+
+import { t } from '../../../../i18n';
+import { createNotificationSchema } from './yupSchema';
+
+const CreateNotification = ({ addNotification, editNotification, getNotification, history }) => {
+  const { notificationId } = useParams();
+  const [notificationTypes, setNotificationTypes] = useState([]);
 
   const redirectHandler = () => {
-    return history.push("/admin/notifications")
-  }
+    return history.push('/admin/notifications');
+  };
 
   const formik = useFormik({
     validationSchema: createNotificationSchema,
     initialValues: {
       id: null,
-      notificationTitle: "",
-      notificationType: "",
-      notificationMessage: "",
-      recipientCategory: "all",
-      notificationDate: "",
-      whomNotifySolo: "",
-      whomNotifyGroup: "",
+      notificationTitle: '',
+      notificationType: '',
+      notificationMessage: '',
+      recipientCategory: 'all',
+      notificationDate: '',
+      whomNotifySolo: '',
+      whomNotifyGroup: '',
       isEmail: false,
       isSite: false,
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       const data = {
         notification_text: values.notificationMessage,
         notification_title: values.notificationTitle,
@@ -61,82 +51,80 @@ const CreateNotification = ({
         isSite: values.isSite,
         notification_date: new Date(values.notificationDate).toISOString(),
         notification_type: parseInt(values.notificationType),
+      };
+      if (values.recipientCategory === 'all') {
+        data.whom_notify = ['all'];
       }
-      if (values.recipientCategory === "all") {
-        data.whom_notify = ["all"]
+      if (values.recipientCategory === 'one') {
+        data.whom_notify = [values.whomNotifySolo];
       }
-      if (values.recipientCategory === "one") {
-        data.whom_notify = [values.whomNotifySolo]
-      }
-      if (values.recipientCategory === "group") {
-        data.whom_notify = values.whomNotifyGroup.split(",")
+      if (values.recipientCategory === 'group') {
+        data.whom_notify = values.whomNotifyGroup.split(',');
       }
       if (values.id) {
-        data.id = values.id
-        editNotification({ data, redirectHandler })
+        data.id = values.id;
+        editNotification({ data, redirectHandler });
       } else {
-        addNotification({ data, redirectHandler })
+        addNotification({ data, redirectHandler });
       }
     },
-  })
+  });
 
   useEffect(() => {
     const getNotificationsTypes = async () => {
-      const data = await getNotificationsTypeRequest()
-      setNotificationTypes(data)
-    }
-    getNotificationsTypes()
-  }, [])
+      const data = await getNotificationsTypeRequest();
+      setNotificationTypes(data);
+    };
+    getNotificationsTypes();
+  }, []);
 
   useEffect(() => {
     const setSelectedNotification = async () => {
       if (notificationId && formik.values.id !== notificationId) {
-        let selectedNotification = getNotification(+notificationId)
+        let selectedNotification = getNotification(+notificationId);
         if (!selectedNotification) {
-          selectedNotification = await getOneNotificationRequest(notificationId)
+          selectedNotification = await getOneNotificationRequest(notificationId);
         }
-        if (!selectedNotification) return
-        const parsedWhomNotify = JSON.parse(selectedNotification.whom_notify)
-        const recipientCategory = parsedWhomNotify.includes("all")
-          ? "all"
+        if (!selectedNotification) return;
+        const parsedWhomNotify = JSON.parse(selectedNotification.whom_notify);
+        const recipientCategory = parsedWhomNotify.includes('all')
+          ? 'all'
           : parsedWhomNotify.length === 1
-          ? "one"
-          : "group"
+          ? 'one'
+          : 'group';
         formik.setValues({
           recipientCategory,
           id: selectedNotification.id,
           isEmail: selectedNotification.isEmail,
           isSite: selectedNotification.isSite,
           notificationTitle: selectedNotification.notification_title,
-          notificationDate: moment(
-            new Date(selectedNotification.notification_date)
-          ).format("yyyy-MM-DDThh:mm"),
+          notificationDate: moment(new Date(selectedNotification.notification_date)).format(
+            'yyyy-MM-DDThh:mm',
+          ),
           notificationMessage: selectedNotification.notification_text,
-          notificationType: selectedNotification?.notification_type?.id ?? "",
-          whomNotifyGroup:
-            recipientCategory === "group" ? parsedWhomNotify.join(",") : "",
-          whomNotifySolo:
-            recipientCategory === "one" ? parsedWhomNotify[0].toString() : "",
-        })
+          notificationType: selectedNotification?.notification_type?.id ?? '',
+          whomNotifyGroup: recipientCategory === 'group' ? parsedWhomNotify.join(',') : '',
+          whomNotifySolo: recipientCategory === 'one' ? parsedWhomNotify[0].toString() : '',
+        });
       }
-    }
-    setSelectedNotification()
-  }, [notificationId])
+    };
+    setSelectedNotification();
+  }, [notificationId]);
 
   return (
     <div className="page-content">
       <MetaTags>
         <title>
-          {formik.values.id ? "Редактирование" : "Создание"} уведомления
+          {formik.values.id ? t('common_editing') : t('common_create')} {t('common_notification')}
         </title>
       </MetaTags>
       <Container fluid>
         <Breadcrumbs
-          title="Уведомления"
+          title={t('common_notification')}
           hasBreadcrumbItem={false}
-          breadcrumbItem={`${
-            formik.values.id ? "Редактировать" : "Создать"
-          } уведомление`}
+          breadcrumbItem={`${formik.values.id ? t('common_editing') : t('common_create')} ${t(
+            'common_notification',
+          )}`}
         />
         <Card outline>
           <CardBody className="notification__create_cardbody">
@@ -144,17 +132,13 @@ const CreateNotification = ({
               <div className="notification__create_body">
                 <div className="notification__create_body_upper">
                   <FormGroup>
-                    <Label>Тип уведомления</Label>
-                    <InputWithError
-                      name="notificationType"
-                      formik={formik}
-                      type="select"
-                    >
+                    <Label>{t('notification_type')}</Label>
+                    <InputWithError name="notificationType" formik={formik} type="select">
                       <option value="" disabled>
-                        Выберите тип уведомления
+                        {t('notification_choose_type')}
                       </option>
                       {notificationTypes &&
-                        notificationTypes.map(item => (
+                        notificationTypes.map((item) => (
                           <option key={item.id} value={item.id}>
                             {item.title}
                           </option>
@@ -162,7 +146,7 @@ const CreateNotification = ({
                     </InputWithError>
                   </FormGroup>
                   <FormGroup>
-                    <Label>Название уведомления</Label>
+                    <Label>{t('notification_name')}</Label>
                     <InputWithError name="notificationTitle" formik={formik} />
                   </FormGroup>
                   <FormGroup>
@@ -179,16 +163,16 @@ const CreateNotification = ({
                     </div>
                   </FormGroup>
                   <FormGroup>
-                    <Label>Тип получателя</Label>
+                    <Label>{t('notification_receiver_type')}</Label>
                     <div className="notification__create_category_wrapper d-flex justify-content-between align-items-center">
                       <Label>
                         <Input
                           name="recipientCategory"
                           type="radio"
-                          checked={formik.values.recipientCategory === "all"}
+                          checked={formik.values.recipientCategory === 'all'}
                           value="all"
                           onChange={formik.handleChange}
-                        />{" "}
+                        />{' '}
                         Всем
                       </Label>
                       <Label>
@@ -196,9 +180,9 @@ const CreateNotification = ({
                           name="recipientCategory"
                           type="radio"
                           value="one"
-                          checked={formik.values.recipientCategory === "one"}
+                          checked={formik.values.recipientCategory === 'one'}
                           onChange={formik.handleChange}
-                        />{" "}
+                        />{' '}
                         Одному
                       </Label>
                       <Label>
@@ -206,26 +190,24 @@ const CreateNotification = ({
                           name="recipientCategory"
                           type="radio"
                           value="group"
-                          checked={formik.values.recipientCategory === "group"}
+                          checked={formik.values.recipientCategory === 'group'}
                           onChange={formik.handleChange}
-                        />{" "}
+                        />{' '}
                         Группе
                       </Label>
                     </div>
-                    {formik.values?.recipientCategory === "one" && (
+                    {formik.values?.recipientCategory === 'one' && (
                       <div>
-                        <Label>
-                          ID пользователя, который должен быть уведомлен
-                        </Label>
+                        <Label>{t('notification_receiver_user_id')}</Label>
                         <InputWithError
                           type="text"
                           formik={formik}
                           name="whomNotifySolo"
-                          placeholder="ID пользователя"
+                          placeholder={t('common_user_id')}
                         />
                       </div>
                     )}
-                    {formik.values?.recipientCategory === "group" && (
+                    {formik.values?.recipientCategory === 'group' && (
                       // <div>
                       //   <Label>
                       //     Выберите файл CSV со списком ID партнеров, которых
@@ -248,19 +230,17 @@ const CreateNotification = ({
                       //   </div>
                       // </div>
                       <div>
-                        <Label>
-                          ID пользователей, которые должны быть уведомлены
-                        </Label>
+                        <Label>{t('notification_receiver_users_id')}</Label>
                         <InputWithError
                           name="whomNotifyGroup"
-                          placeholder="Введите ID пользователей через запятую. Например 58,31,56"
+                          placeholder={t('notification_receiver_users_id_placeholder')}
                           formik={formik}
                         />
                       </div>
                     )}
                   </FormGroup>
                   <FormGroup>
-                    <Label>Дата и время</Label>
+                    <Label>{t('common_date_and_time')}</Label>
                     <Input
                       name="notificationDate"
                       value={formik.values.notificationDate}
@@ -269,7 +249,7 @@ const CreateNotification = ({
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label>Тип доставки</Label>
+                    <Label>{t('notification_delivery_type')}</Label>
                     <div className="d-flex">
                       <Label className="notification__create_checkbox_wrapper d-flex align-items-center">
                         <Input
@@ -279,7 +259,7 @@ const CreateNotification = ({
                           checked={formik.values.isSite}
                           onChange={formik.handleChange}
                         />
-                        <span>Сайт</span>
+                        <span>{t('common_site')}</span>
                       </Label>
                       <Label className="notification__create_checkbox_wrapper d-flex align-items-center">
                         <Input
@@ -289,7 +269,7 @@ const CreateNotification = ({
                           checked={formik.values.isEmail}
                           onChange={formik.handleChange}
                         />
-                        <span>Почта</span>
+                        <span>{t('common_mail')}</span>
                       </Label>
                     </div>
                   </FormGroup>
@@ -299,9 +279,8 @@ const CreateNotification = ({
                     className="notification__create_btn"
                     type="submit"
                     color="primary"
-                    onClick={formik.handleSubmit}
-                  >
-                    Сохранить
+                    onClick={formik.handleSubmit}>
+                    {t('common_save')}
                   </Button>
                 </FormGroup>
               </div>
@@ -310,26 +289,23 @@ const CreateNotification = ({
         </Card>
       </Container>
     </div>
-  )
-}
+  );
+};
 
 CreateNotification.propTypes = {
   addNotification: PropTypes.func,
   editNotification: PropTypes.func,
   getNotification: PropTypes.func,
   history: PropTypes.any,
-}
+};
 
-const mapStateToProps = state => ({
-  getNotification: notificationId =>
-    state.Notifications.notifications.find(item => item.id === notificationId),
-})
+const mapStateToProps = (state) => ({
+  getNotification: (notificationId) =>
+    state.Notifications.notifications.find((item) => item.id === notificationId),
+});
 
-const mapDispatchToProps = dispatch => ({
-  addNotification: data => dispatch(addNotification(data)),
-  editNotification: data => dispatch(editNotification(data)),
-})
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(CreateNotification))
+const mapDispatchToProps = (dispatch) => ({
+  addNotification: (data) => dispatch(addNotification(data)),
+  editNotification: (data) => dispatch(editNotification(data)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateNotification));

@@ -1,37 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types'
 
-import {Root, Grid, GridHeader} from './styles/licenses';
+import PropTypes from 'prop-types';
+
+import { t } from '../../i18n';
 import Row from './row';
+import { Grid, GridHeader, Root } from './styles/licenses';
 
-const Licenses = ({info}) => {
-  
-  const {licenseState = []} = info;
+const Licenses = ({ info }) => {
+  const { licenseState = [] } = info;
 
   return (
     <>
       <Root>
         <Grid>
           <GridHeader>
-            <strong>State</strong>
+            <strong>{t('common_state')}</strong>
           </GridHeader>
           <GridHeader>
-            <strong>License</strong>
+            <strong>{t('common_license')}</strong>
           </GridHeader>
           <GridHeader>
-            <strong>State agency</strong>
+            <strong>{t('common_state_agency')}</strong>
           </GridHeader>
         </Grid>
         {licenseState &&
-          licenseState.map(el => (
+          licenseState.map((el) => (
             <Grid key={el.state}>
               <Row data={el} />
             </Grid>
           ))}
       </Root>
     </>
-  )
-}
+  );
+};
 
 export default Licenses;
 
@@ -47,7 +48,7 @@ Licenses.propTypes = {
           index: PropTypes.string,
           mobile: PropTypes.string,
         }),
-      })
+      }),
     ),
   }),
-}
+};

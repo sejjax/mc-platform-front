@@ -1,49 +1,55 @@
-import React, { useCallback, useState } from "react"
-import { Row, Col, Card, CardBody, CardTitle } from "reactstrap"
-import PropTypes from "prop-types"
-import ByTokenForm from "components/DepositModals/ByTokenForm/byTokenForm"
-import CurrencyCard from "pages/Deposit/currencyCard"
-import BUSDIcon from "../../../assets/images/icons/BUSD.svg"
-import USDTIcon from "../../../assets/images/icons/busdt.svg"
-import LoadingStatus from "./Statuses/LoadingStatus"
-import SuccessStatus from "./Statuses/SuccessStatus"
-import { withRouter } from "react-router-dom"
-import ErrorStatus from "./Statuses/ErrorStatus"
+import React, { useCallback, useState } from 'react';
+
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { Card, CardBody, CardTitle, Col, Row } from 'reactstrap';
+
+import CurrencyCard from 'pages/Deposit/currencyCard';
+
+import ByTokenForm from 'components/DepositModals/ByTokenForm/byTokenForm';
+
+import USDTIcon from '../../../assets/images/icons/busdt.svg';
+import { t } from '../../../i18n';
+import ErrorStatus from './Statuses/ErrorStatus';
+import LoadingStatus from './Statuses/LoadingStatus';
+import SuccessStatus from './Statuses/SuccessStatus';
 
 export const DepositStatus = {
-  init: "init",
-  loading: "loading",
-  success: "success",
-  error: "error",
-}
+  init: 'init',
+  loading: 'loading',
+  success: 'success',
+  error: 'error',
+};
 
 const BaseDepositModal = ({ defaultValue, closeModal, history }) => {
-  const [tokens, setTokens] = useState("USDT")
-  const [depositStatus, setDepositStatus] = useState(DepositStatus.init)
-  const [baseDepositContent, setBaseDepositContent] = useState(false)
+  const [tokens, setTokens] = useState('USDT');
+  const [depositStatus, setDepositStatus] = useState(DepositStatus.init);
+  const [baseDepositContent, setBaseDepositContent] = useState(false);
 
-  const changeTokenHandler = token => {
-    setTokens(token)
-  }
+  const changeTokenHandler = (token) => {
+    setTokens(token);
+  };
 
   const callback = useCallback(
-    token => {
-      changeTokenHandler(token)
+    (token) => {
+      changeTokenHandler(token);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [tokens]
-  )
+    [tokens, changeTokenHandler],
+  );
   const redirectToInvest = () => {
-    closeModal()
-    history.push("/investments")
-  }
+    closeModal();
+    history.push('/investments');
+  };
 
   return (
     <Row>
       <Col sm={12}>
         <Card className="mb-0">
           <CardBody>
-            <CardTitle className="mb-3 font-size-18">Внести средства</CardTitle>
+            <CardTitle className="mb-3 font-size-18">
+              {t('deposit_modal_contribute_funds')}
+            </CardTitle>
             <Card className="border">
               <CardBody>
                 <Row>
@@ -51,11 +57,11 @@ const BaseDepositModal = ({ defaultValue, closeModal, history }) => {
                     {depositStatus === DepositStatus.init && (
                       <CurrencyCard
                         title="USDT BEP20"
-                        description="Будьте внимательны при выборе сети: она должна быть BEP20."
+                        description={t('deposit_modal_network_hint')}
                         icon={USDTIcon}
                         currentPrice="1 USDT = 1 $ = 1 MC"
                         onClick={callback}
-                        isActive={"USDT" === tokens}
+                        isActive={'USDT' === tokens}
                       />
                     )}
                     {depositStatus === DepositStatus.error && <ErrorStatus />}
@@ -92,12 +98,12 @@ const BaseDepositModal = ({ defaultValue, closeModal, history }) => {
         </Card>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default withRouter(BaseDepositModal)
+export default withRouter(BaseDepositModal);
 
 BaseDepositModal.propTypes = {
   defaultValue: PropTypes.string,
   closeModal: PropTypes.func,
-}
+};

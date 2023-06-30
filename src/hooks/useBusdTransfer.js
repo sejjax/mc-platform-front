@@ -1,16 +1,14 @@
-import { busdAbi, busdToken } from "constants/wallet"
-import { useContractWrite, usePrepareContractWrite } from "wagmi"
-import { bsc } from "wagmi/chains"
+import { useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { bsc } from 'wagmi/chains';
 
-export const useBusdTransfer = ({
-  recipientAddress,
-  amount,
-}) => {
+import { busdAbi, busdToken } from 'constants/wallet';
+
+export const useBusdTransfer = ({ recipientAddress, amount }) => {
   const { config } = usePrepareContractWrite({
     abi: busdAbi,
     address: busdToken,
     chainId: bsc.id,
-    functionName: "transfer(address,uint256)",
+    functionName: 'transfer(address,uint256)',
     args: [recipientAddress, amount],
     // onError(error) {
     //   console.log({ error })
@@ -21,8 +19,8 @@ export const useBusdTransfer = ({
     //     onAmountExceedsBalance()
     //   }
     // },
-  })
+  });
 
-  const data = useContractWrite(config)
-  return [data, config]
-}
+  const data = useContractWrite(config);
+  return [data, config];
+};

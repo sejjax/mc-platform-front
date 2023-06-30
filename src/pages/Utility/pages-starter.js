@@ -1,9 +1,10 @@
-import React from "react"
-import MetaTags from "react-meta-tags"
-import { Container } from "reactstrap"
+import React from 'react';
+
+import MetaTags from 'react-meta-tags';
+import { Container } from 'reactstrap';
 
 //Import Breadcrumb
-import Breadcrumbs from "../../components/Common/Breadcrumb"
+import Breadcrumbs from '../../components/Common/Breadcrumb';
 
 const PagesStarter = () => {
   return (
@@ -18,7 +19,7 @@ const PagesStarter = () => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default PagesStarter
+export default PagesStarter;

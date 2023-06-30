@@ -1,4 +1,4 @@
 export const ACCESS = {
-  metrics: "metrics",
-  notifications: "notifications",
-}
+  metrics: 'metrics',
+  notifications: 'notifications',
+};

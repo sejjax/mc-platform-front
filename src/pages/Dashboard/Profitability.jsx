@@ -1,55 +1,50 @@
-import React, { useState } from "react"
-import { Card, CardBody, CardTitle, Button } from "reactstrap"
+import React, { useState } from 'react';
 
-import PropTypes from "prop-types"
-import ReactApexChart from "react-apexcharts"
-import "./sass/notification.scss"
-import { yearData } from "common/data/dashboard"
-import { connect } from "react-redux"
+import PropTypes from 'prop-types';
+import ReactApexChart from 'react-apexcharts';
+import { connect } from 'react-redux';
+import { Button, Card, CardBody, CardTitle } from 'reactstrap';
+
+import { t } from '../../i18n';
+import './sass/notification.scss';
 
 const Profitability = ({ chartsData }) => {
   const series = [
     {
-      name: "MC",
+      name: 'MC',
       data: chartsData,
     },
-  ]
+  ];
 
-  const [active6M, setactive6M] = useState(false)
-  const [activeY, setactiveY] = useState(true)
-  const [dateMonthInterval, setDateMonthInterval] = useState(6)
+  const [dateMonthInterval, setDateMonthInterval] = useState(6);
 
   const chartsDataDates = (() => {
     const result = {
       min: null,
       max: null,
-    }
-    const todayDate = new Date()
-    const minusHalfYear = new Date().setMonth(
-      todayDate.getMonth() - dateMonthInterval
-    )
+    };
+    const todayDate = new Date();
+    const minusHalfYear = new Date().setMonth(todayDate.getMonth() - dateMonthInterval);
 
-    const plusHalfYear = new Date().setMonth(
-      todayDate.getMonth() + dateMonthInterval
-    )
-    result.min = minusHalfYear
-    result.max = plusHalfYear
-    return result
-  })()
+    const plusHalfYear = new Date().setMonth(todayDate.getMonth() + dateMonthInterval);
+    result.min = minusHalfYear;
+    result.max = plusHalfYear;
+    return result;
+  })();
   const options = {
-    chart: { toolbar: "false" },
+    chart: { toolbar: 'false' },
     dataLabels: { enabled: !1 },
-    stroke: { curve: "smooth", width: 2 },
-    markers: { size: 0, style: "hollow" },
+    stroke: { curve: 'smooth', width: 2 },
+    markers: { size: 0, style: 'hollow' },
     xaxis: {
-      type: "datetime",
+      type: 'datetime',
       min: chartsDataDates.min,
       max: chartsDataDates.max,
     },
-    tooltip: { x: { format: "MMM yyyy" } },
-    colors: ["#f1b44c"],
+    tooltip: { x: { format: 'MMM yyyy' } },
+    colors: ['#f1b44c'],
     fill: {
-      type: "gradient",
+      type: 'gradient',
       gradient: {
         shadeIntensity: 1,
         opacityFrom: 0.6,
@@ -57,22 +52,22 @@ const Profitability = ({ chartsData }) => {
         stops: [42, 100, 100, 100],
       },
     },
-  }
+  };
 
-  const changeChartsMonthDisplayHandler = interval => {
-    setDateMonthInterval(interval)
-  }
+  const changeChartsMonthDisplayHandler = (interval) => {
+    setDateMonthInterval(interval);
+  };
 
   return (
     <Card className="p-3 same-height">
       <CardTitle>
-        <h4 className="font-size-15">Обзор доходности проекта по месяцам</h4>
+        <h4 className="font-size-15">{t('dashboard_profitability_title')}</h4>
       </CardTitle>
       <CardBody>
         <div className="h-100">
           {chartsData?.length === 0 && (
             <div className="text-center d-flex justify-content-center align-items-center h-100">
-              Здесь будет отображена ваша доходность по месяцам.
+              {t('dashboard_profitability_chart_text')}
             </div>
           )}
           {chartsData?.length !== 0 && (
@@ -82,48 +77,41 @@ const Profitability = ({ chartsData }) => {
                   color="light"
                   size="sm"
                   type="button"
-                  className={dateMonthInterval === 3 ? "active" : ""}
+                  className={dateMonthInterval === 3 ? 'active' : ''}
                   onClick={() => changeChartsMonthDisplayHandler(3)}
-                  id="six_months"
-                >
+                  id="six_months">
                   6M
                 </Button>
                 <Button
                   color="light"
                   size="sm"
                   type="button"
-                  className={dateMonthInterval === 6 ? "active" : ""}
+                  className={dateMonthInterval === 6 ? 'active' : ''}
                   onClick={() => changeChartsMonthDisplayHandler(6)}
-                  id="one_year"
-                >
+                  id="one_year">
                   1Y
                 </Button>
               </div>
               <div id="overview-chart-timeline">
-                <ReactApexChart
-                  options={options}
-                  series={series}
-                  type="area"
-                  height={240}
-                />
+                <ReactApexChart options={options} series={series} type="area" height={240} />
               </div>
             </div>
           )}
         </div>
       </CardBody>
     </Card>
-  )
-}
+  );
+};
 
 Profitability.propTypes = {
   chartsData: PropTypes.any,
-}
+};
 
-const mapStateToProps = state => {
-  const chartsData = state.Dashboard?.income?.chartsData ?? []
-  return { chartsData }
-}
+const mapStateToProps = (state) => {
+  const chartsData = state.Dashboard?.income?.chartsData ?? [];
+  return { chartsData };
+};
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profitability)
+export default connect(mapStateToProps, mapDispatchToProps)(Profitability);

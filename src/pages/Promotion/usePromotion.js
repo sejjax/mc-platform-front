@@ -1,5 +1,6 @@
-import { get, API_URL } from "helpers/api_helper"
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
+
+import { API_URL, get } from 'helpers/api_helper';
 
 export const usePromotion = () => {
   const [promotionData, setStructures] = useState({
@@ -8,10 +9,10 @@ export const usePromotion = () => {
     firstStructure: 0,
     promotionLevel: 0,
     rating: [],
-  })
-  const { allStructure, strongestStructure } = promotionData
+  });
+  const { allStructure, strongestStructure } = promotionData;
 
-  const otherStructure = allStructure - strongestStructure.amount
+  const otherStructure = allStructure - strongestStructure.amount;
 
   useEffect(() => {
     async function init() {
@@ -21,17 +22,17 @@ export const usePromotion = () => {
         rating,
         promotionLevel = 0,
         firstStructure = 0,
-      } = await get(`${API_URL}/promotion`)
+      } = await get(`${API_URL}/promotion`);
       setStructures({
         allStructure,
         strongestStructure,
         firstStructure,
         promotionLevel,
         rating,
-      })
+      });
     }
-    init()
-  }, [])
+    init();
+  }, []);
 
-  return { ...promotionData, otherStructure }
-}
+  return { ...promotionData, otherStructure };
+};

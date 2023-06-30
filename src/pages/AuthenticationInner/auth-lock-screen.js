@@ -1,20 +1,29 @@
-import React from "react";
+import React from 'react';
+
+import { useFormik } from 'formik';
 import MetaTags from 'react-meta-tags';
-
+import { Link } from 'react-router-dom';
+import {
+  Button,
+  Card,
+  CardBody,
+  Col,
+  Container,
+  Form,
+  FormFeedback,
+  Input,
+  Label,
+  Row,
+} from 'reactstrap';
 // Formik Validation
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import * as Yup from 'yup';
 
-import { Container, Row, Col, CardBody, Card, Button, Form, Label, Input, FormFeedback } from "reactstrap";
-
+import logoImg from '../../assets/images/logo.svg';
 // import images
-import profileImg from "../../assets/images/profile-img.png";
-import logoImg from "../../assets/images/logo.svg";
-import avatar from "../../assets/images/users/avatar-1.jpg";
-import { Link } from "react-router-dom";
+import profileImg from '../../assets/images/profile-img.png';
+import avatar from '../../assets/images/users/avatar-1.jpg';
 
 const LockScreen = () => {
-
   const validation = useFormik({
     // enableReinitialize : use this flag when initial values needs to be changed
     enableReinitialize: true,
@@ -23,11 +32,11 @@ const LockScreen = () => {
       password: '',
     },
     validationSchema: Yup.object({
-      password: Yup.string().required("Please Enter Your Password"),
+      password: Yup.string().required('Please Enter Your Password'),
     }),
     onSubmit: (values) => {
       console.log(values);
-    }
+    },
   });
   return (
     <React.Fragment>
@@ -62,24 +71,19 @@ const LockScreen = () => {
                     <Link to="/">
                       <div className="avatar-md profile-user-wid mb-4">
                         <span className="avatar-title rounded-circle bg-light">
-                          <img
-                            src={logoImg}
-                            alt=""
-                            className="rounded-circle"
-                            height="34"
-                          />
+                          <img src={logoImg} alt="" className="rounded-circle" height="34" />
                         </span>
                       </div>
                     </Link>
                   </div>
                   <div className="p-2">
-                    <Form className="form-horizontal"
+                    <Form
+                      className="form-horizontal"
                       onSubmit={(e) => {
                         e.preventDefault();
                         validation.handleSubmit();
                         return false;
-                      }}
-                    >
+                      }}>
                       <div className="user-thumb text-center mb-4">
                         <img
                           src={avatar}
@@ -98,7 +102,7 @@ const LockScreen = () => {
                           type="password"
                           onChange={validation.handleChange}
                           onBlur={validation.handleBlur}
-                          value={validation.values.password || ""}
+                          value={validation.values.password || ''}
                           invalid={
                             validation.touched.password && validation.errors.password ? true : false
                           }
@@ -110,11 +114,7 @@ const LockScreen = () => {
 
                       <div className="text-end">
                         <Col xs="12" className="text-end">
-                          <Button
-                            color="primary"
-                            className=" w-md "
-                            type="submit"
-                          >
+                          <Button color="primary" className=" w-md " type="submit">
                             Unlock
                           </Button>
                         </Col>
@@ -125,18 +125,15 @@ const LockScreen = () => {
               </Card>
               <div className="mt-5 text-center">
                 <p>
-                  Not you ? return{" "}
-                  <Link
-                    to="/login"
-                    className="fw-medium text-primary"
-                  >
-                    {" "}
-                    Sign In{" "}
-                  </Link>{" "}
+                  Not you ? return{' '}
+                  <Link to="/login" className="fw-medium text-primary">
+                    {' '}
+                    Sign In{' '}
+                  </Link>{' '}
                 </p>
                 <p>
-                  © 2021 Skote. Crafted with{" "}
-                  <i className="mdi mdi-heart text-danger" /> by Themesbrand
+                  © 2021 Skote. Crafted with <i className="mdi mdi-heart text-danger" /> by
+                  Themesbrand
                 </p>
               </div>
             </Col>

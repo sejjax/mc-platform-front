@@ -1,5 +1,8 @@
-import React from "react"
-import Breadcrumbs from "../../components/Common/Breadcrumb"
+import React from 'react';
+
+import Breadcrumbs from '../../components/Common/Breadcrumb';
+
+import { t } from '../../i18n';
 
 const ForbiddenPage = () => {
   return (
@@ -7,10 +10,10 @@ const ForbiddenPage = () => {
       <Breadcrumbs
         title="Forbidden"
         hasBreadcrumbItem={false}
-        breadcrumbItem="Доступ заблокирован"
+        breadcrumbItem={t('forbidden_page')}
       />
     </div>
-  )
-}
+  );
+};
 
-export default ForbiddenPage
+export default ForbiddenPage;

@@ -1,6 +1,8 @@
-import { formatMoney } from "helpers/dollarsUS"
-import styles from "./Progress.module.scss"
-import React from "react"
+import React from 'react';
+
+import { formatMoney } from 'helpers/dollarsUS';
+
+import styles from './Progress.module.scss';
 
 /** @type {import("react").FC<{start? : number, end : number, completed : number, title : string}>} */
 export const Progress = ({ completed, end, title, start = 0 }) => {
@@ -13,13 +15,12 @@ export const Progress = ({ completed, end, title, start = 0 }) => {
       <div className={styles.progress_bar}>
         <div
           className={styles.progress_bar_completed}
-          style={{ width: `${(completed / end) * 100}%` }}
-        ></div>
+          style={{ width: `${(completed / end) * 100}%` }}></div>
       </div>
       <div className={styles.progress_footer}>
         <div>{formatMoney(start)}</div>
         <div>{formatMoney(end)}</div>
       </div>
     </div>
-  )
-}
+  );
+};

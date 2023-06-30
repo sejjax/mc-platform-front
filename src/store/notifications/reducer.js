@@ -1,23 +1,23 @@
+import { API_FAIL, API_SUCCESS } from '../common/actionTypes';
 import {
-  GET_NOTIFICATIONS,
   ADD_NOTIFICATION,
-  EDIT_NOTIFICATION,
   DELETE_NOTIFICATION,
-} from "./actionTypes"
-import { API_SUCCESS, API_FAIL } from "../common/actionTypes"
+  EDIT_NOTIFICATION,
+  GET_NOTIFICATIONS,
+} from './actionTypes';
 
 const INIT_STATE = {
   notifications: [
     {
-      id: "",
-      notification_date: "",
-      notification_type: "",
-      notification_title: "Loading Notifications ...",
-      notification_text: "",
+      id: '',
+      notification_date: '',
+      notification_type: '',
+      notification_title: 'Loading Notifications ...',
+      notification_text: '',
     },
   ],
   currentItemId: null,
-}
+};
 
 const Notifications = (state = INIT_STATE, action) => {
   switch (action.type) {
@@ -27,34 +27,30 @@ const Notifications = (state = INIT_STATE, action) => {
           return {
             ...state,
             notifications: action.payload.data,
-          }
+          };
         case ADD_NOTIFICATION:
           return {
             ...state,
             notifications: [...state.notifications, action.payload.data],
-          }
+          };
         case EDIT_NOTIFICATION:
-          console.log("action.payload :>> ", action.payload)
           return {
             ...state,
-            notifications: state.notifications.map(item => {
+            notifications: state.notifications.map((item) => {
               if (item.id === action.payload.data.id) {
-                return action.payload.data
+                return action.payload.data;
               }
-              return item
+              return item;
             }),
-          }
+          };
 
         case DELETE_NOTIFICATION:
-          console.log("action.payload reducer", action.payload)
           return {
             ...state,
-            notifications: state.notifications.filter(
-              item => item.id !== action.payload.data
-            ),
-          }
+            notifications: state.notifications.filter((item) => item.id !== action.payload.data),
+          };
         default:
-          return state
+          return state;
       }
     case API_FAIL:
       switch (action.payload.actionType) {
@@ -62,13 +58,13 @@ const Notifications = (state = INIT_STATE, action) => {
           return {
             ...state,
             notificationsError: action.payload.error,
-          }
+          };
         default:
-          return state
+          return state;
       }
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default Notifications
+export default Notifications;

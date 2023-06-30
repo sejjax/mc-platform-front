@@ -1,14 +1,14 @@
+import { API_FAIL, API_SUCCESS } from '../common/actionTypes';
 import {
-  GET_TEAM_INFO,
-  GET_PARTNERS_INCOME,
   GET_PARTNERS,
+  GET_PARTNERS_INCOME,
+  GET_TEAM_INFO,
   SET_PARTNERS_INCOME_RANGE,
-} from "./actionTypes"
-import { API_SUCCESS, API_FAIL } from "../common/actionTypes"
+} from './actionTypes';
 
 const INIT_STATE = {
   teamInfo: {
-    partnerId: "",
+    partnerId: '',
     totalReferrals: 0,
     teamIncome: 0,
     referralsIncome: 0,
@@ -26,11 +26,11 @@ const INIT_STATE = {
       dateTo: new Date(2022, 11, 31),
     },
   ]).reduce((acc, [key, value]) => {
-    acc[key] = value
-    return acc
+    acc[key] = value;
+    return acc;
   }, {}),
   partners: [],
-}
+};
 
 const Team = (state = INIT_STATE, action) => {
   switch (action.type) {
@@ -45,14 +45,14 @@ const Team = (state = INIT_STATE, action) => {
             dateTo: action.to,
           },
         },
-      }
+      };
     case API_SUCCESS:
       switch (action.payload.actionType) {
         case GET_TEAM_INFO:
           return {
             ...state,
             teamInfo: action.payload.data,
-          }
+          };
         case GET_PARTNERS_INCOME:
           return {
             ...state,
@@ -63,14 +63,14 @@ const Team = (state = INIT_STATE, action) => {
                 ...action.payload.data,
               },
             },
-          }
+          };
         case GET_PARTNERS:
           return {
             ...state,
             partners: action.payload.data,
-          }
+          };
         default:
-          return state
+          return state;
       }
     case API_FAIL:
       switch (action.payload.actionType) {
@@ -78,21 +78,21 @@ const Team = (state = INIT_STATE, action) => {
           return {
             ...state,
             teamInfoError: action.payload.error,
-          }
+          };
         case GET_PARTNERS:
           return {
             ...state,
             partnersError: action.payload.error,
-          }
+          };
 
         default:
-          return state
+          return state;
       }
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default Team
+export default Team;
 
-export const getTeamInfoSelector = state => state.Team.teamInfo
+export const getTeamInfoSelector = (state) => state.Team.teamInfo;

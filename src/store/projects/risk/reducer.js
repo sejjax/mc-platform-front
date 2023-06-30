@@ -1,12 +1,9 @@
-import {
-  GET_RISKS_FAIL,
-  GET_RISKS_SUCCESS,
-} from "./actionTypes"
+import { GET_RISKS_FAIL, GET_RISKS_SUCCESS } from './actionTypes';
 
 const INIT_STATE = {
   risks: [],
   error: {},
-}
+};
 
 const Risk = (state = INIT_STATE, action) => {
   switch (action.type) {
@@ -14,17 +11,17 @@ const Risk = (state = INIT_STATE, action) => {
       return {
         ...state,
         risks: action.payload,
-      }
+      };
 
     case GET_RISKS_FAIL:
       return {
         ...state,
         error: action.payload,
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default Risk
+export default Risk;

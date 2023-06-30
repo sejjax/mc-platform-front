@@ -1,24 +1,26 @@
-import React, { useMemo, useState } from "react"
-import PropTypes from "prop-types"
-import { Button, Card, CardBody, Col, Row } from "reactstrap"
-import parse from "html-react-parser"
-import { useFormik } from "formik"
+import React, { useMemo, useState } from 'react';
 
-import schema from "../../../yupshema/investSchema"
-import * as moment from "moment"
+import { useFormik } from 'formik';
+import parse from 'html-react-parser';
+import * as moment from 'moment';
+import PropTypes from 'prop-types';
+import { Button, Card, CardBody, Col, Row } from 'reactstrap';
 
-import ProjectImage from "../projectImage"
-import DepositModal from "components/DepositModals/DepositModal/DepositModal"
+import DepositModal from 'components/DepositModals/DepositModal/DepositModal';
+
+import { t } from '../../../i18n';
+import schema from '../../../yupshema/investSchema';
+import ProjectImage from '../projectImage';
 
 const ProjectDetail = ({ project }) => {
-  const [isConnectWallet, setIsConnectWallet] = useState(false)
+  const [isConnectWallet, setIsConnectWallet] = useState(false);
 
-  const [invested, setInvested] = useState(0)
-  const [walletModal, setWalletModal] = useState(false)
+  const [invested, setInvested] = useState(0);
+  const [walletModal, setWalletModal] = useState(false);
   const calcReceive = useMemo(() => {
-    const apy = project?.apy ?? 0
-    return ((apy / 100) * invested + invested).toFixed(2)
-  }, [invested])
+    const apy = project?.apy ?? 0;
+    return ((apy / 100) * invested + invested).toFixed(2);
+  }, [invested]);
 
   const validation = useFormik({
     enableReinitialize: true,
@@ -28,23 +30,20 @@ const ProjectDetail = ({ project }) => {
     },
     validationSchema: schema,
 
-    onSubmit: values => {
+    onSubmit: (values) => {
       //dispatch()
     },
-  })
+  });
 
-  const handleValidDate = date => {
-    return moment(new Date(date)).format("DD MMM Y")
-  }
+  const handleValidDate = (date) => {
+    return moment(new Date(date)).format('DD MMM Y');
+  };
 
   return (
     <Card>
       <CardBody className="project-receive">
         <div className="d-flex">
-          <ProjectImage
-            name={project.name}
-            url={project.image && project.image.url}
-          />
+          <ProjectImage name={project.name} url={project.image && project.image.url} />
 
           <div className="flex-grow-1 overflow-hidden">
             <h5 className="text-truncate font-size-15">
@@ -59,14 +58,9 @@ const ProjectDetail = ({ project }) => {
             lg={{
               offset: 3,
               size: 6,
-            }}
-          >
-            <Button
-              color={"primary"}
-              block
-              onClick={() => setWalletModal(true)}
-            >
-              Инвестировать
+            }}>
+            <Button color={'primary'} block onClick={() => setWalletModal(true)}>
+              {t('common_invest')}
             </Button>
           </Col>
         </Row>
@@ -119,16 +113,13 @@ const ProjectDetail = ({ project }) => {
           </Col> */}
         {/* </Row> */}
       </CardBody>
-      <DepositModal
-        isOpen={walletModal}
-        closeHandler={() => setWalletModal(false)}
-      />
+      <DepositModal isOpen={walletModal} closeHandler={() => setWalletModal(false)} />
     </Card>
-  )
-}
+  );
+};
 
 ProjectDetail.propTypes = {
   project: PropTypes.object,
-}
+};
 
-export default ProjectDetail
+export default ProjectDetail;

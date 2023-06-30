@@ -1,8 +1,9 @@
-import PropTypes from "prop-types"
-import React from "react"
-import { Col, Card, CardBody } from "reactstrap"
+import React from 'react';
 
-const CardMaintenance = props => {
+import PropTypes from 'prop-types';
+import { Card, CardBody, Col } from 'reactstrap';
+
+const CardMaintenance = (props) => {
   return (
     <React.Fragment>
       <Col md="4">
@@ -11,11 +12,11 @@ const CardMaintenance = props => {
         </Card>
       </Col>
     </React.Fragment>
-  )
-}
+  );
+};
 
 CardMaintenance.propTypes = {
   children: PropTypes.any,
-}
+};
 
-export default CardMaintenance
+export default CardMaintenance;

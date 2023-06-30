@@ -1,26 +1,26 @@
-import React, { useState } from "react"
-import MetaTags from "react-meta-tags"
+import React, { useState } from 'react';
 
+import classnames from 'classnames';
+import MetaTags from 'react-meta-tags';
 import {
-  Container,
-  Row,
-  Col,
   Card,
   CardBody,
   CardTitle,
+  Col,
+  Container,
   Nav,
   NavItem,
   NavLink,
+  Row,
   TabContent,
   TabPane,
-} from "reactstrap"
-import classnames from "classnames"
+} from 'reactstrap';
 
 //Import Breadcrumb
-import Breadcrumbs from "../../components/Common/Breadcrumb"
+import Breadcrumbs from '../../components/Common/Breadcrumb';
 
 const PagesFaqs = () => {
-  const [activeTab, setactiveTab] = useState("1")
+  const [activeTab, setactiveTab] = useState('1');
 
   return (
     <React.Fragment>
@@ -38,33 +38,30 @@ const PagesFaqs = () => {
                 <Nav className="flex-column" pills>
                   <NavItem>
                     <NavLink
-                      className={classnames({ active: activeTab === "1" })}
+                      className={classnames({ active: activeTab === '1' })}
                       onClick={() => {
-                        setactiveTab("1")
-                      }}
-                    >
+                        setactiveTab('1');
+                      }}>
                       <i className="bx bx-question-mark d-block check-nav-icon mt-4 mb-2" />
                       <p className="font-weight-bold mb-4">General Questions</p>
                     </NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink
-                      className={classnames({ active: activeTab === "2" })}
+                      className={classnames({ active: activeTab === '2' })}
                       onClick={() => {
-                        setactiveTab("2")
-                      }}
-                    >
+                        setactiveTab('2');
+                      }}>
                       <i className="bx bx-check-shield d-block check-nav-icon mt-4 mb-2" />
                       <p className="font-weight-bold mb-4">Privacy Policy</p>
                     </NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink
-                      className={classnames({ active: activeTab === "3" })}
+                      className={classnames({ active: activeTab === '3' })}
                       onClick={() => {
-                        setactiveTab("3")
-                      }}
-                    >
+                        setactiveTab('3');
+                      }}>
                       <i className="bx bx-support d-block check-nav-icon mt-4 mb-2" />
                       <p className="font-weight-bold mb-4">Support</p>
                     </NavLink>
@@ -76,21 +73,16 @@ const PagesFaqs = () => {
                   <CardBody>
                     <TabContent activeTab={activeTab}>
                       <TabPane tabId="1">
-                        <CardTitle className="mb-5">
-                          General Questions
-                        </CardTitle>
+                        <CardTitle className="mb-5">General Questions</CardTitle>
                         <div className="faq-box d-flex mb-4">
                           <div className="flex-shrink-0 me-3 faq-icon">
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              What is Lorem Ipsum?
-                            </h5>
+                            <h5 className="font-size-15">What is Lorem Ipsum?</h5>
                             <p className="text-muted">
-                              New common language will be more simple and
-                              regular than the existing European languages. It
-                              will be as simple as occidental.
+                              New common language will be more simple and regular than the existing
+                              European languages. It will be as simple as occidental.
                             </p>
                           </div>
                         </div>
@@ -99,13 +91,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              Where does it come from?
-                            </h5>
+                            <h5 className="font-size-15">Where does it come from?</h5>
                             <p className="text-muted">
-                              Everyone realizes why a new common language would
-                              be desirable one could refuse to pay expensive
-                              translators.
+                              Everyone realizes why a new common language would be desirable one
+                              could refuse to pay expensive translators.
                             </p>
                           </div>
                         </div>
@@ -114,13 +103,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              Where can I get some?
-                            </h5>
+                            <h5 className="font-size-15">Where can I get some?</h5>
                             <p className="text-muted">
-                              If several languages coalesce, the grammar of the
-                              resulting language is more simple and regular than
-                              that of the individual languages.
+                              If several languages coalesce, the grammar of the resulting language
+                              is more simple and regular than that of the individual languages.
                             </p>
                           </div>
                         </div>
@@ -131,9 +117,8 @@ const PagesFaqs = () => {
                           <div className="flex-grow-1">
                             <h5 className="font-size-15">Why do we use it?</h5>
                             <p className="text-muted">
-                              Their separate existence is a myth. For science,
-                              music, sport, etc, Europe uses the same
-                              vocabulary.
+                              Their separate existence is a myth. For science, music, sport, etc,
+                              Europe uses the same vocabulary.
                             </p>
                           </div>
                         </div>
@@ -142,13 +127,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              Where can I get some?
-                            </h5>
+                            <h5 className="font-size-15">Where can I get some?</h5>
                             <p className="text-muted">
-                              To an English person, it will seem like simplified
-                              English, as a skeptical Cambridge friend of mine
-                              told me what Occidental
+                              To an English person, it will seem like simplified English, as a
+                              skeptical Cambridge friend of mine told me what Occidental
                             </p>
                           </div>
                         </div>
@@ -161,13 +143,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              Where does it come from?
-                            </h5>
+                            <h5 className="font-size-15">Where does it come from?</h5>
                             <p className="text-muted">
-                              Everyone realizes why a new common language would
-                              be desirable one could refuse to pay expensive
-                              translators.
+                              Everyone realizes why a new common language would be desirable one
+                              could refuse to pay expensive translators.
                             </p>
                           </div>
                         </div>
@@ -176,13 +155,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              Where can I get some?
-                            </h5>
+                            <h5 className="font-size-15">Where can I get some?</h5>
                             <p className="text-muted">
-                              To an English person, it will seem like simplified
-                              English, as a skeptical Cambridge friend of mine
-                              told me what Occidental
+                              To an English person, it will seem like simplified English, as a
+                              skeptical Cambridge friend of mine told me what Occidental
                             </p>
                           </div>
                         </div>
@@ -191,13 +167,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              What is Lorem Ipsum?
-                            </h5>
+                            <h5 className="font-size-15">What is Lorem Ipsum?</h5>
                             <p className="text-muted">
-                              New common language will be more simple and
-                              regular than the existing European languages. It
-                              will be as simple as occidental.
+                              New common language will be more simple and regular than the existing
+                              European languages. It will be as simple as occidental.
                             </p>
                           </div>
                         </div>
@@ -208,9 +181,8 @@ const PagesFaqs = () => {
                           <div className="flex-grow-1">
                             <h5 className="font-size-15">Why do we use it?</h5>
                             <p className="text-muted">
-                              Their separate existence is a myth. For science,
-                              music, sport, etc, Europe uses the same
-                              vocabulary.
+                              Their separate existence is a myth. For science, music, sport, etc,
+                              Europe uses the same vocabulary.
                             </p>
                           </div>
                         </div>
@@ -219,13 +191,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              Where can I get some?
-                            </h5>
+                            <h5 className="font-size-15">Where can I get some?</h5>
                             <p className="text-muted">
-                              If several languages coalesce, the grammar of the
-                              resulting language is more simple and regular than
-                              that of the individual languages.
+                              If several languages coalesce, the grammar of the resulting language
+                              is more simple and regular than that of the individual languages.
                             </p>
                           </div>
                         </div>
@@ -238,13 +207,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              Where can I get some?
-                            </h5>
+                            <h5 className="font-size-15">Where can I get some?</h5>
                             <p className="text-muted">
-                              To an English person, it will seem like simplified
-                              English, as a skeptical Cambridge friend of mine
-                              told me what Occidental
+                              To an English person, it will seem like simplified English, as a
+                              skeptical Cambridge friend of mine told me what Occidental
                             </p>
                           </div>
                         </div>
@@ -253,13 +219,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              Where does it come from?
-                            </h5>
+                            <h5 className="font-size-15">Where does it come from?</h5>
                             <p className="text-muted">
-                              Everyone realizes why a new common language would
-                              be desirable one could refuse to pay expensive
-                              translators.
+                              Everyone realizes why a new common language would be desirable one
+                              could refuse to pay expensive translators.
                             </p>
                           </div>
                         </div>
@@ -271,9 +234,8 @@ const PagesFaqs = () => {
                           <div className="flex-grow-1">
                             <h5 className="font-size-15">Why do we use it?</h5>
                             <p className="text-muted">
-                              Their separate existence is a myth. For science,
-                              music, sport, etc, Europe uses the same
-                              vocabulary.
+                              Their separate existence is a myth. For science, music, sport, etc,
+                              Europe uses the same vocabulary.
                             </p>
                           </div>
                         </div>
@@ -282,13 +244,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              Where can I get some?
-                            </h5>
+                            <h5 className="font-size-15">Where can I get some?</h5>
                             <p className="text-muted">
-                              If several languages coalesce, the grammar of the
-                              resulting language is more simple and regular than
-                              that of the individual languages.
+                              If several languages coalesce, the grammar of the resulting language
+                              is more simple and regular than that of the individual languages.
                             </p>
                           </div>
                         </div>
@@ -298,13 +257,10 @@ const PagesFaqs = () => {
                             <i className="bx bx-help-circle font-size-20 text-success" />
                           </div>
                           <div className="flex-grow-1">
-                            <h5 className="font-size-15">
-                              What is Lorem Ipsum?
-                            </h5>
+                            <h5 className="font-size-15">What is Lorem Ipsum?</h5>
                             <p className="text-muted">
-                              New common language will be more simple and
-                              regular than the existing European languages. It
-                              will be as simple as occidental.
+                              New common language will be more simple and regular than the existing
+                              European languages. It will be as simple as occidental.
                             </p>
                           </div>
                         </div>
@@ -318,7 +274,7 @@ const PagesFaqs = () => {
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default PagesFaqs
+export default PagesFaqs;

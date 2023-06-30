@@ -1,31 +1,26 @@
-import { combineReducers } from "redux"
+import { combineReducers } from 'redux';
 
-// Front
-import Layout from "./layout/reducer"
-
+import Accruals from './accruals/reducer';
+import ConfirmEmail from './auth/confirmEmail/reducer';
+import ForgetPassword from './auth/forgetpwd/reducer';
 // Authentication
-import Login from "./auth/login/reducer"
-import Account from "./auth/register/reducer"
-import ForgetPassword from "./auth/forgetpwd/reducer"
-import Profile from "./auth/profile/reducer"
-import Photo from "./auth/photo/load/reducer"
-import PhotoUpload from "./auth/photo/upload/reducer"
-import ConfirmEmail from "./auth/confirmEmail/reducer"
-
-//projects
-import Project from "./projects/project/reducer"
-import Risk from "./projects/risk/reducer"
-
+import Login from './auth/login/reducer';
+import Photo from './auth/photo/load/reducer';
+import PhotoUpload from './auth/photo/upload/reducer';
+import Profile from './auth/profile/reducer';
+import Account from './auth/register/reducer';
 //Dashboard
-import Dashboard from "./dashboard/reducer"
-
-import Team from "./team/reducer"
-
+import Dashboard from './dashboard/reducer';
+import Investments from './investments/reducer';
+// Front
+import Layout from './layout/reducer';
 //Notifications
-import Notifications from "./notifications/reducer"
-import Wallet from "./wallet/reducer"
-import Accruals from "./accruals/reducer"
-import Investments from "./investments/reducer"
+import Notifications from './notifications/reducer';
+//projects
+import Project from './projects/project/reducer';
+import Risk from './projects/risk/reducer';
+import Team from './team/reducer';
+import Wallet from './wallet/reducer';
 
 const rootReducer = combineReducers({
   // public
@@ -45,6 +40,6 @@ const rootReducer = combineReducers({
   Wallet,
   Investments,
   Accruals,
-})
+});
 
-export default rootReducer
+export default rootReducer;

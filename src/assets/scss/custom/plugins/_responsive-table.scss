@@ -55,7 +55,7 @@
         background-color: $white;
         border-radius: 3px;
         border: 1px solid $gray-300;
-        content: "";
+        content: '';
         display: inline-block;
         height: 17px;
         left: 0;
@@ -79,7 +79,7 @@
         width: 16px;
       }
     }
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       cursor: pointer;
       opacity: 0;
       z-index: 1;
@@ -89,26 +89,26 @@
         opacity: 0.65;
       }
     }
-    input[type="checkbox"]:focus + label {
+    input[type='checkbox']:focus + label {
       &::before {
         outline-offset: -2px;
         outline: none;
       }
     }
-    input[type="checkbox"]:checked + label {
+    input[type='checkbox']:checked + label {
       &::after {
-        content: "\f00c";
-        font-family: "Font Awesome 5 Free";
+        content: '\f00c';
+        font-family: 'Font Awesome 5 Free';
         font-weight: 900;
       }
     }
-    input[type="checkbox"]:disabled + label {
+    input[type='checkbox']:disabled + label {
       &::before {
         background-color: $gray-100;
         cursor: not-allowed;
       }
     }
-    input[type="checkbox"]:checked + label {
+    input[type='checkbox']:checked + label {
       &::before {
         background-color: $primary;
         border-color: $primary;
@@ -142,7 +142,7 @@
   }
 }
 
-body[data-layout="horizontal"] {
+body[data-layout='horizontal'] {
   @media (min-width: 992px) {
     .fixed-solution {
       .sticky-table-header {

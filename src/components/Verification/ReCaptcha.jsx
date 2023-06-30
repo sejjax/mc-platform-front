@@ -1,30 +1,31 @@
-import { useCallback, useEffect } from "react"
-import PropTypes from "prop-types"
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
+import { useCallback, useEffect } from 'react';
 
-const ReCaptcha = props => {
-  const { executeRecaptcha } = useGoogleReCaptcha()
+import PropTypes from 'prop-types';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+
+const ReCaptcha = (props) => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const handleReCaptchaVerify = useCallback(async () => {
     if (!executeRecaptcha) {
-      return
+      return;
     }
-    const token = await executeRecaptcha(props?.action)
-    props.onVerify(token)
+    const token = await executeRecaptcha(props?.action);
+    props.onVerify(token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [executeRecaptcha])
+  }, [executeRecaptcha]);
 
   useEffect(() => {
-    handleReCaptchaVerify()
-  }, [handleReCaptchaVerify])
+    handleReCaptchaVerify();
+  }, [handleReCaptchaVerify]);
 
-  return props.children({ handleReCaptchaVerify })
-}
+  return props.children({ handleReCaptchaVerify });
+};
 
 ReCaptcha.propTypes = {
   children: PropTypes.any,
   action: PropTypes.string,
   onVerify: PropTypes.func,
-}
+};
 
-export default ReCaptcha
+export default ReCaptcha;

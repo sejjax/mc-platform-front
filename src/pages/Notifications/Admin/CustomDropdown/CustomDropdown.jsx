@@ -1,20 +1,18 @@
-import React, { useState } from "react"
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap"
-import shapesImg from "assets/images/shapes.svg"
-import "./CustomDropdown.scss"
-import ProPTypes from "prop-types"
+import React, { useState } from 'react';
+
+import shapesImg from 'assets/images/shapes.svg';
+import ProPTypes from 'prop-types';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+
+import { t } from '../../../../i18n';
+import './CustomDropdown.scss';
 
 const CustomDropdown = ({ deleteClickHandler, editClickHandler }) => {
-  const [isOpen, setisOpen] = useState(false)
+  const [isOpen, setisOpen] = useState(false);
 
   const toggleHandler = () => {
-    setisOpen(!isOpen)
-  }
+    setisOpen(!isOpen);
+  };
 
   return (
     <div className="text-center">
@@ -23,28 +21,22 @@ const CustomDropdown = ({ deleteClickHandler, editClickHandler }) => {
           <img src={shapesImg} alt="" />
         </DropdownToggle>
         <DropdownMenu className="table__dropdown_list">
-          <DropdownItem
-            className="table__dropdown_item_edit"
-            onClick={editClickHandler}
-          >
-            Редактировать
+          <DropdownItem className="table__dropdown_item_edit" onClick={editClickHandler}>
+            {t('common_edit')}
           </DropdownItem>
           <div className="custom-dropdown-divider"></div>
-          <DropdownItem
-            className="table__dropdown_item_delete"
-            onClick={deleteClickHandler}
-          >
-            Удалить
+          <DropdownItem className="table__dropdown_item_delete" onClick={deleteClickHandler}>
+            {t('common_delete')}
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
     </div>
-  )
-}
+  );
+};
 
 CustomDropdown.propTypes = {
   deleteClickHandler: ProPTypes.func,
   editClickHandler: ProPTypes.func,
-}
+};
 
-export default CustomDropdown
+export default CustomDropdown;

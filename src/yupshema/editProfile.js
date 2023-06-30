@@ -1,14 +1,16 @@
-import * as Yup from "yup"
+import * as Yup from 'yup';
+
+import { t } from '../i18n';
 
 const editProfileSchema = Yup.object({
-  fullName: Yup.string().required("Пожалуйста введите имя"),
+  fullName: Yup.string().required(t('auth_register_full_name_hint_required')),
   country: Yup.object()
     .shape({
       value: Yup.string(),
       label: Yup.string(),
     })
-    .required("Пожалуйста выберите страну"),
-  mobile: Yup.string().required("Пожалуйста заполните телефон"),
+    .required(t('auth_register_choose_country_hint')),
+  mobile: Yup.string().required(t('common_phone_number_validation_hint')),
   photo: Yup.object()
     .shape({
       id: Yup.string(),
@@ -17,25 +19,25 @@ const editProfileSchema = Yup.object({
     .notRequired(),
   oldPassword: Yup.string()
     .notRequired()
-    .min(8, "Пароль слишком короткий — минимум 8 символов.")
+    .min(8, t('common_password_hint_small'))
     .matches(
       /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
-      "Пароль должен  содержать 8 символов, один в верхнем регистре, один в нижнем регистре, одну цифру и один символ специального регистра"
+      t('common_password_hint_validation'),
     ),
   password: Yup.string()
     .notRequired()
-    .min(8, "Пароль слишком короткий — минимум 8 символов.")
+    .min(8, t('common_password_hint_small'))
     .matches(
       /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,
-      "Пароль должен  содержать 8 символов, один в верхнем регистре, один в нижнем регистре, одну цифру и один символ специального регистра"
+      t('common_password_hint_validation'),
     ),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Пароли не совпадают")
-    .when("password", {
-      is: password => password !== undefined,
-      then: Yup.string().required("Пожалуйста повторите пароль"),
+    .oneOf([Yup.ref('password'), null], t('common_password_hint_not_match'))
+    .when('password', {
+      is: (password) => password !== undefined,
+      then: Yup.string().required(t('common_password_hint_repeat')),
       otherwise: Yup.string().notRequired(),
     }),
-})
+});
 
-export default editProfileSchema
+export default editProfileSchema;

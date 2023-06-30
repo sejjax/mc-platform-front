@@ -1,1 +1,1 @@
-export const usersNavItems = ["Users Overview", "Grant Access"]
+export const usersNavItems = ['Users Overview', 'Grant Access'];

@@ -188,8 +188,8 @@
       transition-duration: 0.05s;
       top: 0;
       &:before {
-        content: "\F012C";
-        font-family: "Material Design Icons";
+        content: '\F012C';
+        font-family: 'Material Design Icons';
         top: 0;
         height: 20px;
         color: darken($dark, 5%);

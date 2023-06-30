@@ -1,9 +1,10 @@
-import PropTypes from "prop-types"
-import React from "react"
-import { Link } from "react-router-dom"
-import { Card, CardBody, Col } from "reactstrap"
+import React from 'react';
 
-const CardPricing = props => {
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Card, CardBody, Col } from 'reactstrap';
+
+const CardPricing = (props) => {
   return (
     <React.Fragment>
       <Col xl="3" md="6">
@@ -15,17 +16,15 @@ const CardPricing = props => {
                 <p className="text-muted">{props.pricing.description}</p>
               </div>
               <div className="ms-3">
-                <i
-                  className={"bx " + props.pricing.icon + " h1 text-primary"}
-                />
+                <i className={'bx ' + props.pricing.icon + ' h1 text-primary'} />
               </div>
             </div>
             <div className="py-4">
               <h2>
                 <sup>
                   <small>$</small>
-                </sup>{" "}
-                {props.pricing.price}/{" "}
+                </sup>{' '}
+                {props.pricing.price}/{' '}
                 <span className="font-size-13">{props.pricing.duration}</span>
               </h2>
             </div>
@@ -37,9 +36,8 @@ const CardPricing = props => {
 
             <div className="plan-features mt-5">
               {props.pricing.features.map((feature, key) => (
-                <p key={"_feature_" + key}>
-                  <i className="bx bx-checkbox-square text-primary me-2" />{" "}
-                  {feature.title}
+                <p key={'_feature_' + key}>
+                  <i className="bx bx-checkbox-square text-primary me-2" /> {feature.title}
                 </p>
               ))}
             </div>
@@ -47,11 +45,11 @@ const CardPricing = props => {
         </Card>
       </Col>
     </React.Fragment>
-  )
-}
+  );
+};
 
 CardPricing.propTypes = {
   pricing: PropTypes.object,
-}
+};
 
-export default CardPricing
+export default CardPricing;

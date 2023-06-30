@@ -1,13 +1,14 @@
-import React from "react"
-import PropTypes from "prop-types"
-import CountryFlag from "pages/Team/components/CountryFlag"
+import React from 'react';
 
-import { UL, Grid } from "./styles/wrapper"
+import PropTypes from 'prop-types';
 
-import { notAvailableState } from "./data"
+import CountryFlag from 'pages/Team/components/CountryFlag';
+
+import { notAvailableState } from './data';
+import { Grid, UL } from './styles/wrapper';
 
 const Supported = ({ info }) => {
-  const { country = [], specialRegion = [], states = [] } = info
+  const { country = [], specialRegion = [], states = [] } = info;
 
   return (
     <>
@@ -15,22 +16,21 @@ const Supported = ({ info }) => {
         <p>TGT in not available to residents of</p>
         <UL>
           {country &&
-            country.map(el => (
+            country.map((el) => (
               <li key={el.code}>
                 <CountryFlag countryCode={el.code} title={el.name} emoji />
               </li>
             ))}
-          {specialRegion &&
-            specialRegion.map(el => <li key={el.name}>{el.name}</li>)}
+          {specialRegion && specialRegion.map((el) => <li key={el.name}>{el.name}</li>)}
         </UL>
       </div>
       <div>
         <p>TGT is not available to residents of</p>
-        <Grid>{states && states.map(el => <p key={el.name}>{el.name}</p>)}</Grid>
+        <Grid>{states && states.map((el) => <p key={el.name}>{el.name}</p>)}</Grid>
       </div>
     </>
-  )
-}
+  );
+};
 
 Supported.propTypes = {
   info: PropTypes.shape({
@@ -38,19 +38,19 @@ Supported.propTypes = {
       PropTypes.shape({
         name: PropTypes.string,
         code: PropTypes.string,
-      })
+      }),
     ),
     specialRegion: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
-      })
+      }),
     ),
     states: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
-      })
+      }),
     ),
   }),
-}
+};
 
-export default Supported
+export default Supported;

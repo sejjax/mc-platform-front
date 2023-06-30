@@ -1,13 +1,11 @@
 .recharts-wrapper {
   position: static !important;
-} 
+}
 
 .some {
-  
   transition: opacity 300ms;
 
   &:hover {
     opacity: 0.5;
-    
   }
 }
