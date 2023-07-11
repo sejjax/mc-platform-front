@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import withForbiddenWithoutBuyingPackage from 'hocs/withForbiddenWithoutBuyingPackage';
+import useTranslation from 'hooks/useTranslation';
 import useWindowSize from 'hooks/useWindowSize';
 import { Card, CardBody, Input, Label } from 'reactstrap';
 
 import Table from 'components/AnotherTable/Table';
 
-import { t } from '../../i18n';
-
 const DepositAccruals = ({ items, columns, displayedKeyNames }) => {
+  const t = useTranslation();
   const { width: windowWidth } = useWindowSize();
   const table = useRef(null);
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useWeb3Modal } from '@web3modal/react';
+import useTranslation from 'hooks/useTranslation';
 import { useDispatch } from 'react-redux';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Modal } from 'reactstrap';
@@ -8,9 +9,8 @@ import { useAccount } from 'wagmi';
 
 import { editDefaultWalletNumber } from 'store/actions';
 
-import { t } from '../../i18n';
-
 const WalletConnectModal = () => {
+  const t = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { address } = useAccount();
   const dispatch = useDispatch();

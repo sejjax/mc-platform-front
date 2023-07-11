@@ -4,9 +4,9 @@ import { API_URL, get } from 'helpers/api_helper';
 
 const STRAPI_URL = process.env.REACT_APP_STRAPI_URL;
 // const STRAPI_URL = "http://localhost:1336"
-export async function getProjectsList() {
+export async function getProjectsList(locale) {
   try {
-    const response = await axios.get(`${STRAPI_URL}/project-categories/list`);
+    const response = await axios.get(`${STRAPI_URL}/project-categories/list?_locale=${locale}`);
 
     if (response.status >= 200 && response.status <= 299) {
       return response.data;
@@ -16,28 +16,30 @@ export async function getProjectsList() {
   }
 }
 
-export async function getAllProjects() {
-  return await axios.get(`${STRAPI_URL}/projects`);
+export async function getAllProjects(locale) {
+  return await axios.get(`${STRAPI_URL}/projects?_locale=${locale}`);
 }
 
-export async function getProjects(categorySlug) {
-  const response = await axios.get(`${STRAPI_URL}/project-categories/${categorySlug}`);
+export async function getProjects(categorySlug, locale) {
+  const response = await axios.get(
+    `${STRAPI_URL}/project-categories/${categorySlug}?_locale=${locale}`,
+  );
 
   if (response.status >= 200 && response.status <= 299) {
     return response.data;
   }
 }
 
-export async function getProjectsDetails(projectSlug) {
-  const response = await axios.get(`${STRAPI_URL}/projects/${projectSlug}`);
+export async function getProjectsDetails(projectSlug, locale) {
+  const response = await axios.get(`${STRAPI_URL}/projects/${projectSlug}?_locale=${locale}`);
 
   if (response.status >= 200 && response.status <= 299) {
     return response.data;
   }
 }
 
-export async function getRisks() {
-  const response = await axios.get(`${STRAPI_URL}/risks`);
+export async function getRisks(locale = 'en') {
+  const response = await axios.get(`${STRAPI_URL}/risks?_locale=${locale}`);
 
   if (response.status >= 200 && response.status <= 299) {
     return response.data;

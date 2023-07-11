@@ -1,3 +1,4 @@
+import { parseEther } from 'viem';
 import { useContractWrite, usePrepareContractWrite } from 'wagmi';
 import { bsc } from 'wagmi/chains';
 
@@ -8,7 +9,7 @@ export const useUsdtTransfer = ({ recipientAddress, amount }) => {
     abi: usdtAbi,
     address: usdtToken,
     chainId: bsc.id,
-    functionName: 'transfer(address,uint256)',
+    functionName: 'transfer',
     args: [recipientAddress, amount],
     // onError(error) {
     //   console.log({ error })
@@ -20,7 +21,6 @@ export const useUsdtTransfer = ({ recipientAddress, amount }) => {
     //   }
     // },
   });
-
   const data = useContractWrite(config);
   return [data, config];
 };

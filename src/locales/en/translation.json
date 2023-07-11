@@ -163,7 +163,7 @@
     "user_profile_agree_checkbox_label": "I agree to share my personal information with upper-level partners",
     "user_profile_successful_updated": "Profile successfully updated.",
 
-    "change_wallet_modal_hint": "Are you sure you want to change the default wallet to address <span>{{wallet}}</span>? All payments will be directed to this address after email confirmation.",
+    "change_wallet_modal_hint": "Are you sure you want to change the default wallet to address <b>{{wallet}}</b>? All payments will be directed to this address after email confirmation.",
     "change_wallet_modal_confirm_operation": "Confirm Operation via Email",
     "change_wallet_modal_operation_error": "There was a problem sending the email. Please contact support to confirm the wallet change.",
 
@@ -277,6 +277,8 @@
     "deposit_modal_payment_questions": "Have any questions during payment?",
     "deposit_modal_funds_successfully_enrolled": "Funds Successfully Enrolled",
     "deposit_modal_go_to_investments_packages": "You can proceed to investment packages",
+
+    "footer_text": "MCapital. The platform operates in the jurisdiction of the Hualing Free Industrial Zone, Georgia. License for conducting activities <firstLink>Open</firstLink>. Registration number 412772557. Public register of legal entities <secondLink>https://enreg.reestri.gov.ge</secondLink>.",
 
     "investments_packages": "Investment Packages",
 

@@ -1,12 +1,12 @@
 import React from 'react';
 
+import useTranslation from 'hooks/useTranslation';
 import { Card, CardTitle } from 'reactstrap';
 
 import { SUPPORT_LINK } from 'constants/links';
 
-import { t } from '../../../../i18n';
-
 const ErrorStatus = () => {
+  const t = useTranslation();
   return (
     <>
       <Card className={'border border-primary'}>

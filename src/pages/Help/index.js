@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import withForbiddenWithoutBuyingPackage from 'hocs/withForbiddenWithoutBuyingPackage';
 import parse from 'html-react-parser';
+import i18next from 'i18next';
 import { MetaTags } from 'react-meta-tags';
 import {
   AccordionBody,
@@ -19,13 +20,14 @@ import { getHelpInfo } from '../../services/helpService';
 
 import Breadcrumb from 'components/Common/Breadcrumb';
 
+import { convertLocale } from '../../helpers/convertLocation';
 import { t } from '../../i18n';
 
 const Help = () => {
   const [helpInfo, setHelpInfo] = useState(null);
 
   useEffect(async () => {
-    const info = await getHelpInfo();
+    const info = await getHelpInfo(convertLocale(i18next.language));
 
     setHelpInfo(info);
   }, []);

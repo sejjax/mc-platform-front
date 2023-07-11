@@ -75,8 +75,7 @@ const Header = (props) => {
             </button>
           </div>
           <div className="d-flex">
-            {/* <LanguageDropdown /> */}
-
+            <LanguageDropdown />
             <div className="dropdown d-none d-lg-inline-block ms-1">
               <button
                 type="button"
@@ -88,7 +87,6 @@ const Header = (props) => {
                 <i className="bx bx-fullscreen" />
               </button>
             </div>
-
             {/* <NotificationDropdown /> */}
             <ProfileMenu />
           </div>

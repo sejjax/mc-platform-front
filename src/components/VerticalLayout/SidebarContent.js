@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import MetisMenu from '@metismenu/react';
+import useTranslation from 'hooks/useTranslation';
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
 // MetisMenu
@@ -10,18 +11,14 @@ import SimpleBar from 'simplebar-react';
 
 import { isUserBoughtProjectSelector } from 'store/auth/profile/selectors';
 
-import { t } from '../../i18n';
-// SidebarProjectsCategories
 import SidebarProjectsCategories from './SidebarProjectsCategories';
-//i18n
-// import { withTranslation } from "react-i18next"
 import './metisMenu.scss';
 
 const SidebarContent = (props) => {
   const { access } = props;
   const ref = useRef(null);
   const isDisplayInvestorFeatures = useSelector(isUserBoughtProjectSelector);
-
+  const t = useTranslation();
   const refSidebar = useRef();
   const refMenu = useRef();
   const pathName = props.location.pathname;

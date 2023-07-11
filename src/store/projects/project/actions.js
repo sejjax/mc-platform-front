@@ -11,9 +11,10 @@ import {
   SET_PROJECT_BUTTON_CONDITION,
 } from './actionTypes';
 
-export const getProjects = (projectSlug) => ({
+export const getProjects = (projectSlug, locale) => ({
   type: GET_PROJECTS,
   projectSlug,
+  locale,
 });
 
 export const getProjectsSuccess = (projects) => ({
@@ -26,8 +27,9 @@ export const getProjectsFail = (error) => ({
   payload: error,
 });
 
-export const getProjectsList = () => ({
+export const getProjectsList = (locale) => ({
   type: GET_PROJECTS_LIST,
+  locale,
 });
 
 export const getProjectsListSuccess = (projectsList) => ({

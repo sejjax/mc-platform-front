@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 import { roundToDynamicNumbers } from 'helpers/Utils';
-import withForbiddenWithoutBuyingPackage from 'hocs/withForbiddenWithoutBuyingPackage';
+import i18next from 'i18next';
 import { map } from 'lodash';
 import { MetaTags } from 'react-meta-tags';
 import { Card, CardBody, Container, Input, Label } from 'reactstrap';
@@ -12,6 +12,7 @@ import { getAllProjects } from 'services/projectService';
 
 import Breadcrumb from 'components/Common/Breadcrumb';
 
+import { convertLocale } from '../../helpers/convertLocation';
 import { t } from '../../i18n';
 import './IncomeCalculator.scss';
 
@@ -62,7 +63,7 @@ const IncomeCalculator = () => {
 
   useEffect(() => {
     const fetchAllProjects = async () => {
-      const response = await getAllProjects();
+      const response = await getAllProjects(convertLocale(i18next.language));
       setProjects(response.data);
       changeSelectedProject(response.data[0]?.id, response.data[0]?.min_amount);
     };

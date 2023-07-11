@@ -14,27 +14,27 @@ import {
   getProjectsSuccess,
 } from './actions';
 
-function* fetchProjects({ projectSlug }) {
+function* fetchProjects({ projectSlug, locale }) {
   try {
-    const response = yield call(getProjects, projectSlug);
+    const response = yield call(getProjects, projectSlug, locale);
     yield put(getProjectsSuccess(response));
   } catch (error) {
     yield put(getProjectsFail(error));
   }
 }
 
-function* fetchProjectsList() {
+function* fetchProjectsList({ locale }) {
   try {
-    const response = yield call(getProjectsList);
+    const response = yield call(getProjectsList, locale);
     yield put(getProjectsListSuccess(response));
   } catch (error) {
     yield put(getProjectsListFail(error));
   }
 }
 
-function* fetchProjectDetail({ projectSlug }) {
+function* fetchProjectDetail({ projectSlug, locale }) {
   try {
-    const response = yield call(getProjectsDetails, projectSlug);
+    const response = yield call(getProjectsDetails, projectSlug, locale);
     yield put(getProjectDetailSuccess(response));
   } catch (error) {
     yield put(getProjectDetailFail(error));

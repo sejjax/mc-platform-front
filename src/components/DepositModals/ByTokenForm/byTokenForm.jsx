@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Input, Label } from 'reactstrap';
+import { parseEther } from 'viem';
 import { useAccount, useDisconnect } from 'wagmi';
 
 import { sendDeposit } from 'services/depositService';
@@ -38,7 +39,7 @@ const ByTokenForm = ({ closeModal, setBaseDepositContent, setDepositStatus }) =>
   const dispatch = useDispatch();
   const { address, isConnected } = useAccount();
   const amount = watch('amount');
-  const tokenValue = ethers.utils.parseUnits(amount || '0', 'ether');
+  const tokenValue = parseEther(amount || '0');
   const [usdtTransfer] = useUsdtTransfer({
     amount: tokenValue,
     recipientAddress,

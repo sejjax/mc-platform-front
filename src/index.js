@@ -1,5 +1,6 @@
 import React from 'react';
 
+import LanguageProvider from 'helpers/localization/languageProvider';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -13,17 +14,19 @@ import * as serviceWorker from './serviceWorker';
 import store from './store';
 
 const app = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <ToastProvider>
-        {/* <WalletProvider> */}
-        <WalletConnectWrapper>
-          <App />
-        </WalletConnectWrapper>
-        {/* </WalletProvider> */}
-      </ToastProvider>
-    </BrowserRouter>
-  </Provider>
+  <LanguageProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ToastProvider>
+          {/* <WalletProvider> */}
+          <WalletConnectWrapper>
+            <App />
+          </WalletConnectWrapper>
+          {/* </WalletProvider> */}
+        </ToastProvider>
+      </BrowserRouter>
+    </Provider>
+  </LanguageProvider>
 );
 
 ReactDOM.render(app, document.getElementById('root'));

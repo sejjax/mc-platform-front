@@ -5,19 +5,7 @@ import spain from '../assets/images/flags/spain.jpg';
 import usFlag from '../assets/images/flags/us.jpg';
 
 const languages = {
-  sp: {
-    label: 'Spanish',
-    flag: spain,
-  },
-  gr: {
-    label: 'German',
-    flag: germany,
-  },
-  it: {
-    label: 'Italian',
-    flag: italy,
-  },
-  rs: {
+  ru: {
     label: 'Russian',
     flag: russia,
   },

@@ -19,15 +19,12 @@ const resources = {
 
 const FALLBACK_LANGUAGE = 'en';
 
-const language = localStorage.getItem('I18N_LANGUAGE');
-if (!language) {
-  localStorage.setItem('I18N_LANGUAGE', 'en');
-}
-
 i18n.use(initReactI18next).use(LngDetector).init({
   fallbackLng: FALLBACK_LANGUAGE,
   resources,
 });
+
+const lng = localStorage.getItem('I18N_LANGUAGE') || FALLBACK_LANGUAGE;
 
 export const t = (key, params) => String(i18n.t(key, params || {}));
 

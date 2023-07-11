@@ -13,6 +13,7 @@ import { getProjectDetail as onGetProjectDetail } from 'store/projects/project/a
 //Import Breadcrumb
 import Breadcrumbs from 'components/Common/Breadcrumb2';
 
+import { t } from '../../../i18n';
 import OverviewChart from './overviewChart';
 import ProjectDetail from './projectDetail';
 
@@ -35,7 +36,11 @@ const Index = (props) => {
     }
   }, [params, onGetProjectDetail]);
 
-  const breadcrumbItems = ['Проекты', projectDetail?.categories?.name, projectDetail?.name];
+  const breadcrumbItems = [
+    t('sidebar_projects_label'),
+    projectDetail?.categories?.name,
+    projectDetail?.name,
+  ];
 
   return (
     <React.Fragment>

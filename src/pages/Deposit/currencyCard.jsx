@@ -8,7 +8,7 @@ import { t } from '../../i18n';
 const CurrencyCard = ({ title, icon, description, currentPrice, onClick, isActive }) => {
   return (
     <div>
-      <CardText className="font-size-14">Валюта</CardText>
+      <CardText className="font-size-14">{t('common_currency')}</CardText>
       <Card
         className={isActive ? 'border border-primary' : 'border'}
         onClick={() => {

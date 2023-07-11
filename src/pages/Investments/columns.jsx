@@ -5,6 +5,8 @@ import {
   headerFormatterCenteredTitle,
 } from 'helpers/table_helper';
 
+import ShortWallet from '../../components/SharedAcrrualsPage/components/ShortWallet';
+
 import { t } from '../../i18n';
 
 export const columns = addHeaderFormatterToTableColumns(
@@ -100,6 +102,7 @@ export const columns = addHeaderFormatterToTableColumns(
       dataField: 'wallet_addr',
       text: t('tables_title.address'),
       classes: 'wallet__addr_col',
+      formatter: (cell, row) => <ShortWallet id={row.id} wallet={cell} />,
     },
   ],
   headerFormatterCenteredTitle,

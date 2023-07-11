@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
+import useTranslation from 'hooks/useTranslation';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Card, CardBody, CardTitle, Col, Row } from 'reactstrap';
@@ -9,7 +10,6 @@ import CurrencyCard from 'pages/Deposit/currencyCard';
 import ByTokenForm from 'components/DepositModals/ByTokenForm/byTokenForm';
 
 import USDTIcon from '../../../assets/images/icons/busdt.svg';
-import { t } from '../../../i18n';
 import ErrorStatus from './Statuses/ErrorStatus';
 import LoadingStatus from './Statuses/LoadingStatus';
 import SuccessStatus from './Statuses/SuccessStatus';
@@ -22,6 +22,7 @@ export const DepositStatus = {
 };
 
 const BaseDepositModal = ({ defaultValue, closeModal, history }) => {
+  const t = useTranslation();
   const [tokens, setTokens] = useState('USDT');
   const [depositStatus, setDepositStatus] = useState(DepositStatus.init);
   const [baseDepositContent, setBaseDepositContent] = useState(false);

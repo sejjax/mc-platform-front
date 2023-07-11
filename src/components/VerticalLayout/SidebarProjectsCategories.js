@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
+import useTranslation from 'hooks/useTranslation';
 import { isEmpty, map } from 'lodash';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-//redux
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 
 import { getProjectsList as onGetProjectsList } from 'store/actions';
 
-import { t } from '../../i18n';
+import { convertLocale } from '../../helpers/convertLocation';
+import LanguageContext from '../../helpers/localization/languageContext';
 
 const SidebarProjectsCategories = () => {
   const dispatch = useDispatch();
+  const { language } = useContext(LanguageContext);
+  const t = useTranslation();
 
   useEffect(() => {
-    dispatch(onGetProjectsList());
-  }, [dispatch]);
+    dispatch(onGetProjectsList(convertLocale(language)));
+  }, [dispatch, language]);
 
   const { projectsList } = useSelector((state) => ({
     projectsList: state.Project.projectsList,
@@ -48,4 +50,4 @@ SidebarProjectsCategories.propTypes = {
   t: PropTypes.any,
 };
 
-export default withRouter(withTranslation()(SidebarProjectsCategories));
+export default withRouter(SidebarProjectsCategories);

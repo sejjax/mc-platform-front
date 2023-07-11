@@ -164,7 +164,7 @@
     "user_profile_agree_checkbox_label": "Согласен показывать личную информацию вышестоящим партнерам",
     "user_profile_successful_updated": "Профиль успешно обновлён.",
 
-    "change_wallet_modal_hint": "Вы действительно хотите произвести смену кошелька по умолчанию на адрес <span>{{wallet}}</span>? Все платежи будут поступать на этот адрес после подтверждения операции по Email.",
+    "change_wallet_modal_hint": "Вы действительно хотите произвести смену кошелька по умолчанию на адрес <b>{{wallet}}</b>? Все платежи будут поступать на этот адрес после подтверждения операции по Email.",
     "change_wallet_modal_confirm_operation": "Подтвердите операцию по Email",
     "change_wallet_modal_operation_error": "Возникла проблема с отправкой email, обратитесь в техподдержку для подтверждения смены кошелька",
 
@@ -278,6 +278,9 @@
     "deposit_modal_payment_questions": "Возникли вопросы во время платежа?",
     "deposit_modal_funds_successfully_enrolled": "Средства успешно зачислены",
     "deposit_modal_go_to_investments_packages": "Можете перейти к инвестиционным пакетам",
+
+
+    "footer_text": "MCapital. Платформа работает в юрисдикции Свободной Индустриальной Зоны Хуалинг Грузия. Лицензия на осуществление деятельности <firstLink>Открыть</firstLink>. Регистрационный номер 412772557. Публичный реестр юридических лиц <secondLink>https://enreg.reestri.gov.ge</secondLink>",
 
 
     "investments_packages": "Инвестиционные пакеты",

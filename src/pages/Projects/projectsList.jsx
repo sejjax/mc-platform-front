@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import parse from 'html-react-parser';
+import i18next from 'i18next';
 import { isEmpty, map } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -15,6 +16,7 @@ import { Progress } from 'components/Progress/Progress';
 
 import { investorProAllLimit, investorProPerUserLimit } from 'constants/deposit';
 
+import { convertLocale } from '../../helpers/convertLocation';
 import { t } from '../../i18n';
 import { useFetchInvestorProAmount } from './hooks/useFetchInvestorProAmount';
 import { useIsProjectDisabled } from './hooks/useIsProjectDisabled';
@@ -46,13 +48,13 @@ const ProjectsList = () => {
 
   useEffect(() => {
     if (params && params.type) {
-      dispatch(onGetProjects(params.type));
+      dispatch(onGetProjects(params.type, convertLocale(i18next.language)));
     }
   }, [params, dispatch]);
 
   return (
     <React.Fragment>
-      <Breadcrumbs title="Проекты" breadcrumbItem={projectCategory.name} />
+      <Breadcrumbs title={t('sidebar_projects_label')} breadcrumbItem={projectCategory.name} />
       <Row>
         <Col xl={12} sm={12}>
           {!isEmpty(projectCategory.projects) ? (
