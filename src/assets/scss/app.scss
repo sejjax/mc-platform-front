@@ -16,6 +16,7 @@ File: Main Css File
 @import 'variables';
 @import 'utilities';
 @import './node_modules/bootstrap/scss/mixins.scss';
+@import "react-datepicker/dist/react-datepicker.css";
 
 // Structure
 @import 'custom/structure/general';
@@ -83,6 +84,7 @@ File: Main Css File
 @import 'custom/pages/coming-soon';
 @import 'custom/pages/timeline';
 @import 'custom/pages/extras-pages';
+@import "custom/pages/investment";
 
 // html {
 //   overflow-y: overlay;
@@ -155,8 +157,39 @@ iframe {
 
 .table_mobile_select {
   select {
-    max-width: 150px;
+    max-width: 100%;
   }
+}
+
+.col-mobile {
+  @media screen and (max-width: 770px){
+    flex-direction: column;
+  }
+}
+
+
+.picker-date {
+  height: 38px !important;
+  padding: 0.47rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  min-width: 180px;
+
+  @media screen and (max-width: 768px){
+    width: 100%;
+  }
+}
+
+.react-datepicker-popper {
+  z-index: 10;
 }
 
 :root {

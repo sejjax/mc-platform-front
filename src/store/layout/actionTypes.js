@@ -14,3 +14,5 @@ export const TOGGLE_LEFTMENU = 'TOGGLE_LEFTMENU';
 
 // Preloader
 export const CHANGE_PRELOADER = 'CHANGE_PRELOADER';
+
+export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';

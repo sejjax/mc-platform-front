@@ -112,4 +112,4 @@ const mapStatetoProps = (state) => {
 export default connect(mapStatetoProps, {
   toggleLeftmenu,
   changeSidebarType,
-})(withTranslation()(Header));
+})(Header);

@@ -1,0 +1,2 @@
+export const SET_PAGINATION = 'SET_PAGINATION';
+export const SET_TOTAL_ITEMS = 'SET_TOTAL_ITEMS';

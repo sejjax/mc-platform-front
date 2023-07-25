@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import i18n from 'i18next';
+import i18next from 'i18next';
 
 import LanguageContext from './languageContext';
 
@@ -11,13 +11,13 @@ const LanguageProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    i18n.changeLanguage(language);
+    i18next.changeLanguage(language);
   }, [language]);
 
-  const handleLanguageChange = (languageCode) => {
+  const handleLanguageChange = useCallback((languageCode) => {
     localStorage.setItem('I18N_LANGUAGE', languageCode);
     setLanguage(languageCode);
-  };
+  }, []);
 
   return (
     <LanguageContext.Provider value={{ language, changeLanguage: handleLanguageChange }}>

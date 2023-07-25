@@ -30,7 +30,7 @@ const Help = () => {
     const info = await getHelpInfo(convertLocale(i18next.language));
 
     setHelpInfo(info);
-  }, []);
+  }, [i18next.language]);
 
   return (
     <>

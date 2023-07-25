@@ -1,4 +1,5 @@
 import {
+  CHANGE_LANGUAGE,
   CHANGE_LAYOUT_WIDTH,
   CHANGE_PRELOADER,
   CHANGE_SIDEBAR_THEME,
@@ -49,4 +50,9 @@ export const changeTopbarTheme = (topbarTheme) => ({
 export const toggleLeftmenu = (isopen) => ({
   type: TOGGLE_LEFTMENU,
   payload: isopen,
+});
+
+export const changeLanguage = (language) => ({
+  type: CHANGE_LANGUAGE,
+  payload: language,
 });

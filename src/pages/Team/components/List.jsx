@@ -12,7 +12,7 @@ import { Input, Label } from 'reactstrap';
 
 import { countryName } from 'constants/countries';
 
-import { t } from '../../../i18n';
+import useTranslation from '../../../hooks/useTranslation';
 import '../scss/list.scss';
 import CountryFlag from './CountryFlag';
 
@@ -26,6 +26,7 @@ export function headerFormatter(column, colIndex, { sortElement }) {
 }
 
 const List = ({ partners, userPartnerId, fullName }) => {
+  const t = useTranslation();
   const [showOnlyFirstStructure, setShowOnlyFirstStructure] = useState(false);
   const [search, setSearch] = useState('');
 
@@ -120,7 +121,7 @@ const List = ({ partners, userPartnerId, fullName }) => {
         text: t('tables_title.country'),
         headerFormatter,
         formatter: (country) => {
-          return <CountryFlag countryCode={country} title={countryName[country]} />;
+          return <CountryFlag countryCode={country} title={countryName(t)[country]} />;
         },
       },
       {
@@ -146,7 +147,7 @@ const List = ({ partners, userPartnerId, fullName }) => {
         formatter: (cell) => (typeof cell === 'number' ? roundToDynamicNumbers(cell, 1) : cell),
       },
     ],
-    [userPartnerId, fullName, partners],
+    [t, userPartnerId, fullName, partners],
   );
 
   const productData = useMemo(() => {

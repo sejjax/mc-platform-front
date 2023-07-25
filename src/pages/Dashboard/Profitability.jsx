@@ -5,10 +5,11 @@ import ReactApexChart from 'react-apexcharts';
 import { connect } from 'react-redux';
 import { Button, Card, CardBody, CardTitle } from 'reactstrap';
 
-import { t } from '../../i18n';
+import useTranslation from '../../hooks/useTranslation';
 import './sass/notification.scss';
 
 const Profitability = ({ chartsData }) => {
+  const t = useTranslation();
   const series = [
     {
       name: 'MC',

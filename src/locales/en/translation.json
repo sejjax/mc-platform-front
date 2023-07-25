@@ -142,6 +142,16 @@
     "common_withdraw": "Withdraw",
     "common_profile": "Profile",
     "common_logout": "Logout",
+    "common_closed": "Close",
+    "common_open": "Open",
+    "common_referral_income": "Referral",
+    "common_passive_income": "Passive",
+    "common_type": "Type",
+    "common_chose_period": "Chose period",
+    "common_product_id": "Product id",
+    "common_product_id_placeholder": "Enter product id",
+    "common_view_accruals": "View accruals",
+
 
     "user_profile_name": "Your Name",
     "user_profile_change_photo": "Change Photo",
@@ -225,6 +235,7 @@
     "sidebar_projects_label": "Projects",
     "sidebar_investments_label": "Investments",
     "sidebar_referral_accruals_label": "Referral Accruals",
+    "sidebar_passive_accruals_label": "Passive Accruals",
     "sidebar_projects_accruals_label": "Project Accruals",
     "sidebar_calculator_label": "Profitability Calculator",
     "sidebar_help_label": "Help",
@@ -301,6 +312,16 @@
     "project_total_bought": "Total Bought:",
     "project_empty_text": "There are currently no projects in this category",
     "project_change_yearly_profit": "Change Yearly Profit",
+
+    "investments_show_closed": "Show closed",
+    "investments_summary_total_amount": "<text>Total Invested:</text> <text>{{amount}} {{currency}}</text>",
+    "investments_summary_total_payed": "<text>Total Paid:</text> <text>{{amount}} {{currency}}</text>",
+    "investments_summary_current_amount": "<text>Currently Invested:</text> <text>{{amount}} {{currency}}</text>",
+    "investments_summary_pay_ready_amount": "<text>Pay Ready:</text> <text>{{amount}} {{currency}}</text>",
+    "accruals_income_current_week": "<text>Accruals for the current week:</text> <text>{{amount}} {{currency}}</text>",
+    "accruals_income_current_month": "<text>Accruals for the current month:</text> <text>{{amount}} {{currency}}</text>",
+    "accruals_income_next_month": "<text>Accruals for the next month:</text> <text>{{amount}} {{currency}}</text>",
+
 
     "promotion_title": "Journey to Peru",
     "promotion_subtitle": "Give yourself the dream trip from MCapital.",

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import parse from 'html-react-parser';
-import i18next from 'i18next';
 import { isEmpty, map } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -17,6 +16,7 @@ import { Progress } from 'components/Progress/Progress';
 import { investorProAllLimit, investorProPerUserLimit } from 'constants/deposit';
 
 import { convertLocale } from '../../helpers/convertLocation';
+import LanguageContext from '../../helpers/localization/languageContext';
 import { t } from '../../i18n';
 import { useFetchInvestorProAmount } from './hooks/useFetchInvestorProAmount';
 import { useIsProjectDisabled } from './hooks/useIsProjectDisabled';
@@ -34,6 +34,8 @@ const ProjectsList = () => {
   const [investModal, setInvestModal] = useState(false);
   const dispatch = useDispatch();
 
+  const { language } = useContext(LanguageContext);
+
   const { projectCategory, isDepositButtonDisabledByInvestment } = useSelector(selector);
   useProjectInvestmentTimeout();
   const investorProDepositAmount = useFetchInvestorProAmount();
@@ -48,9 +50,9 @@ const ProjectsList = () => {
 
   useEffect(() => {
     if (params && params.type) {
-      dispatch(onGetProjects(params.type, convertLocale(i18next.language)));
+      dispatch(onGetProjects(params.type, convertLocale(language)));
     }
-  }, [params, dispatch]);
+  }, [params, dispatch, language]);
 
   return (
     <React.Fragment>

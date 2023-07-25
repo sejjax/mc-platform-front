@@ -1,5 +1,4 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { useEffect } from 'react';
 
 import { useFormik } from 'formik';
 import getImageReader from 'helpers/GetImageReader';
@@ -30,12 +29,13 @@ import PhotoEditorModal from 'components/DepositModals/PhotoEditor/PhotoEditorMo
 import countries from 'constants/countries';
 
 import blankAvatar from '../../assets/images/blankProfile.png';
-import { t } from '../../i18n';
+import useTranslation from '../../hooks/useTranslation';
 import { editProfile, uploadPhotoError } from '../../store/actions';
 import './scss/profile.scss';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+  const t = useTranslation();
 
   const [isFileUpload, setFileUpload] = useState(false);
   const [photoPreview, setPhotoPreview] = useState(null);
@@ -82,7 +82,7 @@ const UserProfile = () => {
 
     initialValues: {
       fullName: fullName || '',
-      country: countries[0]?.options?.find(({ value }) => value === country),
+      country: countries(t)[0]?.options?.find(({ value }) => value === country),
       mobile: mobile || '',
       agreement: agreement === 1,
       oldPassword: '',
@@ -223,7 +223,7 @@ const UserProfile = () => {
                           value={validation.values.country || t('auth_register_choose_country')}
                           onChange={(value) => validation.setFieldValue('country', value)}
                           onBlur={validation.handleBlur}
-                          options={countries}
+                          options={countries(t)}
                           invalid={!!validation.errors.country}
                         />
                         {validation.errors.country && (

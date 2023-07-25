@@ -21,7 +21,7 @@ import ReCaptcha from 'components/Verification/ReCaptcha';
 // import country list
 import countries from 'constants/countries';
 
-import { t } from '../../i18n';
+import useTranslation from '../../hooks/useTranslation';
 // action
 import { apiError, registerUser } from '../../store/actions';
 import DisplayReferralName from './DisplayReferralName';
@@ -31,6 +31,7 @@ import FullScreenLogo from './FullScreenLogo.jsx';
 const Register = (props) => {
   const dispatch = useDispatch();
   const { search } = useLocation();
+  const t = useTranslation();
 
   const partnerId = new URLSearchParams(search).get('partner_id');
 
@@ -284,7 +285,7 @@ const Register = (props) => {
                                         validation.setFieldValue('country', value)
                                       }
                                       // onBlur={validation.handleBlur}
-                                      options={countries}
+                                      options={countries(t)}
                                     />
                                   </div>
                                   <div className="mb-3">

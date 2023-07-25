@@ -7,18 +7,15 @@ import { useSelector } from 'react-redux';
 import { useToasts } from 'react-toast-notifications';
 import { Card, Col, Row } from 'reactstrap';
 
-import {
-  allStructureLevels,
-  firstStructureLevels,
-  partnerLevelToDisplayedName,
-} from 'constants/levels';
+import { allStructureLevels, firstStructureLevels } from 'constants/levels';
 
-import { t } from '../../i18n';
+import useTranslation from '../../hooks/useTranslation';
 import DefaultProfileImage from './DefaultProfileImage';
 import './sass/notification.scss';
 import './sass/welcomeComp.scss';
 
 const WelcomeComp = ({ user }) => {
+  const t = useTranslation();
   const { level, investorLevel, fullName, partnerId, needToAllStructure, needToFirstStructure } =
     user;
   const { addToast } = useToasts();

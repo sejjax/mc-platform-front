@@ -1,6 +1,4 @@
-import { t } from '../i18n';
-
-const countries = [
+const countries = (t) => [
   {
     options: [
       { label: t('countries.RU'), value: 'RU' },
@@ -113,7 +111,8 @@ const countries = [
 
 export default countries;
 
-export const countryName = countries[0].options.reduce((acc, curr) => {
-  acc[curr.value] = curr.label;
-  return acc;
-}, {});
+export const countryName = (t) =>
+  countries(t)[0].options.reduce((acc, curr) => {
+    acc[curr.value] = curr.label;
+    return acc;
+  }, {});

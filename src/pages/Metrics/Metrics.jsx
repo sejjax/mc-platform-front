@@ -14,7 +14,7 @@ import AnotherTable from 'components/AnotherTable/Table';
 
 import { ACCESS } from 'constants/access';
 
-import { t } from '../../i18n';
+import useTranslation from '../../hooks/useTranslation';
 import {
   metricsNavDisplayedTitles,
   metricsTableNavItems,
@@ -23,6 +23,7 @@ import {
 } from './MetricsContstants';
 
 const Metrics = () => {
+  const t = useTranslation();
   const [projectsTab, setProjectsTab] = useState('year');
   const [usersTab, setUsersTab] = useState('year');
   const [data, setData] = useState({
@@ -144,13 +145,13 @@ const Metrics = () => {
                           active: usersTab === tabName,
                         })}
                         onClick={tabHandler('user', tabName)}>
-                        <span className="d-block">{metricsNavDisplayedTitles[tabName]}</span>
+                        <span className="d-block">{metricsNavDisplayedTitles(t)[tabName]}</span>
                       </NavLink>
                     </NavItem>
                   ))}
                 </Nav>
               </div>
-              <AnotherTable data={selectedPartnerData} columns={usersTable} keyField="id" />
+              <AnotherTable data={selectedPartnerData} columns={usersTable(t)} keyField="id" />
             </CardBody>
           </Card>
           <Card>
@@ -173,7 +174,7 @@ const Metrics = () => {
                 </Nav>
               </div>
 
-              <AnotherTable data={selectedProjectData} keyField="id" columns={projectsTable} />
+              <AnotherTable data={selectedProjectData} keyField="id" columns={projectsTable(t)} />
             </CardBody>
           </Card>
         </Row>

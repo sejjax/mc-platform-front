@@ -1,6 +1,6 @@
 import { all, fork } from 'redux-saga/effects';
 
-import { AccrualSaga } from './accruals/saga';
+import AccrualSaga from './accruals/saga';
 import ConfirmSaga from './auth/confirmEmail/saga';
 import ForgetSaga from './auth/forgetpwd/saga';
 import AuthSaga from './auth/login/saga';
@@ -10,7 +10,7 @@ import ProfileSaga from './auth/profile/saga';
 //public
 import AccountSaga from './auth/register/saga';
 import dashboardSaga from './dashboard/saga';
-import { watchInvestmentsSaga } from './investments/saga';
+import investmentsSaga from './investments/saga';
 import LayoutSaga from './layout/saga';
 import notificationsSaga from './notifications/saga';
 import projectSaga from './projects/project/saga';
@@ -35,7 +35,7 @@ export default function* rootSaga() {
     fork(teamSaga),
     fork(notificationsSaga),
     fork(watchWallet),
-    fork(watchInvestmentsSaga),
+    fork(investmentsSaga),
     fork(AccrualSaga),
   ]);
 }

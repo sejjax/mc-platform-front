@@ -1,31 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import languages from 'common/languages';
-import { convertLocale } from 'helpers/convertLocation';
-import LanguageContext from 'helpers/localization/languageContext';
 import i18next from 'i18next';
 import { get, map } from 'lodash';
-import { withTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 
 //i18n
-import i18n from '../../../i18n';
+import { changeLanguage } from '../../../store/layout/actions';
 
 const LanguageDropdown = () => {
-  // Declare a new state variable, which we'll call "menu"
-  // const [selectedLang, setSelectedLang] = useState('');
-  const { language, changeLanguage } = useContext(LanguageContext);
-
+  const dispatch = useDispatch();
+  const language = useSelector((state) => state.Layout.language);
   const [menu, setMenu] = useState(false);
 
-  // useEffect(() => {
-  //   const currentLanguage = localStorage.getItem('I18N_LANGUAGE');
-  //   setSelectedLang(currentLanguage);
-  // }, []);
-
   const changeLanguageAction = (lang) => {
-    //set language as i18n
-    changeLanguage(lang);
+    dispatch(changeLanguage(lang));
+    localStorage.setItem('I18N_LANGUAGE', lang);
+    i18next.changeLanguage(lang);
   };
 
   const toggle = () => {
@@ -54,4 +46,4 @@ const LanguageDropdown = () => {
   );
 };
 
-export default withTranslation()(LanguageDropdown);
+export default LanguageDropdown;

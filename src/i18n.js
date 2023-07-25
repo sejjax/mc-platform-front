@@ -1,4 +1,4 @@
-import i18n from 'i18next';
+import i18next, { i18n } from 'i18next';
 import LngDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
@@ -19,13 +19,12 @@ const resources = {
 
 const FALLBACK_LANGUAGE = 'en';
 
-i18n.use(initReactI18next).use(LngDetector).init({
+i18next.use(initReactI18next).use(LngDetector).init({
   fallbackLng: FALLBACK_LANGUAGE,
   resources,
 });
 
 const lng = localStorage.getItem('I18N_LANGUAGE') || FALLBACK_LANGUAGE;
+export const t = (key, params) => String(i18next.t(key, { ...params }));
 
-export const t = (key, params) => String(i18n.t(key, params || {}));
-
-export default i18n;
+export default i18next;

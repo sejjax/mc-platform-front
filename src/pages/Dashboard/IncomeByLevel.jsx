@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, CardBody, CardTitle, Row } from 'reactstrap';
 
 import { getIncome } from 'store/actions';
 
-import { t } from '../../i18n';
+import useTranslation from '../../hooks/useTranslation';
 import IncomeChart from './IncomeChats/incomeChart';
 import './sass/incomebyLevel.scss';
 import './sass/notification.scss';
 
-const structureLines = {
-  1: t('dashboard_first_line'),
-  2: t('dashboard_other_lines'),
-};
-
 const IncomeByLevel = ({ income, onGetIncome }) => {
+  const t = useTranslation();
+  const structureLines = {
+    1: t('dashboard_first_line'),
+    2: t('dashboard_other_lines'),
+  };
+
   const data = React.useMemo(() => {
     const partners = Object.values(income?.partners ?? {});
     const { basic = 0, investor = 0, investorPro = 0 } = income?.products ?? {};
@@ -61,7 +61,7 @@ const IncomeByLevel = ({ income, onGetIncome }) => {
         ],
       },
     };
-  }, [income]);
+  }, [income, t]);
 
   const { products, partners } = data;
 

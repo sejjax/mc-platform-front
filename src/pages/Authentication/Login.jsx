@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
 import withAuthRedirect from 'hocs/withAuthRedirect';
@@ -17,6 +17,7 @@ import FullScreenLogo from './FullScreenLogo';
 
 const Login = (props) => {
   const dispatch = useDispatch();
+  const [cred, setCred] = useState({});
   const validation = useFormik({
     enableReinitialize: false,
 
@@ -82,6 +83,7 @@ const Login = (props) => {
                               className="form-control"
                               placeholder={`${t('common_email_placeholder')}`}
                               type="text"
+                              id="username"
                               onChange={validation.handleChange}
                               onBlur={validation.handleBlur}
                               value={validation.values.identifier || ''}
@@ -113,6 +115,7 @@ const Login = (props) => {
                             <PasswordInput
                               validation={validation}
                               name="password"
+                              id="password"
                               placeholder={`${t('common_password_placeholder')}`}
                               invalid={
                                 !!(validation.touched.password && validation.errors.password)
@@ -141,7 +144,10 @@ const Login = (props) => {
                           </div>
 
                           <div className="mt-3 d-grid">
-                            <button className="btn btn-primary btn-block " type="submit">
+                            <button
+                              className="btn btn-primary btn-block "
+                              type="submit"
+                              id="loginButton">
                               {t('auth_login')}
                             </button>
                           </div>

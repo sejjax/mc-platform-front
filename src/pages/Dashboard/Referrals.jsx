@@ -6,7 +6,7 @@ import { Card, CardBody, CardTitle, Row } from 'reactstrap';
 
 import { getReferrals } from 'store/actions';
 
-import { t } from '../../i18n';
+import useTranslation from '../../hooks/useTranslation';
 import './sass/notification.scss';
 
 const LEVEL_LABELS = [
@@ -25,6 +25,7 @@ const LEVEL_LABELS = [
 
 const Referrals = ({ user, referrals, onGetReferrals }) => {
   const userLevel = user.level + 1;
+  const t = useTranslation();
 
   useEffect(() => {
     onGetReferrals();

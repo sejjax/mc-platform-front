@@ -9,6 +9,7 @@ import Photo from './auth/photo/load/reducer';
 import PhotoUpload from './auth/photo/upload/reducer';
 import Profile from './auth/profile/reducer';
 import Account from './auth/register/reducer';
+import Currency from './currency/reducer';
 //Dashboard
 import Dashboard from './dashboard/reducer';
 import Investments from './investments/reducer';
@@ -16,6 +17,7 @@ import Investments from './investments/reducer';
 import Layout from './layout/reducer';
 //Notifications
 import Notifications from './notifications/reducer';
+import PaginationReducer from './paginations/reducer';
 //projects
 import Project from './projects/project/reducer';
 import Risk from './projects/risk/reducer';
@@ -40,6 +42,8 @@ const rootReducer = combineReducers({
   Wallet,
   Investments,
   Accruals,
+  Currency,
+  PaginationReducer,
 });
 
 export default rootReducer;

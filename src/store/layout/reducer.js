@@ -9,6 +9,7 @@ import {
   topBarThemeTypes,
 } from '../../constants/layout';
 import {
+  CHANGE_LANGUAGE,
   CHANGE_LAYOUT,
   CHANGE_LAYOUT_WIDTH,
   CHANGE_PRELOADER,
@@ -32,6 +33,7 @@ const INIT_STATE = {
   isMobile: false,
   showSidebar: true,
   leftMenu: false,
+  language: window.localStorage.getItem('I18N_LANGUAGE') || 'en',
 };
 
 const Layout = (state = INIT_STATE, action) => {
@@ -81,6 +83,12 @@ const Layout = (state = INIT_STATE, action) => {
       return {
         ...state,
         leftMenu: action.payload,
+      };
+
+    case CHANGE_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload,
       };
 
     default:
