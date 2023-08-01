@@ -29,15 +29,15 @@ const Referrals = ({ user, referrals, onGetReferrals }) => {
 
   useEffect(() => {
     onGetReferrals();
-  }, []);
+  }, [onGetReferrals]);
 
   const hasReferrals = React.useMemo(() => {
-    if (!referrals) {
+    if (!referrals?.referralsCount.length) {
       return false;
     }
 
-    for (const count of referrals) {
-      if (count !== 0) {
+    for (const item of referrals?.referralsCount) {
+      if (item.count > 0) {
         return true;
       }
     }
@@ -45,7 +45,6 @@ const Referrals = ({ user, referrals, onGetReferrals }) => {
     return false;
   }, [referrals]);
 
-  const maxLevels = referrals?.length ?? 0;
   return (
     <Card
       className="p-3 same-height"
@@ -69,15 +68,8 @@ const Referrals = ({ user, referrals, onGetReferrals }) => {
         )}
         {!!userLevel && hasReferrals && (
           <div>
-            {Array.from({ length: maxLevels }, (_value, index) => {
-              const level = (index + 1) % maxLevels;
+            {referrals?.referralsCount.map(({ level, count }) => {
               const label = t(`referrals_levels.${LEVEL_LABELS[level]}`);
-              const count = referrals?.[level];
-
-              if (!count) {
-                return null;
-              }
-
               return (
                 <Row className="border-top" key={level}>
                   <div className={level > 0 ? 'referrals' : 'inactive'}>
@@ -90,6 +82,14 @@ const Referrals = ({ user, referrals, onGetReferrals }) => {
                 </Row>
               );
             })}
+            <Row className="border-top">
+              <div className="referrals">
+                <div className="level-typography">
+                  <span className="font-weight-600">{t('common_inactive')}</span>
+                </div>
+                <span className="active-count">{referrals?.referralsWithoutAnyDepositsCount}</span>
+              </div>
+            </Row>
           </div>
         )}
       </CardBody>
@@ -101,7 +101,15 @@ Referrals.propTypes = {
   user: PropTypes.shape({
     level: PropTypes.number,
   }),
-  referrals: PropTypes.arrayOf(PropTypes.number),
+  referrals: PropTypes.shape({
+    referralsCount: PropTypes.arrayOf(
+      PropTypes.shape({
+        level: PropTypes.number,
+        count: PropTypes.number,
+      }),
+    ),
+    referralsWithoutAnyDepositsCount: PropTypes.number,
+  }),
   onGetReferrals: PropTypes.func,
 };
 

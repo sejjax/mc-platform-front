@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useFormik } from 'formik';
 import withAuthRedirect from 'hocs/withAuthRedirect';
@@ -17,7 +17,6 @@ import FullScreenLogo from './FullScreenLogo';
 
 const Login = (props) => {
   const dispatch = useDispatch();
-  const [cred, setCred] = useState({});
   const validation = useFormik({
     enableReinitialize: false,
 
@@ -38,6 +37,32 @@ const Login = (props) => {
   const { error } = useSelector((state) => ({
     error: state.Login.error,
   }));
+
+  // const fetchCredentialsFromWebView = () => {
+  //   const data = { action: 'get_credentials' };
+  //   const message = JSON.stringify(data);
+  //   window.postMessage(message);
+  // };
+
+  const handleWebViewMessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      if (data.username && data.password) {
+        validation.setFieldValue('identifier', data.username);
+        validation.setFieldValue('password', data.password);
+      }
+    } catch (error) {
+      console.log('Error parsing message data:', error);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('message', handleWebViewMessage);
+    // Удаляем обработчик при размонтировании компонента
+    return () => {
+      window.removeEventListener('message', handleWebViewMessage);
+    };
+  }, [handleWebViewMessage]);
 
   return (
     <React.Fragment>

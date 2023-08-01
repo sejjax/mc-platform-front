@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -7,11 +6,11 @@ import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardBody, CardTitle } from 'reactstrap';
 
 import { getNotifications } from 'store/actions';
 
-import { t } from '../../i18n';
+import useTranslation from '../../hooks/useTranslation';
 
 const add_zero = (num) => {
   if (num < 10) {
@@ -39,6 +38,7 @@ const pretty_date_function = (ts) => {
 };
 const Notifications = ({ notifications, onGetNotifications }) => {
   const [height, setHeight] = useState(420);
+  const t = useTranslation();
 
   const hasNotifications = React.useMemo(() => {
     if (!notifications) {

@@ -6,13 +6,11 @@ import PropTypes from 'prop-types';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, Card, CardBody } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 
-// import './scss/list.scss';
 import { getNotifications } from 'store/actions';
 
-import { t } from '../../i18n';
+import useTranslation from '../../hooks/useTranslation';
 
 const paginationOptions = {
   paginationPosition: 'top',
@@ -27,42 +25,44 @@ function headerFormatter(column, colIndex, { sortElement }) {
   );
 }
 
-const columns = [
-  {
-    dataField: 'notification_type',
-    text: t('notification_type'),
-    sort: true,
-    headerFormatter,
-    attrs: {
-      'data-label': t('notification_type'),
-    },
-  },
-  {
-    dataField: 'notification_title',
-    text: t('notification_item_title'),
-    sort: true,
-    headerFormatter,
-    attrs: {
-      'data-label': t('notification_item_title'),
-    },
-    formatter: (row) => <p>{row}</p>,
-  },
-
-  {
-    dataField: 'notification_text',
-    text: t('notification_text'),
-    sort: true,
-    attrs: {
-      'data-label': t('notification_text'),
-    },
-    headerFormatter,
-    formatter(row) {
-      return <p>{parse(row)}</p>;
-    },
-  },
-];
-
 const Notifications = ({ notifications, onGetNotifications }) => {
+  const t = useTranslation();
+
+  const columns = [
+    {
+      dataField: 'notification_type',
+      text: t('notification_type'),
+      sort: true,
+      headerFormatter,
+      attrs: {
+        'data-label': t('notification_type'),
+      },
+    },
+    {
+      dataField: 'notification_title',
+      text: t('notification_item_title'),
+      sort: true,
+      headerFormatter,
+      attrs: {
+        'data-label': t('notification_item_title'),
+      },
+      formatter: (row) => <p>{row}</p>,
+    },
+
+    {
+      dataField: 'notification_text',
+      text: t('notification_text'),
+      sort: true,
+      attrs: {
+        'data-label': t('notification_text'),
+      },
+      headerFormatter,
+      formatter(row) {
+        return <p>{parse(row)}</p>;
+      },
+    },
+  ];
+
   React.useEffect(() => {
     onGetNotifications?.();
   }, [onGetNotifications]);

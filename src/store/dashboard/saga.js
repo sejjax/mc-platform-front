@@ -32,7 +32,7 @@ export function* watchGetChartsData() {
 
 function* getReferrals() {
   try {
-    const response = yield get('/users/me/referrals');
+    const response = yield get('/users/referrals-count');
     yield put(apiSuccess(GET_REFERRALS, response));
   } catch (error) {
     yield put(apiFail(GET_REFERRALS, error));
