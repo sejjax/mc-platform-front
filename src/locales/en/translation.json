@@ -375,16 +375,16 @@
     },
     "referrals_levels": {
       "inactive": "Inactive",
-      "first": "First Level",
-      "second": "Second Level",
-      "third": "Third Level",
-      "fourth": "Fourth Level",
-      "fifth": "Fifth Level",
-      "sixth": "Sixth Level",
-      "seventh": "Seventh Level",
-      "eighth": "Eighth Level",
-      "ninth": "Ninth Level",
-      "tenth": "Tenth Level"
+      "first": "First Line",
+      "second": "Second Line",
+      "third": "Third Line",
+      "fourth": "Fourth Line",
+      "fifth": "Fifth Line",
+      "sixth": "Sixth Line",
+      "seventh": "Seventh Line",
+      "eighth": "Eighth Line",
+      "ninth": "Ninth Line",
+      "tenth": "Tenth Line"
     },
     "tables_title": {
       "date": "Date",
