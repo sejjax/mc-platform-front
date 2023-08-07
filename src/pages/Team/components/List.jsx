@@ -63,6 +63,13 @@ const List = ({ partners, userPartnerId, fullName }) => {
           'data-label': t('tables_title.mobile'),
         },
         headerFormatter,
+        formatter: (cell, row) => {
+          if (row.isDataHidden) {
+            return t('common_hidden');
+          } else {
+            return cell;
+          }
+        },
       },
       {
         dataField: 'partnerId',
@@ -133,7 +140,13 @@ const List = ({ partners, userPartnerId, fullName }) => {
         text: t('tables_title.deposit_amount'),
         headerFormatter,
         sortValue: (cell) => (typeof cell === 'number' ? cell : -1),
-        formatter: (cell) => (typeof cell === 'number' ? roundToDynamicNumbers(cell, 1) : cell),
+        formatter: (cell, row) => {
+          if (row.isDataHidden) {
+            return t('common_hidden');
+          } else {
+            return typeof cell === 'number' ? roundToDynamicNumbers(cell, 1) : cell;
+          }
+        },
       },
       {
         dataField: 'teamDeposit',
@@ -144,7 +157,13 @@ const List = ({ partners, userPartnerId, fullName }) => {
         text: t('tables_title.structure_amount'),
         headerFormatter,
         sortValue: (cell) => (typeof cell === 'number' ? cell : -1),
-        formatter: (cell) => (typeof cell === 'number' ? roundToDynamicNumbers(cell, 1) : cell),
+        formatter: (cell, row) => {
+          if (row.isDataHidden) {
+            return t('common_hidden');
+          } else {
+            return typeof cell === 'number' ? roundToDynamicNumbers(cell, 1) : cell;
+          }
+        },
       },
     ],
     [t, userPartnerId, fullName, partners],
