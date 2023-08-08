@@ -6,6 +6,7 @@ import {
   headerFormatterCenteredTitle,
 } from 'helpers/table_helper';
 import i18next from 'i18next';
+import moment from 'moment/moment';
 
 import ShortWallet from 'components/SharedAcrrualsPage/components/ShortWallet';
 
@@ -30,7 +31,7 @@ export const columns = (t, setSort) => [
       'data-label': t('tables_title.date'),
     },
     formatter: (row) => {
-      return <div>{row.split('-').reverse().join('.')}</div>;
+      return <div>{moment(row).format('DD.MM.YYYY')}</div>;
     },
     onSort: (field, order) => {
       setSort({ [field]: order.toUpperCase() });

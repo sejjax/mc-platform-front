@@ -2,6 +2,7 @@ import {
   addHeaderFormatterToTableColumns,
   headerFormatterCenteredTitle,
 } from 'helpers/table_helper';
+import moment from 'moment';
 
 import ShortWallet from '../../components/SharedAcrrualsPage/components/ShortWallet';
 
@@ -16,8 +17,7 @@ export const columns = (t, setIsOpenId) => {
           'data-label': t('tables_title.date'),
         },
         formatter: (row) => {
-          const date = new Date(row);
-          return <div>{date.toLocaleDateString()}</div>;
+          return <div>{moment(row).format('DD.MM.YYYY')}</div>;
         },
       },
       {
