@@ -16,8 +16,8 @@ import s from './AnalyzeChart.module.scss';
 
 const AnalyzeChart = ({ data }) => {
   const chartData = data?.map((item) => ({
-    inInvesting: item.inInvesting,
-    payed: item.payed,
+    inInvesting: Number(item.inInvesting).toFixed(2),
+    payed: Number(item.payed).toFixed(2),
     name: moment(item.date).format('DD.MM.YYYY'),
   }));
 

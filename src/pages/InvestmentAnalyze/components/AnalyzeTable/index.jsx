@@ -15,13 +15,13 @@ const AnalyzeTable = ({ info }) => {
         <div className={classNames(s.item, s.yellow)}>
           <div className={s.label}>{t('investments_analyze_total_investments')}</div>
           <div className={s.value}>
-            {roundNumber(info?.totalInvestments)} {currency}
+            {roundNumber(info?.totalInvestments ?? 0)} {currency}
           </div>
         </div>
         <div className={classNames(s.item, s.yellow)}>
           <div className={s.label}>{t('investments_analyze_current_investments')}</div>
           <div className={s.value}>
-            {roundNumber(info?.currentInvestments)} {currency}
+            {roundNumber(info?.currentInvestments ?? 0)} {currency}
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@ const AnalyzeTable = ({ info }) => {
         </div>
         <div className={classNames(s.item, s.green, s.fullWidth)}>
           <div className={s.textCenter}>
-            {roundNumber(info?.finalProfit)} {currency}
+            {roundNumber(info?.finalProfit ?? 0)} {currency}
           </div>
         </div>
       </div>
@@ -39,19 +39,19 @@ const AnalyzeTable = ({ info }) => {
         <div className={classNames(s.item, s.blue)}>
           <div className={s.label}>{t('investments_analyze_total_income')}</div>
           <div className={s.value}>
-            {roundNumber(info?.totalIncome)} {currency}
+            {roundNumber(info?.totalIncome ?? 0)} {currency}
           </div>
         </div>
         <div className={classNames(s.item, s.blue)}>
           <div className={s.label}>{t('investments_analyze_total_return')}</div>
           <div className={s.value}>
-            {roundNumber(info?.totalInvestmentsReturn)} {currency}
+            {roundNumber(info?.totalInvestmentsReturn ?? 0)} {currency}
           </div>
         </div>
         <div className={classNames(s.item, s.blue)}>
           <div className={s.label}>{t('investments_analyze_total_payed')}</div>
           <div className={s.value}>
-            {roundNumber(info?.totalPayed)} {currency}
+            {roundNumber(info?.totalPayed ?? 0)} {currency}
           </div>
         </div>
       </div>
@@ -59,19 +59,19 @@ const AnalyzeTable = ({ info }) => {
         <div className={classNames(s.item, s.lightGreen)}>
           <div className={s.label}>{t('investments_analyze_future_income')}</div>
           <div className={s.value}>
-            {roundNumber(info?.futureIncome)} {currency}
+            {roundNumber(info?.futureIncome ?? 0)} {currency}
           </div>
         </div>
         <div className={classNames(s.item, s.lightGreen)}>
           <div className={s.label}>{t('investments_analyze_future_return')}</div>
           <div className={s.value}>
-            {roundNumber(info?.futureInvestmentsReturn)} {currency}
+            {roundNumber(info?.futureInvestmentsReturn ?? 0)} {currency}
           </div>
         </div>
         <div className={classNames(s.item, s.lightGreen)}>
           <div className={s.label}>{t('investments_analyze_future_payed')}</div>
           <div className={s.value}>
-            {roundNumber(info?.futurePayed)} {currency}
+            {roundNumber(info?.futurePayed ?? 0)} {currency}
           </div>
         </div>
       </div>
