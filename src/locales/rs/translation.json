@@ -237,6 +237,7 @@
     "sidebar_notification_label": "Уведомления",
     "sidebar_finance_label": "Финансы",
     "sidebar_investments_label": "Инвестиции",
+    "sidebar_investments_analyze_label": "Анализ инвестиций",
     "sidebar_referral_accruals_label": "Реферальные начисления",
     "sidebar_passive_accruals_label": "Пассивные начисления",
     "sidebar_projects_accruals_label": "Проектные начисления",
@@ -254,6 +255,18 @@
     "project_accruals_sorting_order_asc": "По возрастанию",
 
     "forbidden_page": "Доступ заблокирован",
+
+    "investments_analyze_title": "Анализ инвестиций в Mcapital",
+    "investments_analyze_total_investments": "Всего проинвестировано:",
+    "investments_analyze_current_investments": "Сейчас в инвестициях:",
+    "investments_analyze_final_profit": "Итоговая прибыль от инвестиций в Mcapital:",
+    "investments_analyze_total_income": "Всего получено прибыли:",
+    "investments_analyze_total_return": "Возвращено тело инвестиций:",
+    "investments_analyze_total_payed": "Всего выплачено (тело + %)",
+    "investments_analyze_future_income": "Предстоящая прибыль:",
+    "investments_analyze_future_return": "Предстоящий возврат тела:",
+    "investments_analyze_future_payed": "Итого к получению:",
+
 
     "team_structure": "Структура команды",
     "team_structure_info": "Информация о структуре",

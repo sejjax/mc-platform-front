@@ -1,8 +1,9 @@
-import { SET_INVESTMENTS, SET_INVESTMENTS_SUMMARY } from './actionTypes';
+import { SET_INVESTMENTS, SET_INVESTMENTS_ANALYSIS, SET_INVESTMENTS_SUMMARY } from './actionTypes';
 
 const initState = {
   items: [],
   investmentSummary: {},
+  investmentAnalysis: {},
 };
 
 const Investments = (state = initState, action) => {
@@ -12,6 +13,9 @@ const Investments = (state = initState, action) => {
 
     case SET_INVESTMENTS_SUMMARY:
       return { ...state, investmentSummary: action.payload };
+
+    case SET_INVESTMENTS_ANALYSIS:
+      return { ...state, investmentAnalysis: action.payload };
 
     default:
       return state;

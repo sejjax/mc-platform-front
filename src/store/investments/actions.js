@@ -1,7 +1,9 @@
 import {
   FETCH_INVESTMENTS,
+  FETCH_INVESTMENTS_ANALYSIS,
   FETCH_INVESTMENTS_SUMMARY,
   SET_INVESTMENTS,
+  SET_INVESTMENTS_ANALYSIS,
   SET_INVESTMENTS_SUMMARY,
 } from './actionTypes';
 
@@ -21,5 +23,14 @@ export const fetchInvestmentsSummary = () => ({
 
 export const setInvestmentsSummary = (data) => ({
   type: SET_INVESTMENTS_SUMMARY,
+  payload: data,
+});
+
+export const fetchInvestmentsAnalysis = () => ({
+  type: FETCH_INVESTMENTS_ANALYSIS,
+});
+
+export const setInvestmentsAnalysis = (data) => ({
+  type: SET_INVESTMENTS_ANALYSIS,
   payload: data,
 });

@@ -11,3 +11,7 @@ export const fetchInvestments = async (payload) => {
 export const fetchInvestmentsSummary = async () => {
   return await get('user/deposit/investment-summary');
 };
+
+export const fetchInvestmentsAnalysis = async () => {
+  return await get('user/deposit/investments-info');
+};

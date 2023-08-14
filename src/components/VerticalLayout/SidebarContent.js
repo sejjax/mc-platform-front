@@ -157,6 +157,13 @@ const SidebarContent = (props) => {
                   <li>
                     <NavLink to={'/calculator'}>{t('sidebar_calculator_label')}</NavLink>
                   </li>
+                  {isDisplayInvestorFeatures && (
+                    <li>
+                      <NavLink to={'/investments-analyzing'}>
+                        {t('sidebar_investments_analyze_label')}
+                      </NavLink>
+                    </li>
+                  )}
                 </ul>
               </li>
               {isDisplayInvestorFeatures && (

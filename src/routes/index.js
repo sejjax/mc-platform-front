@@ -34,6 +34,7 @@ import LockScreen from '../pages/AuthenticationInner/auth-lock-screen';
 // Dashboard
 import Dashboard from '../pages/Dashboard/index';
 import Deposit from '../pages/Deposit';
+import InvestmentAnalyze from '../pages/InvestmentAnalyze';
 import Pages404 from '../pages/Utility/pages-404';
 import Pages500 from '../pages/Utility/pages-500';
 import PagesComingsoon from '../pages/Utility/pages-comingsoon';
@@ -50,6 +51,7 @@ const authProtectedRoutes = [
     path: '/investments',
     component: Investments,
   },
+  { path: '/investments-analyzing', component: InvestmentAnalyze },
   {
     path: '/accruals/deposit',
     component: DepositAccruals,

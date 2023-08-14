@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import withForbiddenWithoutBuyingPackage from 'hocs/withForbiddenWithoutBuyingPackage';
 import { Trans } from 'react-i18next';
@@ -26,7 +26,7 @@ const Investments = () => {
   const [showClosed, setShowClosed] = useState(false);
   const dispatch = useDispatch();
   const [pagination, setPagination] = useState({});
-  console.log(language);
+
   const filteredItems = useMemo(() => {
     const data = [...(items?.items || [])];
 

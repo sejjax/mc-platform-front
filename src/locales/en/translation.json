@@ -236,6 +236,7 @@
     "sidebar_finance_label": "Finance",
     "sidebar_projects_label": "Projects",
     "sidebar_investments_label": "Investments",
+    "sidebar_investments_analyze_label": "Investment analysis",
     "sidebar_referral_accruals_label": "Referral Accruals",
     "sidebar_passive_accruals_label": "Passive Accruals",
     "sidebar_projects_accruals_label": "Project Accruals",
@@ -253,6 +254,17 @@
     "project_accruals_sorting_order_asc": "Ascending",
 
     "forbidden_page": "Access Denied",
+
+    "investments_analyze_title": "Analysis of investments in Mcapital",
+    "investments_analyze_total_investments": "Total Invested:",
+    "investments_analyze_current_investments": "Currently in Investments:",
+    "investments_analyze_final_profit": "Final Profit from Mcapital Investments:",
+    "investments_analyze_total_income": "Total Profits Earned:",
+    "investments_analyze_total_return": "Total Investment Return:",
+    "investments_analyze_total_payed": "Total Paid Out (Principal + %)",
+    "investments_analyze_future_income": "Future Profit:",
+    "investments_analyze_future_return": "Future Return of Principal:",
+    "investments_analyze_future_payed": "Total to Receive:",
 
     "team_structure": "Team Structure",
     "team_structure_info": "Structure Information",
