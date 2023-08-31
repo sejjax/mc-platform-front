@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     ports:
-      - ${APP_PORT}:80
+      - ${REACT_APP_PORT}:80
     networks:
       - platform-network
 
