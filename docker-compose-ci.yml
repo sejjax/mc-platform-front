@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  front:
+    container_name: platform_front
+    image: ghcr.io/mc-platform/front:main
+    env_file:
+      - .env
+    ports:
+      - ${REACT_APP_PORT}:80
+    networks:
+      - platform-network
+
+networks:
+  platform-network:
+    driver: bridge
