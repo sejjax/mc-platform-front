@@ -52,7 +52,7 @@ STRAPI_PLATFORM_PORT=1336
 REACT_APP_STRAPI_URL=http://mcplatform.net:1336
 
 # User
-REACT_APP_PORT=8088
+REACT_APP_PORT=8080
 REACT_APP_BASE_URL=http://dashboard.mcplatform.net
 REACT_APP_STRAPI_PLATFORM_URL=http://mcplatform.net:1336
 REACT_APP_SERVER_URL=https://server.mcplatform.net/api
